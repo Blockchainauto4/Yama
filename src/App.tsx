@@ -72,6 +72,54 @@ export default function App() {
     setCart([]);
   };
 
+  const handleSwapCartItem = (oldProductId: string, newProduct: Product) => {
+    setCart((prev) => {
+      const oldItem = prev.find((item) => item.product.id === oldProductId);
+      const qty = oldItem ? oldItem.quantity : 1;
+
+      const filtered = prev.filter((item) => item.product.id !== oldProductId);
+      const existingNew = filtered.find((item) => item.product.id === newProduct.id);
+
+      if (existingNew) {
+        return filtered.map((item) =>
+          item.product.id === newProduct.id
+            ? { ...item, quantity: item.quantity + qty }
+            : item
+        );
+      }
+      return [...filtered, { product: newProduct, quantity: qty }];
+    });
+    showToast(`Troca realizada! Item substituído por "${newProduct.name}"`);
+  };
+
+  const handleSwapAllToCheaper = () => {
+    let swappedCount = 0;
+    setCart((prev) => {
+      return prev.map((item) => {
+        const cheaper = products
+          .filter(
+            (p) =>
+              p.category === item.product.category &&
+              p.id !== item.product.id &&
+              p.clubeYamaPrice < item.product.clubeYamaPrice
+          )
+          .sort((a, b) => a.clubeYamaPrice - b.clubeYamaPrice)[0];
+
+        if (cheaper) {
+          swappedCount++;
+          return { product: cheaper, quantity: item.quantity };
+        }
+        return item;
+      });
+    });
+
+    if (swappedCount > 0) {
+      showToast(`⚡ ${swappedCount} produto(s) substituído(s) pelas opções mais baratas!`);
+    } else {
+      showToast("Seu carrinho já utiliza as opções mais baratas de cada categoria!");
+    }
+  };
+
   // Real-time Price Update (Gestor)
   const handleUpdateProductPrice = (
     productId: string,
@@ -184,10 +232,13 @@ export default function App() {
         {currentMode === "carrinho" && (
           <CartManager
             cart={cart}
+            products={products}
             selectedStore={selectedStore}
             onUpdateQuantity={handleUpdateCartQuantity}
             onRemoveItem={handleRemoveCartItem}
             onClearCart={handleClearCart}
+            onSwapItem={handleSwapCartItem}
+            onSwapAllCheaper={handleSwapAllToCheaper}
           />
         )}
 
