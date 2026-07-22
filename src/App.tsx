@@ -16,6 +16,8 @@ import { CartManager } from "./components/CartManager";
 import { PriceManagerModal } from "./components/PriceManagerModal";
 import { GeminiProductAssistant } from "./components/GeminiProductAssistant";
 import { PriceReportModal } from "./components/PriceReportModal";
+import { PriceTicker } from "./components/PriceTicker";
+import { LocalSeoFooter } from "./components/LocalSeoFooter";
 import { Bell, Flame, RefreshCw, Sparkles, CheckCircle2 } from "lucide-react";
 
 export default function App() {
@@ -199,6 +201,9 @@ export default function App() {
         cartCount={totalCartCount}
       />
 
+      {/* Live Financial-Style Price Ticker Banner */}
+      <PriceTicker products={products} onAddToCart={handleAddToCart} />
+
       {/* Main Body Content Container */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6">
         {currentMode === "consulta" && (
@@ -251,6 +256,13 @@ export default function App() {
         )}
 
         {currentMode === "ia_assistente" && <GeminiProductAssistant />}
+
+        {/* Local SEO Section Footer */}
+        <LocalSeoFooter
+          stores={stores}
+          selectedStore={selectedStore}
+          onSelectStore={setSelectedStore}
+        />
       </main>
 
       {/* Modals */}

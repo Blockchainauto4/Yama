@@ -39,6 +39,8 @@ export interface StoreUnit {
   closingTime: string;
   phone: string;
   services: string[];
+  latitude?: number;
+  longitude?: number;
 }
 
 export interface CartItem {

@@ -13,6 +13,8 @@ export const STORES_DATA: StoreUnit[] = [
     closingTime: "22:00",
     phone: "(11) 5514-9080",
     services: ["Compras na loja", "Retirada na porta", "Entrega expressa"],
+    latitude: -23.6823,
+    longitude: -46.7321,
   },
   {
     id: "funcionarios",
@@ -26,6 +28,8 @@ export const STORES_DATA: StoreUnit[] = [
     closingTime: "21:30",
     phone: "(11) 5514-3320",
     services: ["Compras na loja", "Entrega ao domicílio"],
+    latitude: -23.6654,
+    longitude: -46.7412,
   },
   {
     id: "anatoli",
@@ -39,6 +43,8 @@ export const STORES_DATA: StoreUnit[] = [
     closingTime: "22:00",
     phone: "(11) 5514-1140",
     services: ["Compras na loja", "Entrega ao domicílio"],
+    latitude: -23.6321,
+    longitude: -46.7289,
   },
 ];
 

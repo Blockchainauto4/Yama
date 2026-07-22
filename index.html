@@ -1,13 +1,126 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
+    
+    <!-- Local SEO Primary Meta Tags -->
+    <title>Super Yama Supermercados | Mercado Perto de Mim & Consulta de Preços em Tempo Real</title>
+    <meta name="title" content="Super Yama Supermercados | Mercado Perto de Mim & Consulta de Preços em Tempo Real" />
+    <meta name="description" content="Encontre o Super Yama mais próximo: Mercado perto de mim com consulta de preços ao vivo, encarte de ofertas, leitor de código de barras e Clube Yama. Unidades em São Paulo com hortifruti, açougue e mercearia." />
+    <meta name="keywords" content="mercado perto de mim, supermercado perto de mim, mercado aberto agora, consulta de preco mercado, encarte super yama, ofertas de supermercado hoje, hortifruti perto de mim, acougue perto de mim, clube yama, leitor codigo de barras supermercado, super yama taquandava" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Super Yama Supermercados" />
+    <meta name="geo.region" content="BR-SP" />
+    <meta name="geo.placename" content="São Paulo" />
+    <meta name="geo.position" content="-23.6823;-46.7321" />
+    <meta name="ICBM" content="-23.6823, -46.7321" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="business.business" />
+    <meta property="og:url" content="https://superyama.com.br/" />
+    <meta property="og:title" content="Super Yama Supermercados | Mercado Perto de Mim & Consulta de Preços" />
+    <meta property="og:description" content="Encontre ofertas do dia, consulte preços em tempo real com leitor de barras e encontre o Super Yama mais próximo de você." />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=1200&q=80" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="business:contact_data:street_address" content="Av. Taquandava, 9" />
+    <meta property="business:contact_data:locality" content="São Paulo" />
+    <meta property="business:contact_data:region" content="SP" />
+    <meta property="business:contact_data:postal_code" content="04941-000" />
+    <meta property="business:contact_data:country_name" content="Brasil" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="Super Yama Supermercados | Mercado Perto de Mim" />
+    <meta property="twitter:description" content="Consulta de preços em tempo real, encarte de ofertas e comparador do Super Yama Supermercados." />
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=1200&q=80" />
+
+    <!-- Schema.org JSON-LD Structured Data for Local Grocery Store SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "GroceryStore",
+          "@id": "https://superyama.com.br/#store-taquandava",
+          "name": "Super Yama Supermercados - Unidade Taquandava",
+          "image": "https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=800&q=80",
+          "telephone": "+551155149080",
+          "priceRange": "$$",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Av. Taquandava, 9",
+            "addressLocality": "São Paulo",
+            "addressRegion": "SP",
+            "postalCode": "04941-000",
+            "addressCountry": "BR"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -23.6823,
+            "longitude": -46.7321
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+              "opens": "07:00",
+              "closes": "22:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": "Sunday",
+              "opens": "07:00",
+              "closes": "20:00"
+            }
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Encarte de Ofertas Super Yama",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Product",
+                  "name": "Arroz Tipo 1 Agulhinha Camil 5kg",
+                  "category": "Mercearia"
+                },
+                "price": "23.90",
+                "priceCurrency": "BRL"
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Product",
+                  "name": "Picanha Bovina Friboi peça kg",
+                  "category": "Açougue"
+                },
+                "price": "59.90",
+                "priceCurrency": "BRL"
+              }
+            ]
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://superyama.com.br/#website",
+          "url": "https://superyama.com.br/",
+          "name": "Super Yama Supermercados - Mercado Perto de Mim",
+          "description": "Consulta de preços em tempo real, encarte de ofertas e leitor de código de barras.",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://superyama.com.br/?search={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
+    }
+    </script>
   </head>
-  <body>
+  <body class="bg-slate-50 text-slate-800 font-sans antialiased">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
+
 
