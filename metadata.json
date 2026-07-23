@@ -1,6 +1,6 @@
 {
-  "name": "Super Yama - Consulta de Preços",
-  "description": "Sistema em tempo real de consulta de preços, leitor de código de barras, encarte de ofertas e comparador do Super Yama Supermercados.",
-  "requestFramePermissions": ["camera"],
+  "name": "Yama Eco-Express & Supermercados | Entregas 24h em Bikes, Rastreio GPS & Consulta de Preços",
+  "description": "Plataforma de entregas rápidas 24 horas em bicicletas elétricas e mecânicas, cadastro de entregadores, rastreio GPS ao vivo de mercadorias no mercado e consulta de preços em tempo real.",
+  "requestFramePermissions": ["camera", "geolocation"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

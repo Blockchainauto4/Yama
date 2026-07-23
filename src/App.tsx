@@ -5,8 +5,11 @@ import {
   PriceChangeLog,
   Product,
   StoreUnit,
+  UserProfile,
+  DelivererProfile,
+  ActiveDeliveryOrder,
 } from "./types";
-import { INITIAL_PRODUCTS, STORES_DATA } from "./data/mockData";
+import { INITIAL_PRODUCTS, STORES_DATA, MOCK_DELIVERERS, MOCK_ACTIVE_ORDERS } from "./data/mockData";
 import { Header } from "./components/Header";
 import { PriceSearch } from "./components/PriceSearch";
 import { BarcodeScannerModal } from "./components/BarcodeScannerModal";
@@ -18,6 +21,9 @@ import { GeminiProductAssistant } from "./components/GeminiProductAssistant";
 import { PriceReportModal } from "./components/PriceReportModal";
 import { PriceTicker } from "./components/PriceTicker";
 import { LocalSeoFooter } from "./components/LocalSeoFooter";
+import { AuthModal } from "./components/AuthModal";
+import { DeliveryTrackerView } from "./components/DeliveryTrackerView";
+import { DelivererRegisterView } from "./components/DelivererRegisterView";
 import { Bell, Flame, RefreshCw, Sparkles, CheckCircle2 } from "lucide-react";
 
 export default function App() {
@@ -28,6 +34,21 @@ export default function App() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [priceLogs, setPriceLogs] = useState<PriceChangeLog[]>([]);
 
+  // Fleet Deliverers & Active GPS Delivery Orders
+  const [deliverers, setDeliverers] = useState<DelivererProfile[]>(MOCK_DELIVERERS);
+  const [activeOrders, setActiveOrders] = useState<ActiveDeliveryOrder[]>(MOCK_ACTIVE_ORDERS);
+
+  // Auth User State
+  const [currentUser, setCurrentUser] = useState<UserProfile | null>(() => {
+    try {
+      const saved = localStorage.getItem("superyama_user");
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
   const [isScannerOpen, setIsScannerOpen] = useState(false);
   const [reportProduct, setReportProduct] = useState<Product | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -37,6 +58,74 @@ export default function App() {
     setToastMessage(msg);
     setTimeout(() => setToastMessage(null), 3000);
   };
+
+  const handleUserLogin = (user: UserProfile) => {
+    setCurrentUser(user);
+    try {
+      localStorage.setItem("superyama_user", JSON.stringify(user));
+    } catch {
+      // ignore
+    }
+    showToast(`🎉 Olá, ${user.name}! 5% de Desconto de Boas-Vindas ativado e preços liberados!`);
+  };
+
+  const handleUserLogout = () => {
+    setCurrentUser(null);
+    try {
+      localStorage.removeItem("superyama_user");
+    } catch {
+      // ignore
+    }
+    showToast("Você saiu da sua conta. Faça login novamente para visualizar todos os preços.");
+  };
+
+  const handleRegisterDeliverer = (newDeliv: DelivererProfile) => {
+    setDeliverers((prev) => [newDeliv, ...prev]);
+    showToast(`🚲 Cadastro efetuado! ${newDeliv.name} foi ativado(a) no radar da frota 24h.`);
+  };
+
+  const handleCheckoutDelivery = () => {
+    if (cart.length === 0) return;
+
+    const assignedDeliv = deliverers[Math.floor(Math.random() * deliverers.length)];
+    const totalVal = cart.reduce(
+      (sum, item) => sum + item.product.clubeYamaPrice * item.quantity,
+      0
+    );
+
+    const newOrder: ActiveDeliveryOrder = {
+      id: "ord-" + Math.floor(1000 + Math.random() * 9000),
+      orderNumber: "#YAMA-" + Math.floor(1000 + Math.random() * 9000),
+      storeName: selectedStore.name,
+      storeAddress: selectedStore.address,
+      customerAddress: currentUser
+        ? `Rua das Flores, 88 - ${selectedStore.neighborhood}`
+        : `Endereço do Cliente - ${selectedStore.neighborhood}`,
+      customerName: currentUser?.name || "Cliente Yama",
+      neighborhood: selectedStore.neighborhood.split("/")[0],
+      deliverer: assignedDeliv,
+      itemsCount: cart.reduce((sum, i) => sum + i.quantity, 0),
+      totalValue: totalVal,
+      deliveryFee: 3.90, // Low-cost fee!
+      status: "no_estabelecimento", // Atendente no mercado separando as mercadorias
+      estimatedMinutes: 10,
+      currentLat: selectedStore.latitude || -23.6823,
+      currentLng: selectedStore.longitude || -46.7321,
+      targetLat: (selectedStore.latitude || -23.6823) + 0.005,
+      targetLng: (selectedStore.longitude || -46.7321) + 0.005,
+      otpCode: String(Math.floor(1000 + Math.random() * 9000)),
+      createdAt: "Agora mesmo",
+      is24hExpress: true,
+    };
+
+    setActiveOrders([newOrder, ...activeOrders]);
+    setCart([]);
+    setMode("rastreio");
+    showToast(
+      `⚡ Pedido ${newOrder.orderNumber} disparado! ${assignedDeliv.name} já está no mercado separando suas mercadorias.`
+    );
+  };
+
 
   // Cart operations
   const handleAddToCart = (product: Product, quantity: number) => {
@@ -199,10 +288,18 @@ export default function App() {
         setSelectedStore={setSelectedStore}
         stores={stores}
         cartCount={totalCartCount}
+        currentUser={currentUser}
+        onOpenAuth={() => setIsAuthModalOpen(true)}
+        onLogout={handleUserLogout}
       />
 
       {/* Live Financial-Style Price Ticker Banner */}
-      <PriceTicker products={products} onAddToCart={handleAddToCart} />
+      <PriceTicker
+        products={products}
+        currentUser={currentUser}
+        onOpenAuth={() => setIsAuthModalOpen(true)}
+        onAddToCart={handleAddToCart}
+      />
 
       {/* Main Body Content Container */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-6">
@@ -210,6 +307,8 @@ export default function App() {
           <PriceSearch
             products={products}
             selectedStore={selectedStore}
+            currentUser={currentUser}
+            onOpenAuth={() => setIsAuthModalOpen(true)}
             onAddToCart={handleAddToCart}
             onReportPrice={(p) => setReportProduct(p)}
             onOpenScanner={() => setIsScannerOpen(true)}
@@ -239,11 +338,14 @@ export default function App() {
             cart={cart}
             products={products}
             selectedStore={selectedStore}
+            currentUser={currentUser}
+            onOpenAuth={() => setIsAuthModalOpen(true)}
             onUpdateQuantity={handleUpdateCartQuantity}
             onRemoveItem={handleRemoveCartItem}
             onClearCart={handleClearCart}
             onSwapItem={handleSwapCartItem}
             onSwapAllCheaper={handleSwapAllToCheaper}
+            onCheckoutDelivery={handleCheckoutDelivery}
           />
         )}
 
@@ -257,6 +359,20 @@ export default function App() {
 
         {currentMode === "ia_assistente" && <GeminiProductAssistant />}
 
+        {currentMode === "rastreio" && (
+          <DeliveryTrackerView
+            orders={activeOrders}
+            deliverers={deliverers}
+          />
+        )}
+
+        {currentMode === "cadastro_entregador" && (
+          <DelivererRegisterView
+            deliverers={deliverers}
+            onRegisterDeliverer={handleRegisterDeliverer}
+          />
+        )}
+
         {/* Local SEO Section Footer */}
         <LocalSeoFooter
           stores={stores}
@@ -266,6 +382,12 @@ export default function App() {
       </main>
 
       {/* Modals */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        onLogin={handleUserLogin}
+      />
+
       <BarcodeScannerModal
         isOpen={isScannerOpen}
         onClose={() => setIsScannerOpen(false)}
@@ -279,6 +401,7 @@ export default function App() {
         onClose={() => setReportProduct(null)}
         onSubmitReport={handleSubmitReport}
       />
+
 
       {/* App Footer */}
       <footer className="bg-slate-800 text-slate-400 py-4 px-6 text-xs font-medium shrink-0 border-t border-slate-700">

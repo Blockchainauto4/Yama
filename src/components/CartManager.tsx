@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { CartItem, Product, StoreUnit } from "../types";
+import { CartItem, Product, StoreUnit, UserProfile } from "../types";
+import { WhatsAppCheckoutModal } from "./WhatsAppCheckoutModal";
 import {
   ShoppingBag,
   Trash2,
@@ -16,31 +17,43 @@ import {
   ChevronUp,
   Tag,
   CheckCircle2,
+  Gift,
+  Lock,
+  UserCheck,
+  Bike,
+  MessageSquare,
 } from "lucide-react";
 
 interface CartManagerProps {
   cart: CartItem[];
   products?: Product[];
   selectedStore: StoreUnit;
+  currentUser: UserProfile | null;
+  onOpenAuth: () => void;
   onUpdateQuantity: (productId: string, newQty: number) => void;
   onRemoveItem: (productId: string) => void;
   onClearCart: () => void;
   onSwapItem?: (oldProductId: string, newProduct: Product) => void;
   onSwapAllCheaper?: () => void;
+  onCheckoutDelivery?: () => void;
 }
 
 export const CartManager: React.FC<CartManagerProps> = ({
   cart,
   products = [],
   selectedStore,
+  currentUser,
+  onOpenAuth,
   onUpdateQuantity,
   onRemoveItem,
   onClearCart,
   onSwapItem,
   onSwapAllCheaper,
+  onCheckoutDelivery,
 }) => {
   const [copied, setCopied] = useState(false);
   const [expandedComparisons, setExpandedComparisons] = useState<Record<string, boolean>>({});
+  const [isWhatsAppModalOpen, setIsWhatsAppModalOpen] = useState(false);
 
   const toggleExpand = (productId: string) => {
     setExpandedComparisons((prev) => ({
@@ -60,6 +73,12 @@ export const CartManager: React.FC<CartManagerProps> = ({
   );
 
   const totalSavings = regularTotal - clubeTotal;
+
+  // 5% Welcome discount calculation for registered accounts
+  const welcomeDiscountPercent = currentUser?.welcomeDiscountActive ? 5 : 0;
+  const welcomeDiscountAmount = (clubeTotal * welcomeDiscountPercent) / 100;
+  const finalTotalToPay = clubeTotal - welcomeDiscountAmount;
+
 
   // Calculate quick price comparison for each item in the cart
   const itemComparisons = cart.map((item) => {
@@ -400,6 +419,34 @@ export const CartManager: React.FC<CartManagerProps> = ({
                     <span>- R$ {totalSavings.toFixed(2).replace(".", ",")}</span>
                   </div>
 
+                  {/* 5% Welcome Discount Badge or Login Prompt */}
+                  {currentUser ? (
+                    <div className="flex justify-between text-amber-300 font-black bg-amber-950/80 p-2.5 rounded-xl border border-amber-600/50 text-xs">
+                      <span className="flex items-center gap-1.5">
+                        <Gift className="w-4 h-4 text-amber-400" />
+                        Bônus Cadastro (5% OFF no Total):
+                      </span>
+                      <span>- R$ {welcomeDiscountAmount.toFixed(2).replace(".", ",")}</span>
+                    </div>
+                  ) : (
+                    <div className="bg-amber-400/20 border border-amber-400/40 p-3 rounded-2xl text-xs text-amber-200 space-y-2">
+                      <div className="flex items-center gap-1.5 font-bold text-amber-300">
+                        <Gift className="w-4 h-4" />
+                        <span>Ganhe 5% OFF ao Criar Sua Conta!</span>
+                      </div>
+                      <p className="text-[11px] leading-tight text-amber-100">
+                        Cadastre-se grátis agora para ganhar mais <strong>R$ {((clubeTotal * 5) / 100).toFixed(2).replace(".", ",")} de desconto extra</strong> no total desta compra.
+                      </p>
+                      <button
+                        onClick={onOpenAuth}
+                        className="w-full py-2 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs transition flex items-center justify-center gap-1.5"
+                      >
+                        <UserCheck className="w-3.5 h-3.5" />
+                        Criar Conta & Liberar 5% OFF
+                      </button>
+                    </div>
+                  )}
+
                   {totalPotentialExtraSavings > 0 && (
                     <div className="bg-blue-950/80 border border-blue-800/60 p-2.5 rounded-xl space-y-1">
                       <div className="flex justify-between text-amber-300 font-bold">
@@ -416,36 +463,70 @@ export const CartManager: React.FC<CartManagerProps> = ({
 
                   <div className="pt-3 border-t border-slate-800 flex justify-between items-baseline">
                     <span className="font-bold text-white text-sm">
-                      Total Final (Clube):
+                      Total Final a Pagar:
                     </span>
-                    <span className="text-3xl font-black text-white tracking-tight">
-                      R$ {clubeTotal.toFixed(2).replace(".", ",")}
+                    <span className="text-3xl font-black text-amber-300 tracking-tight">
+                      R$ {finalTotalToPay.toFixed(2).replace(".", ",")}
                     </span>
                   </div>
+
                 </div>
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-2.5">
+                <button
+                  onClick={() => setIsWhatsAppModalOpen(true)}
+                  className="w-full py-4 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs rounded-2xl flex items-center justify-center gap-2 transition shadow-xl shadow-emerald-950/30 active:scale-95 border border-emerald-500"
+                >
+                  <MessageSquare className="w-5 h-5 fill-current text-emerald-100" />
+                  <span>FINALIZAR PEDIDO NO WHATSAPP CENTRAL</span>
+                </button>
+
+                {onCheckoutDelivery && (
+                  <button
+                    onClick={onCheckoutDelivery}
+                    className="w-full py-3.5 px-4 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs rounded-2xl flex items-center justify-center gap-2 transition shadow-md active:scale-95 border border-amber-300"
+                  >
+                    <Bike className="w-4 h-4 text-red-600" />
+                    <span>Disparo Direto para Entregador E-Bike (R$ 3,90)</span>
+                  </button>
+                )}
+
                 <button
                   onClick={handleShareList}
-                  className={`w-full py-3.5 px-4 rounded-2xl font-bold text-xs flex items-center justify-center gap-2 transition shadow-lg ${
+                  className={`w-full py-3 px-4 rounded-2xl font-bold text-xs flex items-center justify-center gap-2 transition ${
                     copied
-                      ? "bg-emerald-600 text-white"
-                      : "bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-950"
+                      ? "bg-emerald-700 text-white"
+                      : "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700"
                   }`}
                 >
                   <Share2 className="w-4 h-4" />
-                  {copied ? "Lista Copiada para o WhatsApp!" : "Compartilhar Lista no WhatsApp"}
+                  {copied ? "Lista Copiada para o WhatsApp!" : "Copiar Texto da Lista de Compras"}
                 </button>
 
                 <div className="text-[11px] text-slate-400 text-center font-medium">
-                  Super Yama • Valores válidos para hoje
+                  Atendimento 24h • Central WhatsApp: (11) 98765-4321
                 </div>
               </div>
             </div>
           </div>
         </div>
       )}
+
+      {/* WhatsApp Central Order Finalization Modal */}
+      <WhatsAppCheckoutModal
+        isOpen={isWhatsAppModalOpen}
+        onClose={() => setIsWhatsAppModalOpen(false)}
+        cart={cart}
+        selectedStore={selectedStore}
+        currentUser={currentUser}
+        onConfirmOrder={(details) => {
+          setIsWhatsAppModalOpen(false);
+          if (onCheckoutDelivery) {
+            onCheckoutDelivery();
+          }
+        }}
+      />
     </div>
   );
 };

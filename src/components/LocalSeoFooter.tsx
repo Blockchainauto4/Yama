@@ -96,19 +96,23 @@ export const LocalSeoFooter: React.FC<LocalSeoFooterProps> = ({
   const faqs = [
     {
       q: "Onde fica o mercado Super Yama mais perto de mim?",
-      a: "O Super Yama conta com 3 unidades estratégicas em São Paulo: Unidade Taquandava (Av. Taquandava, 9 - Balneário Dom Carlos), Unidade Funcionários Públicos (Av. dos Funcionários Públicos, 512 - Jd. São Luís) e Unidade Anatoli Liadov (Rua Anatoli Liadov, 46A - Vila Andrade). Clique no botão 'Usar Meu GPS' para localizar a unidade mais próxima em tempo real!",
+      a: "O Super Yama conta com 3 unidades estratégicas em São Paulo atendendo a bairros como Jardim Aracati, Vila de São Paulo, Pava, Balneário Dom Carlos, Jardim São Luís e Vila Andrade: Unidade Taquandava (Av. Taquandava, 9), Unidade Funcionários Públicos (Av. dos Funcionários Públicos, 512) e Unidade Anatoli Liadov (Rua Anatoli Liadov, 46A). Clique no botão 'Usar Meu GPS' para localizar a unidade mais próxima em tempo real!",
     },
     {
-      q: "Como consultar preços e encarte de ofertas atualizados do supermercado?",
-      a: "Você pode buscar qualquer produto na barra de pesquisa superior por nome ou código de barras EAN, ver o preço de prateleira e o valor exclusivo de desconto do Clube Yama. Acesse também a aba 'Encarte Ofertas' para conferir os destaques do dia do hortifruti, açougue e mercearia.",
+      q: "O Super Yama faz entrega / delivery de supermercado perto de mim?",
+      a: "Sim! Oferecemos serviço de delivery e entrega expressa para regiões como Jardim Aracati, Vila de São Paulo, Pava, Jardim São Luís, Taquandava e proximidades. Você pode consultar os preços de produtos essenciais como Leite, Açúcar, Ovos, Frutas e carnes direto no app e montar sua lista de compras.",
     },
     {
-      q: "Quais os horários de funcionamento do supermercado Super Yama?",
-      a: "As unidades do Super Yama funcionam de segunda a sábado das 07:00 às 22:00 (Funcionários Públicos até 21:30) e aos domingos das 07:00 às 20:00. O status da loja e o horário de fechamento são atualizados ao vivo no topo da página.",
+      q: "Como consultar preços de produtos essenciais como Leite, Açúcar, Ovos e Frutas?",
+      a: "Você pode buscar qualquer item essencial (Leite UHT, Açúcar Refinado, Ovos de Granja, Frutas como Banana e Maçã) na barra de busca por nome ou código de barras EAN. O sistema mostra imediatamente o preço normal e o desconto exclusivo do Clube Yama.",
     },
     {
-      q: "Como funciona a garantia de preço baixo e o comparativo rápido?",
-      a: "No seu carrinho de compras, o sistema identifica automaticamente marcas concorrentes disponíveis do mesmo segmento com valores menores para que você possa substituir e economizar ainda mais na sua compra final.",
+      q: "Quais os horários de funcionamento das lojas do Super Yama?",
+      a: "As unidades do Super Yama funcionam de segunda a sábado das 07:00 às 22:00 (Funcionários Públicos até 21:30) e aos domingos das 07:00 às 20:00. O status da loja e horário de fechamento são atualizados ao vivo no topo da página.",
+    },
+    {
+      q: "Como funciona o comparativo de preços e trocas econômicas?",
+      a: "No seu carrinho de compras, o comparador inteligente analisa os itens adicionados (por exemplo, marcas de Leite, Açúcar ou Sabão) e indica se existe alguma marca concorrente mais barata do mesmo segmento para você economizar ainda mais.",
     },
   ];
 
@@ -272,34 +276,101 @@ export const LocalSeoFooter: React.FC<LocalSeoFooterProps> = ({
           </div>
         </div>
 
-        {/* Local SEO Categories Keyword Badges */}
-        <div className="bg-slate-50 border border-slate-200 rounded-3xl p-6 space-y-4">
-          <h3 className="font-bold text-sm text-slate-800 flex items-center gap-2 uppercase tracking-wider">
-            <BadgePercent className="w-4 h-4 text-red-600" />
-            Principais Buscas e Seções de Mercado Perto de Mim
-          </h3>
-          <div className="flex flex-wrap gap-2 text-xs">
-            {[
-              "Mercado Perto de Mim São Paulo",
-              "Supermercado Perto de Mim Aberto Agora",
-              "Açougue e Ofertas de Carne Perto de Mim",
-              "Feira Hortifruti Frutas e Verduras",
-              "Padaria e Pão Francês Quentinho",
-              "Laticínios Queijo e Leite com Desconto",
-              "Mercearia Arroz Feijão Óleo Café",
-              "Cerveja e Bebidas Geladas",
-              "Produtos de Limpeza e Lavanderia",
-              "Consulta de Preço por Código de Barras",
-              "Encarte Super Yama de Hoje",
-              "Clube Yama de Vantagens",
-            ].map((term, idx) => (
-              <span
-                key={idx}
-                className="bg-white border border-slate-200 text-slate-700 hover:border-red-300 font-medium px-3 py-1.5 rounded-xl transition cursor-default shadow-2xs"
-              >
-                📍 {term}
-              </span>
-            ))}
+        {/* Local SEO Categories Keyword Badges & Special Sections */}
+        <div className="bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-6">
+          <div className="border-b border-slate-200 pb-4">
+            <h3 className="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+              <BadgePercent className="w-5 h-5 text-red-600" />
+              Buscas Frequentes & Categorias Especiais: "Perto de Mim"
+            </h3>
+            <p className="text-xs text-slate-500 mt-1 font-medium">
+              Encontre o que você precisa a poucos passos no Super Yama com entrega rápida 24h em e-bikes para Jardim Aracati, Vila de São Paulo, Pava e Taquandava.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+            {/* Padaria Perto de Mim */}
+            <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-2">
+              <div className="font-extrabold text-slate-900 text-sm flex items-center gap-1.5 text-amber-700">
+                🥐 Padaria Perto de Mim
+              </div>
+              <p className="text-[11px] text-slate-600 font-medium leading-relaxed">
+                Pão francês crocante assado de hora em hora, broas de milho, bolo caseiro de fubá, rosquinhas e salgados fofinhos.
+              </p>
+              <div className="text-[10px] text-amber-800 font-extrabold bg-amber-50 px-2 py-1 rounded-lg">
+                📍 Assado na Hora • Unidades 1, 2 e 3
+              </div>
+            </div>
+
+            {/* Loja de Produtos de Limpeza Perto de Mim */}
+            <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-2">
+              <div className="font-extrabold text-slate-900 text-sm flex items-center gap-1.5 text-blue-700">
+                🧹 Produtos de Limpeza Perto de Mim
+              </div>
+              <p className="text-[11px] text-slate-600 font-medium leading-relaxed">
+                Sabão em pó Omo e Brilhante, amaciantes concentrados Downy e Ypê, água sanitária, desinfetantes Pinho Sol e papel higiênico.
+              </p>
+              <div className="text-[10px] text-blue-800 font-extrabold bg-blue-50 px-2 py-1 rounded-lg">
+                📍 Corredor 6 • Ofertas do Clube
+              </div>
+            </div>
+
+            {/* Loja de Utensílios Domésticos Perto de Mim */}
+            <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-2">
+              <div className="font-extrabold text-slate-900 text-sm flex items-center gap-1.5 text-indigo-700">
+                🍳 Utensílios Domésticos Perto de Mim
+              </div>
+              <p className="text-[11px] text-slate-600 font-medium leading-relaxed">
+                Potes herméticos Sanremo BPA Free, assadeiras de alumínio, jarras de vidro, copos, talheres, vassouras, rodos e baldes reforçados.
+              </p>
+              <div className="text-[10px] text-indigo-800 font-extrabold bg-indigo-50 px-2 py-1 rounded-lg">
+                📍 Utilidades para Casa & Cozinha
+              </div>
+            </div>
+
+            {/* Loja de Produtos para Churrasco Perto de Mim */}
+            <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-2">
+              <div className="font-extrabold text-slate-900 text-sm flex items-center gap-1.5 text-red-700">
+                🥩 Produtos para Churrasco Perto de Mim
+              </div>
+              <p className="text-[11px] text-slate-600 font-medium leading-relaxed">
+                Carvão vegetal 3kg sem fumaça, sal grosso Cisne, picanha nobre Friboi, linguiça toscana Perdigão, espetinhos e acendedores.
+              </p>
+              <div className="text-[10px] text-red-800 font-extrabold bg-red-50 px-2 py-1 rounded-lg">
+                📍 Sexta do Churrasco • Açougue Nobre
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-2">
+            <h4 className="text-xs font-bold text-slate-700 mb-3 uppercase tracking-wider">
+              Termos de Busca Regionais em Destaque:
+            </h4>
+            <div className="flex flex-wrap gap-2 text-xs">
+              {[
+                "Padaria Perto de Mim - Pão Francês Quentinho",
+                "Loja de Produtos de Limpeza Perto de Mim",
+                "Loja de Utensílios Domésticos Perto de Mim",
+                "Loja de Produtos para Churrasco Perto de Mim",
+                "Mercado Perto de Mim - Jardim Aracati",
+                "Supermercado Delivery na Vila de São Paulo",
+                "Mercado na Pava e Taquandava",
+                "Carvão Vegetal 3kg para Churrasco",
+                "Açougue e Picanha Friboi em Oferta",
+                "Sabão em Pó OMO e Amaciante Downy",
+                "Hortifruti: Banana Prata, Maçã Gala, Mamão",
+                "Cerveja Heineken & Amstel Gelada 24h",
+                "Consulta de Preço por Código de Barras EAN",
+                "WhatsApp Central de Compras Super Yama",
+              ].map((term, idx) => (
+                <span
+                  key={idx}
+                  className="bg-white border border-slate-200 text-slate-700 hover:border-red-300 font-medium px-3 py-1.5 rounded-xl transition cursor-default shadow-2xs"
+                >
+                  📍 {term}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
 

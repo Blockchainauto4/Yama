@@ -3,6 +3,7 @@ import {
   Product,
   CategoryType,
   StoreUnit,
+  UserProfile,
 } from "../types";
 import {
   Search,
@@ -15,12 +16,16 @@ import {
   TrendingDown,
   ShoppingBag,
   Info,
+  Lock,
+  UserCheck,
 } from "lucide-react";
 import { ProductDetailCard } from "./ProductDetailCard";
 
 interface PriceSearchProps {
   products: Product[];
   selectedStore: StoreUnit;
+  currentUser: UserProfile | null;
+  onOpenAuth: () => void;
   onAddToCart: (product: Product, quantity: number) => void;
   onReportPrice: (product: Product) => void;
   onOpenScanner: () => void;
@@ -31,24 +36,30 @@ interface PriceSearchProps {
 export const PriceSearch: React.FC<PriceSearchProps> = ({
   products,
   selectedStore,
+  currentUser,
+  onOpenAuth,
   onAddToCart,
   onReportPrice,
   onOpenScanner,
   searchQuery,
   setSearchQuery,
 }) => {
+
   const [selectedCategory, setSelectedCategory] = useState<CategoryType | "tudo">("tudo");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const categories: { id: CategoryType | "tudo"; label: string; icon: string }[] = [
     { id: "tudo", label: "Todos os Itens", icon: "🛒" },
-    { id: "mercearia", label: "Mercearia", icon: "🌾" },
-    { id: "açougue", label: "Açougue", icon: "🥩" },
-    { id: "hortifruti", label: "Hortifruti", icon: "🍎" },
-    { id: "laticínios", label: "Laticínios & Frios", icon: "🧀" },
     { id: "padaria", label: "Padaria", icon: "🥖" },
+    { id: "limpeza", label: "Produtos de Limpeza", icon: "🧼" },
+    { id: "churrasco", label: "Produtos p/ Churrasco", icon: "🔥" },
+    { id: "hortifruti", label: "Hortifruti", icon: "🍎" },
+    { id: "utensílios domésticos", label: "Utensílios Domésticos", icon: "🍳" },
+    { id: "açougue", label: "Açougue & Carnes", icon: "🥩" },
+    { id: "mercearia", label: "Mercearia", icon: "🌾" },
+    { id: "laticínios", label: "Laticínios & Frios", icon: "🧀" },
     { id: "bebidas", label: "Bebidas", icon: "🥤" },
-    { id: "limpeza", label: "Limpeza", icon: "🧼" },
+    { id: "higiene", label: "Higiene Pessoal", icon: "🧴" },
   ];
 
   const filteredProducts = useMemo(() => {
@@ -143,22 +154,55 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
         </div>
       </div>
 
-      {/* Categories Filter Pills */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
-        {categories.map((cat) => (
-          <button
-            key={cat.id}
-            onClick={() => setSelectedCategory(cat.id)}
-            className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap flex items-center gap-2 transition shadow-xs ${
-              selectedCategory === cat.id
-                ? "bg-red-600 text-white shadow-md shadow-red-200"
-                : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:text-slate-900"
-            }`}
-          >
-            <span>{cat.icon}</span>
-            <span>{cat.label}</span>
-          </button>
-        ))}
+      {/* Categories Filter Menu Bar */}
+      <div className="space-y-2">
+        <div className="flex items-center justify-between text-xs font-bold text-slate-700 px-1">
+          <span className="flex items-center gap-1.5 uppercase tracking-wider text-[11px] text-slate-500">
+            <SlidersHorizontal className="w-3.5 h-3.5 text-red-600" />
+            Filtrar por Categoria ("Perto de Mim"):
+          </span>
+          {selectedCategory !== "tudo" && (
+            <button
+              onClick={() => setSelectedCategory("tudo")}
+              className="text-red-600 hover:underline text-[11px] font-extrabold"
+            >
+              Limpar Filtro de Categoria
+            </button>
+          )}
+        </div>
+
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+          {categories.map((cat) => {
+            const itemCount =
+              cat.id === "tudo"
+                ? products.length
+                : products.filter((p) => p.category === cat.id).length;
+
+            return (
+              <button
+                key={cat.id}
+                onClick={() => setSelectedCategory(cat.id)}
+                className={`px-3.5 py-2 rounded-2xl text-xs font-bold whitespace-nowrap flex items-center gap-2 transition border ${
+                  selectedCategory === cat.id
+                    ? "bg-red-600 text-white border-red-600 shadow-md shadow-red-200 font-extrabold"
+                    : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:text-slate-900 shadow-2xs"
+                }`}
+              >
+                <span>{cat.icon}</span>
+                <span>{cat.label}</span>
+                <span
+                  className={`text-[10px] px-1.5 py-0.5 rounded-full font-mono ${
+                    selectedCategory === cat.id
+                      ? "bg-white/20 text-white font-bold"
+                      : "bg-slate-100 text-slate-600"
+                  }`}
+                >
+                  {itemCount}
+                </span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Selected Product Detail Card or List View */}
@@ -178,6 +222,8 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
           <ProductDetailCard
             product={selectedProduct}
             selectedStore={selectedStore}
+            currentUser={currentUser}
+            onOpenAuth={onOpenAuth}
             onAddToCart={onAddToCart}
             onReportPrice={onReportPrice}
           />
@@ -189,10 +235,20 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
               Exibindo <strong className="text-slate-800">{filteredProducts.length}</strong> itens cadastrados em{" "}
               <strong className="text-slate-800">{selectedStore.name}</strong>
             </span>
-            <span className="text-emerald-700 font-bold flex items-center gap-1">
-              <TrendingDown className="w-3.5 h-3.5" />
-              Valores exclusivos no Clube Yama
-            </span>
+            {currentUser ? (
+              <span className="text-emerald-700 font-bold flex items-center gap-1 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100">
+                <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                Preços liberados + 5% OFF de Boas-Vindas
+              </span>
+            ) : (
+              <button
+                onClick={onOpenAuth}
+                className="text-amber-800 font-extrabold flex items-center gap-1 bg-amber-100 hover:bg-amber-200 px-3 py-1 rounded-full border border-amber-300 transition text-xs"
+              >
+                <Lock className="w-3.5 h-3.5 text-amber-700" />
+                Faça Login p/ ver todos os preços e ganhar 5% OFF
+              </button>
+            )}
           </div>
 
           {filteredProducts.length === 0 ? (
@@ -217,7 +273,13 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
               {filteredProducts.map((p) => (
                 <div
                   key={p.id}
-                  onClick={() => setSelectedProduct(p)}
+                  onClick={() => {
+                    if (!currentUser) {
+                      onOpenAuth();
+                    } else {
+                      setSelectedProduct(p);
+                    }
+                  }}
                   className="bg-white border border-slate-200 hover:border-red-500/50 rounded-3xl p-5 transition-all duration-200 shadow-sm hover:shadow-xl hover:shadow-slate-200/50 cursor-pointer group flex flex-col justify-between"
                 >
                   <div>
@@ -255,30 +317,48 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
                     </div>
                   </div>
 
-                  {/* Pricing footer */}
+                  {/* Pricing footer or Login Lock */}
                   <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
-                    <div>
-                      <div className="text-[11px] text-slate-400 line-through">
-                        R$ {p.price.toFixed(2).replace(".", ",")}
+                    {currentUser ? (
+                      <div>
+                        <div className="text-[11px] text-slate-400 line-through">
+                          R$ {p.price.toFixed(2).replace(".", ",")}
+                        </div>
+                        <div className="text-2xl font-black text-slate-900 tracking-tighter">
+                          R$ {p.clubeYamaPrice.toFixed(2).replace(".", ",")}
+                        </div>
                       </div>
-                      <div className="text-2xl font-black text-slate-900 tracking-tighter">
-                        R$ {p.clubeYamaPrice.toFixed(2).replace(".", ",")}
-                      </div>
-                    </div>
+                    ) : (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onOpenAuth();
+                        }}
+                        className="flex items-center gap-1.5 bg-amber-400/20 hover:bg-amber-400/30 text-amber-900 border border-amber-400/50 text-xs font-bold px-3 py-2 rounded-xl transition"
+                      >
+                        <Lock className="w-4 h-4 text-amber-600" />
+                        <span>Entrar p/ Ver Preço</span>
+                      </button>
+                    )}
 
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        onAddToCart(p, 1);
+                        if (!currentUser) {
+                          onOpenAuth();
+                        } else {
+                          onAddToCart(p, 1);
+                        }
                       }}
                       className="p-3 bg-red-600 hover:bg-red-700 text-white rounded-xl transition shadow-md shadow-red-200 flex items-center justify-center active:scale-95"
-                      title="Adicionar ao carrinho"
+                      title={currentUser ? "Adicionar ao carrinho" : "Faça Login para Comprar"}
                     >
-                      <ShoppingBag className="w-4 h-4" />
+                      {currentUser ? <ShoppingBag className="w-4 h-4" /> : <Lock className="w-4 h-4" />}
                     </button>
                   </div>
                 </div>
               ))}
+
             </div>
           )}
         </div>

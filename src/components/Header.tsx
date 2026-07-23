@@ -13,8 +13,15 @@ import {
   Clock,
   PhoneCall,
   MapPin,
+  User,
+  Gift,
+  LogOut,
+  Lock,
+  Bike,
+  Truck,
+  Zap,
 } from "lucide-react";
-import { AppMode, StoreUnit } from "../types";
+import { AppMode, StoreUnit, UserProfile } from "../types";
 
 interface HeaderProps {
   currentMode: AppMode;
@@ -23,6 +30,9 @@ interface HeaderProps {
   setSelectedStore: (store: StoreUnit) => void;
   stores: StoreUnit[];
   cartCount: number;
+  currentUser: UserProfile | null;
+  onOpenAuth: () => void;
+  onLogout: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -32,8 +42,12 @@ export const Header: React.FC<HeaderProps> = ({
   setSelectedStore,
   stores,
   cartCount,
+  currentUser,
+  onOpenAuth,
+  onLogout,
 }) => {
   const [showStoreDropdown, setShowStoreDropdown] = React.useState(false);
+
 
   return (
     <header className="bg-white text-slate-800 shadow-sm sticky top-0 z-40 border-b border-slate-200">
@@ -98,21 +112,42 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-4 text-slate-600">
+        <div className="flex items-center gap-3 text-slate-600">
+          {/* User Account Login Status Badge */}
+          {currentUser ? (
+            <div className="flex items-center gap-2 bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-1 rounded-lg text-[11px] font-bold">
+              <span className="flex items-center gap-1 text-slate-800">
+                <User className="w-3.5 h-3.5 text-emerald-600" />
+                <span className="max-w-[100px] truncate">{currentUser.name}</span>
+              </span>
+              <span className="bg-amber-400 text-slate-950 px-1.5 py-0.2 rounded text-[10px] font-black uppercase flex items-center gap-0.5">
+                <Gift className="w-3 h-3" /> 5% OFF
+              </span>
+              <button
+                onClick={onLogout}
+                className="text-slate-400 hover:text-red-600 transition ml-1"
+                title="Sair da Conta"
+              >
+                <LogOut className="w-3 h-3" />
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={onOpenAuth}
+              className="flex items-center gap-1.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-[11px] px-3 py-1 rounded-lg transition shadow-xs"
+            >
+              <Gift className="w-3.5 h-3.5" />
+              <span>Entrar e Ganhar 5% OFF</span>
+            </button>
+          )}
+
+          <span className="hidden sm:inline text-slate-300">|</span>
           <div className="text-xs text-green-600 font-semibold flex items-center justify-end gap-1.5">
             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            Servidor Conectado
+            Servidor
           </div>
-          <span className="hidden sm:inline text-slate-300">|</span>
-          <span className="hidden md:flex items-center gap-1 text-[11px] text-slate-600 font-medium">
-            <Clock className="w-3 h-3 text-red-600" />
-            Sincronia SQL Ativa
-          </span>
-          <span className="hidden lg:flex items-center gap-1 text-[11px] text-slate-500">
-            <PhoneCall className="w-3 h-3 text-slate-400" />
-            {selectedStore.phone}
-          </span>
         </div>
+
       </div>
 
       {/* Main Header Branding & Modes */}
@@ -136,7 +171,7 @@ export const Header: React.FC<HeaderProps> = ({
                 </span>
               </div>
               <p className="text-xs font-medium text-slate-500 uppercase tracking-widest">
-                Sistema de Consulta em Tempo Real
+                Rede Multi-Lojas • Entregas 24h em E-Bikes com Baixo Custo
               </p>
             </div>
           </div>
@@ -168,7 +203,31 @@ export const Header: React.FC<HeaderProps> = ({
             }`}
           >
             <Search className="w-4 h-4" />
-            Consulta de Preços
+            Consulta & Lojas
+          </button>
+
+          <button
+            onClick={() => setMode("rastreio")}
+            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition ${
+              currentMode === "rastreio"
+                ? "bg-emerald-600 text-white shadow-md font-black"
+                : "text-slate-700 hover:text-slate-900 hover:bg-white bg-emerald-50/80 border border-emerald-200/60"
+            }`}
+          >
+            <Zap className="w-4 h-4 text-amber-400 fill-current" />
+            Rastreio GPS 24h (E-Bike)
+          </button>
+
+          <button
+            onClick={() => setMode("cadastro_entregador")}
+            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition ${
+              currentMode === "cadastro_entregador"
+                ? "bg-amber-400 text-slate-950 font-black shadow-md"
+                : "text-slate-700 hover:text-slate-900 hover:bg-white bg-amber-50/80 border border-amber-200/60"
+            }`}
+          >
+            <Bike className="w-4 h-4 text-red-600" />
+            Seja Entregador(a)
           </button>
 
           <button

@@ -2,6 +2,7 @@ import React from "react";
 import {
   Product,
   StoreUnit,
+  UserProfile,
 } from "../types";
 import {
   ShoppingBag,
@@ -13,11 +14,15 @@ import {
   Tag,
   Share2,
   TrendingDown,
+  Lock,
+  Sparkles,
 } from "lucide-react";
 
 interface ProductDetailCardProps {
   product: Product;
   selectedStore: StoreUnit;
+  currentUser: UserProfile | null;
+  onOpenAuth: () => void;
   onAddToCart: (product: Product, quantity: number) => void;
   onReportPrice: (product: Product) => void;
 }
@@ -25,6 +30,8 @@ interface ProductDetailCardProps {
 export const ProductDetailCard: React.FC<ProductDetailCardProps> = ({
   product,
   selectedStore,
+  currentUser,
+  onOpenAuth,
   onAddToCart,
   onReportPrice,
 }) => {
@@ -36,10 +43,15 @@ export const ProductDetailCard: React.FC<ProductDetailCardProps> = ({
   );
 
   const handleAdd = () => {
+    if (!currentUser) {
+      onOpenAuth();
+      return;
+    }
     onAddToCart(product, quantity);
     setAddedNotice(true);
     setTimeout(() => setAddedNotice(false), 2000);
   };
+
 
   return (
     <div className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-xl shadow-slate-200/50 text-slate-800 flex flex-col md:flex-row transition">
@@ -89,34 +101,58 @@ export const ProductDetailCard: React.FC<ProductDetailCardProps> = ({
           </div>
         </div>
 
-        {/* Pricing Box - Sleek Interface style giant price display */}
-        <div className="space-y-4">
-          <div className="flex items-end gap-3 flex-wrap">
-            <span className="text-2xl font-bold text-slate-400 pb-2">R$</span>
-            <span className="text-6xl sm:text-7xl font-black text-slate-900 tracking-tighter">
-              {product.clubeYamaPrice.toFixed(2).replace(".", ",")}
-            </span>
-            <div className="mb-2 bg-red-50 p-2.5 rounded-xl border border-red-100">
-              <p className="text-red-600 text-xs font-bold uppercase">Oferta Yama</p>
-              <p className="text-slate-500 text-xs line-through decoration-slate-400 font-semibold">
-                R$ {product.price.toFixed(2).replace(".", ",")}
-              </p>
+        {/* Pricing Box */}
+        {currentUser ? (
+          <div className="space-y-4">
+            <div className="flex items-end gap-3 flex-wrap">
+              <span className="text-2xl font-bold text-slate-400 pb-2">R$</span>
+              <span className="text-6xl sm:text-7xl font-black text-slate-900 tracking-tighter">
+                {product.clubeYamaPrice.toFixed(2).replace(".", ",")}
+              </span>
+              <div className="mb-2 bg-red-50 p-2.5 rounded-xl border border-red-100">
+                <p className="text-red-600 text-xs font-bold uppercase">Oferta Yama</p>
+                <p className="text-slate-500 text-xs line-through decoration-slate-400 font-semibold">
+                  R$ {product.price.toFixed(2).replace(".", ",")}
+                </p>
+              </div>
             </div>
-          </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="p-3.5 bg-emerald-50 rounded-2xl border border-emerald-100">
-              <p className="text-emerald-700 text-xs font-bold uppercase mb-0.5">Economia no Clube</p>
-              <p className="text-base font-bold text-emerald-900">
-                R$ {(product.price - product.clubeYamaPrice).toFixed(2).replace(".", ",")}
-              </p>
-            </div>
-            <div className="p-3.5 bg-amber-50 rounded-2xl border border-amber-100">
-              <p className="text-amber-700 text-xs font-bold uppercase mb-0.5">Preço Unitário</p>
-              <p className="text-base font-bold text-amber-900">{product.unitPriceRatio}</p>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-3.5 bg-emerald-50 rounded-2xl border border-emerald-100">
+                <p className="text-emerald-700 text-xs font-bold uppercase mb-0.5">Economia no Clube</p>
+                <p className="text-base font-bold text-emerald-900">
+                  R$ {(product.price - product.clubeYamaPrice).toFixed(2).replace(".", ",")}
+                </p>
+              </div>
+              <div className="p-3.5 bg-amber-50 rounded-2xl border border-amber-100">
+                <p className="text-amber-700 text-xs font-bold uppercase mb-0.5">Preço Unitário</p>
+                <p className="text-base font-bold text-amber-900">{product.unitPriceRatio}</p>
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="bg-amber-50 border-2 border-dashed border-amber-300 rounded-3xl p-6 text-center space-y-3">
+            <div className="w-12 h-12 bg-amber-400 text-slate-950 rounded-2xl flex items-center justify-center mx-auto shadow-md">
+              <Lock className="w-6 h-6" />
+            </div>
+            <div>
+              <h4 className="text-lg font-extrabold text-amber-950">
+                Preço Exclusivo para Cadastrados
+              </h4>
+              <p className="text-xs text-amber-800 font-medium max-w-sm mx-auto mt-1">
+                Faça login ou cadastre-se grátis em menos de 10 segundos para visualizar o preço e garantir <strong>5% de desconto de boas-vindas</strong> em sua compra.
+              </p>
+            </div>
+            <button
+              onClick={onOpenAuth}
+              className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs rounded-2xl transition shadow-lg shadow-red-200 flex items-center justify-center gap-2 mx-auto"
+            >
+              <Sparkles className="w-4 h-4 text-amber-300" />
+              <span>Criar Conta / Entrar para Ver Preço & Ganhar 5% OFF</span>
+            </button>
+          </div>
+        )}
+
 
         {/* Action Controls */}
         <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-100">

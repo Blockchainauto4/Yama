@@ -6,7 +6,9 @@ export type CategoryType =
   | "bebidas"
   | "mercearia"
   | "limpeza"
-  | "higiene";
+  | "higiene"
+  | "utensílios domésticos"
+  | "churrasco";
 
 export interface Product {
   id: string;
@@ -70,4 +72,69 @@ export interface PriceChangeLog {
   timestamp: string;
 }
 
-export type AppMode = "consulta" | "totem" | "encarte" | "carrinho" | "gestor" | "ia_assistente";
+export interface UserProfile {
+  id: string;
+  name: string;
+  email: string;
+  cpf?: string;
+  welcomeDiscountActive: boolean; // 5% off on total purchase
+  discountPercent: number; // 5
+}
+
+export type BikeType = "ebike" | "mechanical_bike";
+
+export interface DelivererProfile {
+  id: string;
+  name: string;
+  phone: string;
+  cpf: string;
+  bikeType: BikeType;
+  bikeModel: string;
+  neighborhood: string;
+  availability: "24h" | "diurno" | "noturno";
+  status: "Aprovado" | "Em Análise" | "Ativo no Radar";
+  rating: number;
+  totalDeliveries: number;
+  avatarUrl: string;
+  pixKey?: string;
+}
+
+export type DeliveryStatusStep =
+  | "aguardando_aceite"
+  | "no_estabelecimento"
+  | "mercadoria_coletada"
+  | "em_transito_bike"
+  | "entregue";
+
+export interface ActiveDeliveryOrder {
+  id: string;
+  orderNumber: string;
+  storeName: string;
+  storeAddress: string;
+  customerAddress: string;
+  customerName: string;
+  neighborhood: string;
+  deliverer?: DelivererProfile;
+  itemsCount: number;
+  totalValue: number;
+  deliveryFee: number; // Baixo custo R$ 3,90
+  status: DeliveryStatusStep;
+  estimatedMinutes: number;
+  currentLat: number;
+  currentLng: number;
+  targetLat: number;
+  targetLng: number;
+  otpCode: string;
+  createdAt: string;
+  is24hExpress: boolean;
+}
+
+export type AppMode =
+  | "consulta"
+  | "totem" | "encarte"
+  | "carrinho"
+  | "gestor"
+  | "ia_assistente"
+  | "rastreio"
+  | "cadastro_entregador";
+
