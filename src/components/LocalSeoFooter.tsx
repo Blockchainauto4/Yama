@@ -96,11 +96,15 @@ export const LocalSeoFooter: React.FC<LocalSeoFooterProps> = ({
   const faqs = [
     {
       q: "Onde fica o mercado Super Yama mais perto de mim?",
-      a: "O Super Yama conta com 3 unidades estratégicas em São Paulo atendendo a bairros como Jardim Aracati, Vila de São Paulo, Pava, Balneário Dom Carlos, Jardim São Luís e Vila Andrade: Unidade Taquandava (Av. Taquandava, 9), Unidade Funcionários Públicos (Av. dos Funcionários Públicos, 512) e Unidade Anatoli Liadov (Rua Anatoli Liadov, 46A). Clique no botão 'Usar Meu GPS' para localizar a unidade mais próxima em tempo real!",
+      a: "O Super Yama conta com 3 unidades estratégicas em São Paulo atendendo a bairros como Jardim Aracati, Vila de São Paulo, Pava, Balneário Dom Carlos, Jardim São Luís, Vila Andrade e Chácara Santana: Unidade Taquandava (Av. Taquandava, 9), Unidade Funcionários Públicos (Av. dos Funcionários Públicos, 512) e Unidade Anatoli Liadov (Rua Anatoli Liadov, 46A). Clique no botão 'Usar Meu GPS' para localizar a unidade mais próxima em tempo real!",
     },
     {
       q: "O Super Yama faz entrega / delivery de supermercado perto de mim?",
-      a: "Sim! Oferecemos serviço de delivery e entrega expressa para regiões como Jardim Aracati, Vila de São Paulo, Pava, Jardim São Luís, Taquandava e proximidades. Você pode consultar os preços de produtos essenciais como Leite, Açúcar, Ovos, Frutas e carnes direto no app e montar sua lista de compras.",
+      a: "Sim! Oferecemos serviço de delivery e entrega expressa para regiões como Jardim Aracati, Vila de São Paulo, Pava, Jardim São Luís, Taquandava, Chácara Santana e proximidades. Você pode consultar os preços de produtos essenciais como Leite, Açúcar, Ovos, Frutas e carnes direto no app e montar sua lista de compras.",
+    },
+    {
+      q: "Vocês têm hortifruti fresco e açougue perto de mim?",
+      a: "Com certeza! Temos frutas, legumes e verduras fresquinhas todos os dias (Hortifruti Perto de Mim). Nosso açougue oferece cortes de carne bovina, suína e aves de alta qualidade, ideais para o dia a dia ou para aquele churrasco especial de fim de semana.",
     },
     {
       q: "Como consultar preços de produtos essenciais como Leite, Açúcar, Ovos e Frutas?",
@@ -366,21 +370,22 @@ export const LocalSeoFooter: React.FC<LocalSeoFooterProps> = ({
                 "Disque Bebida / Disk Bebida Perto de Mim",
                 "Disque Cerveja Gelada Perto de Mim",
                 "Disque Vinho Perto de Mim",
-                "Disque Gelada 24 Horas em E-Bike",
+                "Mercado Aberto Agora",
+                "Supermercado Delivery na Vila de São Paulo",
                 "Padaria Perto de Mim - Pão Francês Quentinho",
+                "Hortifruti Perto de Mim - Frutas Frescas",
+                "Açougue Perto de Mim - Carnes para Churrasco",
                 "Loja de Produtos de Limpeza Perto de Mim",
                 "Loja de Utensílios Domésticos Perto de Mim",
-                "Loja de Produtos para Churrasco Perto de Mim",
+                "Produtos para Churrasco Perto de Mim",
                 "Mercado Perto de Mim - Jardim Aracati",
-                "Supermercado Delivery na Vila de São Paulo",
                 "Mercado na Pava e Taquandava",
+                "Supermercado Perto de Mim - M'Boi Mirim",
+                "Onde comprar cerveja barata",
+                "Ofertas de Supermercado Hoje",
                 "Carvão Vegetal 3kg para Churrasco",
-                "Açougue e Picanha Friboi em Oferta",
-                "Sabão em Pó OMO e Amaciante Downy",
-                "Hortifruti: Banana Prata, Maçã Gala, Mamão",
-                "Cerveja Heineken & Amstel Gelada 24h",
+                "Sabão em Pó OMO e Amaciante",
                 "Consulta de Preço por Código de Barras EAN",
-                "WhatsApp Central de Compras Super Yama",
               ].map((term, idx) => (
                 <span
                   key={idx}
