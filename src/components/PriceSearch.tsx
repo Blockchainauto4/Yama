@@ -58,7 +58,7 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
     { id: "açougue", label: "Açougue & Carnes", icon: "🥩" },
     { id: "mercearia", label: "Mercearia", icon: "🌾" },
     { id: "laticínios", label: "Laticínios & Frios", icon: "🧀" },
-    { id: "bebidas", label: "Bebidas", icon: "🥤" },
+    { id: "bebidas", label: "Adega & Disque Bebida / Cerveja / Vinho", icon: "🍷" },
     { id: "higiene", label: "Higiene Pessoal", icon: "🧴" },
   ];
 

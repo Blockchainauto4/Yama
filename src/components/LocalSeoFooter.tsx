@@ -288,7 +288,20 @@ export const LocalSeoFooter: React.FC<LocalSeoFooterProps> = ({
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 text-xs">
+            {/* Adega 24 Horas & Disque Bebida Perto de Mim */}
+            <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-2">
+              <div className="font-extrabold text-slate-900 text-sm flex items-center gap-1.5 text-purple-700">
+                🍷 Adega 24h & Disque Bebida
+              </div>
+              <p className="text-[11px] text-slate-600 font-medium leading-relaxed">
+                Adega aberta 24h perto de mim com disque cerveja gelada, disque vinho, whiskies, destilados e energéticos entregues em minutos.
+              </p>
+              <div className="text-[10px] text-purple-800 font-extrabold bg-purple-50 px-2 py-1 rounded-lg">
+                📍 Tele-Bebida & Delivery Express 24h
+              </div>
+            </div>
+
             {/* Padaria Perto de Mim */}
             <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-2">
               <div className="font-extrabold text-slate-900 text-sm flex items-center gap-1.5 text-amber-700">
@@ -321,7 +334,7 @@ export const LocalSeoFooter: React.FC<LocalSeoFooterProps> = ({
                 🍳 Utensílios Domésticos Perto de Mim
               </div>
               <p className="text-[11px] text-slate-600 font-medium leading-relaxed">
-                Potes herméticos Sanremo BPA Free, assadeiras de alumínio, jarras de vidro, copos, talheres, vassouras, rodos e baldes reforçados.
+                Potes herméticos Sanremo BPA Free, assadeiras de alumínio, javras de vidro, copos, talheres, vassouras, rodos e baldes reforçados.
               </p>
               <div className="text-[10px] text-indigo-800 font-extrabold bg-indigo-50 px-2 py-1 rounded-lg">
                 📍 Utilidades para Casa & Cozinha
@@ -348,6 +361,12 @@ export const LocalSeoFooter: React.FC<LocalSeoFooterProps> = ({
             </h4>
             <div className="flex flex-wrap gap-2 text-xs">
               {[
+                "Adega Perto de Mim",
+                "Adega Aberta 24 Horas Perto de Mim",
+                "Disque Bebida / Disk Bebida Perto de Mim",
+                "Disque Cerveja Gelada Perto de Mim",
+                "Disque Vinho Perto de Mim",
+                "Disque Gelada 24 Horas em E-Bike",
                 "Padaria Perto de Mim - Pão Francês Quentinho",
                 "Loja de Produtos de Limpeza Perto de Mim",
                 "Loja de Utensílios Domésticos Perto de Mim",
