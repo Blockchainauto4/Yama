@@ -41,7 +41,7 @@
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "GroceryStore",
+          "@type": ["GroceryStore", "LiquorStore", "Bakery", "ConvenienceStore"],
           "@id": "https://superyama.com.br/#store-taquandava",
           "name": "Super Yama Supermercados - Unidade Taquandava",
           "image": "https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=800&q=80",
@@ -136,6 +136,16 @@
                   "category": "Adega Perto de Mim"
                 },
                 "price": "4.99",
+                "priceCurrency": "BRL"
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Product",
+                  "name": "Pizza Congelada Sadia Calabresa 460g",
+                  "category": "Congelados e Frios Perto de Mim"
+                },
+                "price": "19.90",
                 "priceCurrency": "BRL"
               },
               {

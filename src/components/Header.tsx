@@ -239,7 +239,7 @@ export const Header: React.FC<HeaderProps> = ({
             }`}
           >
             <Monitor className="w-4 h-4" />
-            Totem Kiosk
+            Totem Autoatendimento
           </button>
 
           <button
