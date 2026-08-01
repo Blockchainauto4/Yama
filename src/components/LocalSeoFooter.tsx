@@ -365,12 +365,22 @@ export const LocalSeoFooter: React.FC<LocalSeoFooterProps> = ({
             </h4>
             <div className="flex flex-wrap gap-2 text-xs">
               {[
+                "Yama Supermercado",
+                "Super Yama Supermercado",
+                "Supermercado Yama",
+                "Yama",
+                "Delivery 24 horas SP",
+                "Mercado Yama Ipava",
+                "Mercado",
+                "Supermercado Yama Cidade Ipava",
+                "Mercado Perto de Mim",
+                "Mercado Próximo a Mim",
+                "Mercado Aberto Agora",
                 "Adega Perto de Mim",
                 "Adega Aberta 24 Horas Perto de Mim",
                 "Disque Bebida / Disk Bebida Perto de Mim",
                 "Disque Cerveja Gelada Perto de Mim",
                 "Disque Vinho Perto de Mim",
-                "Mercado Aberto Agora",
                 "Supermercado Delivery na Vila de São Paulo",
                 "Padaria Perto de Mim - Pão Francês Quentinho",
                 "Hortifruti Perto de Mim - Frutas Frescas",

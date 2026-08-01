@@ -43,7 +43,7 @@ export const WhatsAppCheckoutModal: React.FC<WhatsAppCheckoutModalProps> = ({
   onConfirmOrder,
 }) => {
   const [customerName, setCustomerName] = useState(currentUser?.name || "");
-  const [customerPhone, setCustomerPhone] = useState(currentUser?.phone || "(11) 9");
+  const [customerPhone, setCustomerPhone] = useState(currentUser?.phone || "");
   const [cpf, setCpf] = useState(currentUser?.cpf || "");
   const [streetAddress, setStreetAddress] = useState("");
   const [addressNumber, setAddressNumber] = useState("");
@@ -135,7 +135,8 @@ export const WhatsAppCheckoutModal: React.FC<WhatsAppCheckoutModalProps> = ({
     return msg;
   };
 
-  const handleSendWhatsApp = () => {
+  const handleSendWhatsApp = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     const text = generateWhatsAppMessage();
     const encodedText = encodeURIComponent(text);
     const whatsappUrl = `https://wa.me/${CENTRAL_WHATSAPP_NUMBER}?text=${encodedText}`;
@@ -191,7 +192,7 @@ export const WhatsAppCheckoutModal: React.FC<WhatsAppCheckoutModalProps> = ({
         </div>
 
         {/* Modal Body */}
-        <div className="p-6 space-y-6 max-h-[75vh] overflow-y-auto">
+        <form onSubmit={handleSendWhatsApp} className="p-6 space-y-6 max-h-[75vh] overflow-y-auto">
           {/* Order Quick Summary Card */}
           <div className="bg-slate-50 border border-slate-200 p-4 rounded-2xl space-y-3">
             <div className="flex items-center justify-between text-xs font-bold text-slate-700">
@@ -444,33 +445,34 @@ export const WhatsAppCheckoutModal: React.FC<WhatsAppCheckoutModalProps> = ({
               {generateWhatsAppMessage()}
             </pre>
           </div>
-        </div>
+        
+          {/* Modal Footer Actions */}
+          <div className="mt-6 p-6 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 -mx-6 -mb-6">
+            <div className="text-xs text-slate-500 font-medium text-center sm:text-left">
+              Central de Vendas WhatsApp:{" "}
+              <strong className="text-slate-800">{CENTRAL_WHATSAPP_FORMATTED}</strong>
+            </div>
 
-        {/* Modal Footer Actions */}
-        <div className="p-6 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="text-xs text-slate-500 font-medium text-center sm:text-left">
-            Central de Vendas WhatsApp:{" "}
-            <strong className="text-slate-800">{CENTRAL_WHATSAPP_FORMATTED}</strong>
+            <div className="flex items-center gap-2 w-full sm:w-auto">
+              <button
+                type="button"
+                onClick={onClose}
+                className="py-3 px-4 rounded-2xl font-bold text-xs text-slate-600 hover:bg-slate-200 transition"
+              >
+                Cancelar
+              </button>
+
+              <button
+                type="submit"
+                className="flex-1 sm:flex-initial py-3.5 px-6 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs rounded-2xl flex items-center justify-center gap-2 transition shadow-xl shadow-emerald-950/20 active:scale-95"
+              >
+                <MessageSquare className="w-4 h-4 fill-current text-emerald-100" />
+                <span>Enviar Pedido para WhatsApp da Central</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
-
-          <div className="flex items-center gap-2 w-full sm:w-auto">
-            <button
-              onClick={onClose}
-              className="py-3 px-4 rounded-2xl font-bold text-xs text-slate-600 hover:bg-slate-200 transition"
-            >
-              Cancelar
-            </button>
-
-            <button
-              onClick={handleSendWhatsApp}
-              className="flex-1 sm:flex-initial py-3.5 px-6 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs rounded-2xl flex items-center justify-center gap-2 transition shadow-xl shadow-emerald-950/20 active:scale-95"
-            >
-              <MessageSquare className="w-4 h-4 fill-current text-emerald-100" />
-              <span>Enviar Pedido para WhatsApp da Central</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
   );
