@@ -47,7 +47,7 @@ export default function App() {
       return null;
     }
   });
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(!currentUser);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(true);
 
   const [isScannerOpen, setIsScannerOpen] = useState(false);
   const [reportProduct, setReportProduct] = useState<Product | null>(null);
