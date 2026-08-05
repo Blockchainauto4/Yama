@@ -140,7 +140,7 @@ export const ProductDetailCard: React.FC<ProductDetailCardProps> = ({
                 Preço Exclusivo para Cadastrados
               </h4>
               <p className="text-xs text-amber-800 font-medium max-w-sm mx-auto mt-1">
-                Faça login ou cadastre-se grátis em menos de 10 segundos para visualizar o preço e garantir <strong>5% de desconto de boas-vindas</strong> em sua compra.
+                Faça login ou cadastre-se grátis em menos de 10 segundos para visualizar o preço e garantir <strong>50% de desconto no pre-save</strong> em sua compra.
               </p>
             </div>
             <button

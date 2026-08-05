@@ -13,7 +13,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onLogin }
 
   const handleUnlock = () => {
     // Open Spotify link in new tab
-    window.open("https://open.spotify.com/album/2oEU7FFDsfa3fheCfFXKoc?si=qn5LoN3PT3KtNgnRJiwIqA&utm_source=copy-link", "_blank");
+    window.open("https://offstep.link/307187539131", "_blank");
     
     // Auto-login to unlock prices
     const newUser: UserProfile = {
@@ -21,7 +21,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onLogin }
       name: "Ouvinte Fluxo",
       email: "ouvinte@fluxo.com",
       welcomeDiscountActive: true,
-      discountPercent: 5,
+      discountPercent: 50,
     };
     onLogin(newUser);
     onClose();
@@ -43,17 +43,17 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onLogin }
           </div>
 
           <h3 className="text-2xl font-black tracking-tight text-white mb-2">
-            Preços Bloqueados!
+            Desbloqueie 50% OFF!
           </h3>
           <p className="text-sm text-green-50 mt-1 font-medium leading-relaxed">
-            Para liberar a visibilidade de todos os preços e ofertas, acesse o link abaixo e ouça o melhor do Sertanejo e do Funk!
+            Faça o pre-save da música Dona do meu passo, o melhor do Sertanejo com o Fluxo, e ganhe 50% de desconto na sua primeira compra e 15% em todas as próximas!
           </p>
         </div>
 
         <div className="p-6 space-y-4">
           <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-center">
-            <p className="text-sm font-bold text-slate-800 mb-1">Álbum: O Traço e a Tinta</p>
-            <p className="text-xs text-slate-500 font-medium">Artista: Fluxo</p>
+            <p className="text-sm font-bold text-slate-800 mb-1">Música: Dona do meu passo</p>
+            <p className="text-xs text-slate-500 font-medium">Artista: Fluxo (Sertanejo)</p>
           </div>
 
           <button
@@ -61,11 +61,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onLogin }
             className="w-full bg-green-500 hover:bg-green-600 text-white font-black text-sm py-4 rounded-2xl transition shadow-lg shadow-green-200 flex items-center justify-center gap-2 active:scale-95"
           >
             <Headphones className="w-5 h-5" />
-            <span>Ouvir no Spotify & Liberar Preços</span>
+            <span>Fazer Pre-save & Liberar 50% OFF</span>
           </button>
           
           <p className="text-[10px] text-center text-slate-400 font-medium px-4">
-            Ao clicar, você será redirecionado para o Spotify e os preços do Yammá serão desbloqueados automaticamente.
+            Ao clicar, você será redirecionado para fazer o pre-save e os preços do Yammá serão desbloqueados com 50% de desconto.
           </p>
         </div>
       </div>

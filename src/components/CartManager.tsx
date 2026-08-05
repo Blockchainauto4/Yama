@@ -74,8 +74,8 @@ export const CartManager: React.FC<CartManagerProps> = ({
 
   const totalSavings = regularTotal - clubeTotal;
 
-  // 5% Welcome discount calculation for registered accounts
-  const welcomeDiscountPercent = currentUser?.welcomeDiscountActive ? 5 : 0;
+  // Discount calculation for registered accounts
+  const welcomeDiscountPercent = currentUser ? (currentUser.welcomeDiscountActive ? 50 : 15) : 0;
   const welcomeDiscountAmount = (clubeTotal * welcomeDiscountPercent) / 100;
   const finalTotalToPay = clubeTotal - welcomeDiscountAmount;
 
@@ -424,7 +424,7 @@ export const CartManager: React.FC<CartManagerProps> = ({
                     <div className="flex justify-between text-amber-300 font-black bg-amber-950/80 p-2.5 rounded-xl border border-amber-600/50 text-xs">
                       <span className="flex items-center gap-1.5">
                         <Gift className="w-4 h-4 text-amber-400" />
-                        Bônus Cadastro (5% OFF no Total):
+                        Desconto Especial (Ouvinte Fluxo):
                       </span>
                       <span>- R$ {welcomeDiscountAmount.toFixed(2).replace(".", ",")}</span>
                     </div>
@@ -432,17 +432,17 @@ export const CartManager: React.FC<CartManagerProps> = ({
                     <div className="bg-amber-400/20 border border-amber-400/40 p-3 rounded-2xl text-xs text-amber-200 space-y-2">
                       <div className="flex items-center gap-1.5 font-bold text-amber-300">
                         <Gift className="w-4 h-4" />
-                        <span>Ganhe 5% OFF ao Criar Sua Conta!</span>
+                        <span>Ganhe 50% OFF na 1ª compra ao fazer Pre-save!</span>
                       </div>
                       <p className="text-[11px] leading-tight text-amber-100">
-                        Cadastre-se grátis agora para ganhar mais <strong>R$ {((clubeTotal * 5) / 100).toFixed(2).replace(".", ",")} de desconto extra</strong> no total desta compra.
+                        Faça o Pre-save grátis agora para ganhar <strong>R$ {((clubeTotal * 50) / 100).toFixed(2).replace(".", ",")} de desconto extra</strong> no total desta compra.
                       </p>
                       <button
                         onClick={onOpenAuth}
                         className="w-full py-2 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs transition flex items-center justify-center gap-1.5"
                       >
                         <UserCheck className="w-3.5 h-3.5" />
-                        Criar Conta & Liberar 5% OFF
+                        Fazer Pre-save & Liberar 50% OFF
                       </button>
                     </div>
                   )}

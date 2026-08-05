@@ -121,7 +121,7 @@ export const Header: React.FC<HeaderProps> = ({
                 <span className="max-w-[100px] truncate">{currentUser.name}</span>
               </span>
               <span className="bg-amber-400 text-slate-950 px-1.5 py-0.2 rounded text-[10px] font-black uppercase flex items-center gap-0.5">
-                <Gift className="w-3 h-3" /> 5% OFF
+                <Gift className="w-3 h-3" /> 50% OFF
               </span>
               <button
                 onClick={onLogout}

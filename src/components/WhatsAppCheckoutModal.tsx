@@ -117,7 +117,7 @@ export const WhatsAppCheckoutModal: React.FC<WhatsAppCheckoutModalProps> = ({
     msg += `• Subtotal (Tabela Normal): R$ ${regularTotal.toFixed(2).replace(".", ",")}\n`;
     msg += `• Economia Yammá: -R$ ${totalSavings.toFixed(2).replace(".", ",")}\n`;
     if (welcomeDiscount > 0) {
-      msg += `• Bônus de Cadastro (5% OFF): -R$ ${welcomeDiscount.toFixed(2).replace(".", ",")}\n`;
+      msg += `• Desconto Especial (Pre-save 50% OFF): -R$ ${welcomeDiscount.toFixed(2).replace(".", ",")}\n`;
     }
     msg += `• Taxa de Entrega E-Bike: R$ ${deliveryFee.toFixed(2).replace(".", ",")}\n`;
     msg += `💵 *VALOR FINAL A PAGAR: R$ ${finalTotal.toFixed(2).replace(".", ",")}*\n\n`;

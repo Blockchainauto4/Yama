@@ -240,7 +240,7 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
             {currentUser ? (
               <span className="text-emerald-700 font-bold flex items-center gap-1 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100">
                 <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                Preços liberados + 5% OFF de Boas-Vindas
+                Preços liberados + Desconto Pre-save
               </span>
             ) : (
               <button
@@ -248,7 +248,7 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
                 className="text-amber-800 font-extrabold flex items-center gap-1 bg-amber-100 hover:bg-amber-200 px-3 py-1 rounded-full border border-amber-300 transition text-xs"
               >
                 <Lock className="w-3.5 h-3.5 text-amber-700" />
-                Faça Login p/ ver todos os preços e ganhar 5% OFF
+                Pre-save p/ ver preços e ganhar 50% OFF
               </button>
             )}
           </div>

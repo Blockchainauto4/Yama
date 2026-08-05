@@ -47,7 +47,7 @@ export default function App() {
       return null;
     }
   });
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(!currentUser);
 
   const [isScannerOpen, setIsScannerOpen] = useState(false);
   const [reportProduct, setReportProduct] = useState<Product | null>(null);
@@ -66,7 +66,7 @@ export default function App() {
     } catch {
       // ignore
     }
-    showToast(`🎉 Olá, ${user.name}! 5% de Desconto de Boas-Vindas ativado e preços liberados!`);
+    showToast(`🎉 Olá, ${user.name}! Desconto de 50% (Pre-save) ativado e preços liberados!`);
   };
 
   const handleUserLogout = () => {
