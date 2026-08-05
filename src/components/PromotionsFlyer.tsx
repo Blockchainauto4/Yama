@@ -20,7 +20,7 @@ export const PromotionsFlyer: React.FC<PromotionsFlyerProps> = ({
       {/* Flyer Header Banner */}
       <div className="bg-gradient-to-br from-red-600 via-red-700 to-red-800 rounded-3xl p-6 sm:p-10 text-white shadow-lg shadow-red-200 relative overflow-hidden">
         <div className="absolute right-0 top-0 bottom-0 opacity-10 font-serif text-[180px] font-black select-none pointer-events-none leading-none">
-          YAMA
+          YAMMÁ
         </div>
 
         <div className="max-w-2xl relative z-10 space-y-3">
@@ -30,7 +30,7 @@ export const PromotionsFlyer: React.FC<PromotionsFlyerProps> = ({
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight uppercase">
-            SUPER YAMA <br />
+            YAMMÁ <br />
             <span className="text-amber-300 font-serif lowercase italic">
               ofertas imbatíveis da semana
             </span>
@@ -38,7 +38,7 @@ export const PromotionsFlyer: React.FC<PromotionsFlyerProps> = ({
 
           <p className="text-sm text-red-100 font-medium max-w-lg">
             Aproveite os melhores preços com o seu cadastro no{" "}
-            <strong>Clube Yama</strong> na unidade {selectedStore.name}.
+            <strong>Cotações Yammá</strong> na unidade {selectedStore.name}.
           </p>
 
           <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-bold text-slate-900">
@@ -58,13 +58,13 @@ export const PromotionsFlyer: React.FC<PromotionsFlyerProps> = ({
             Destaques do Encarte ({promoProducts.length} itens em oferta)
           </h3>
           <span className="text-xs text-slate-500 font-medium">
-            Super Yama • {selectedStore.name}
+            Yammá • {selectedStore.name}
           </span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {promoProducts.map((p) => {
-            const savings = (p.price - p.clubeYamaPrice).toFixed(2).replace(".", ",");
+            const savings = (p.price - p.yammaPrice).toFixed(2).replace(".", ",");
             return (
               <div
                 key={p.id}
@@ -115,7 +115,7 @@ export const PromotionsFlyer: React.FC<PromotionsFlyerProps> = ({
 
                   <div className="flex items-baseline justify-between">
                     <span className="text-3xl font-black text-slate-900 tracking-tighter">
-                      R$ {p.clubeYamaPrice.toFixed(2).replace(".", ",")}
+                      R$ {p.yammaPrice.toFixed(2).replace(".", ",")}
                     </span>
                     <span className="text-[10px] font-bold text-white bg-slate-900 px-2 py-0.5 rounded uppercase flex items-center gap-0.5">
                       <BadgeCheck className="w-3 h-3 text-amber-400" /> Clube

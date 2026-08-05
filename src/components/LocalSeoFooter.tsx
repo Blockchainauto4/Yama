@@ -95,28 +95,28 @@ export const LocalSeoFooter: React.FC<LocalSeoFooterProps> = ({
 
   const faqs = [
     {
-      q: "Onde fica o mercado Super Yama mais perto de mim?",
-      a: "O Super Yama conta com 3 unidades estratégicas em São Paulo atendendo a bairros como Jardim Aracati, Vila de São Paulo, Pava, Balneário Dom Carlos, Jardim São Luís, Vila Andrade e Chácara Santana: Unidade Taquandava (Av. Taquandava, 9), Unidade Funcionários Públicos (Av. dos Funcionários Públicos, 512) e Unidade Anatoli Liadov (Rua Anatoli Liadov, 46A). Clique no botão 'Usar Meu GPS' para localizar a unidade mais próxima em tempo real!",
+      q: "O que é o Yammá?",
+      a: "O Yammá é um sistema inteligente de cotação e comparação de preços que reúne os valores praticados por todos os supermercados da Zona Sul de São Paulo, ajudando você a encontrar o melhor preço para as suas compras.",
     },
     {
-      q: "O Super Yama faz entrega / delivery de supermercado perto de mim?",
-      a: "Sim! Oferecemos serviço de delivery e entrega expressa para regiões como Jardim Aracati, Vila de São Paulo, Pava, Jardim São Luís, Taquandava, Chácara Santana e proximidades. Você pode consultar os preços de produtos essenciais como Leite, Açúcar, Ovos, Frutas e carnes direto no app e montar sua lista de compras.",
+      q: "O Yammá faz entrega de supermercado?",
+      a: "O Yammá não vende produtos diretamente, mas facilita o seu processo de compra. Você encontra o melhor preço no nosso site e pode ser redirecionado para comprar nos e-commerces dos supermercados parceiros que fazem delivery para a sua região.",
     },
     {
-      q: "Vocês têm hortifruti fresco e açougue perto de mim?",
-      a: "Com certeza! Temos frutas, legumes e verduras fresquinhas todos os dias (Hortifruti Perto de Mim). Nosso açougue oferece cortes de carne bovina, suína e aves de alta qualidade, ideais para o dia a dia ou para aquele churrasco especial de fim de semana.",
+      q: "Consigo comparar preços de hortifruti fresco e açougue?",
+      a: "Com certeza! Nosso sistema monitora preços de frutas, legumes, verduras e cortes de carne em diversos supermercados próximos a você, permitindo que você encontre qualidade e economia.",
     },
     {
       q: "Como consultar preços de produtos essenciais como Leite, Açúcar, Ovos e Frutas?",
-      a: "Você pode buscar qualquer item essencial (Leite UHT, Açúcar Refinado, Ovos de Granja, Frutas como Banana e Maçã) na barra de busca por nome ou código de barras EAN. O sistema mostra imediatamente o preço normal e o desconto exclusivo do Clube Yama.",
+      a: "Você pode buscar qualquer item na nossa barra de busca inteligente. O Yammá compara instantaneamente o preço do produto em diferentes redes de supermercados para garantir a melhor oferta.",
     },
     {
-      q: "Quais os horários de funcionamento das lojas do Super Yama?",
-      a: "As unidades do Super Yama funcionam de segunda a sábado das 07:00 às 22:00 (Funcionários Públicos até 21:30) e aos domingos das 07:00 às 20:00. O status da loja e horário de fechamento são atualizados ao vivo no topo da página.",
+      q: "Quais supermercados da Zona Sul estão no Yammá?",
+      a: "O Yammá monitora as principais redes e supermercados de bairro da Zona Sul de São Paulo, incluindo regiões como Jardim Aracati, Vila de São Paulo, Jardim São Luís, Taquandava, e Chácara Santana.",
     },
     {
       q: "Como funciona o comparativo de preços e trocas econômicas?",
-      a: "No seu carrinho de compras, o comparador inteligente analisa os itens adicionados (por exemplo, marcas de Leite, Açúcar ou Sabão) e indica se existe alguma marca concorrente mais barata do mesmo segmento para você economizar ainda mais.",
+      a: "No seu carrinho de cotação, o comparador inteligente analisa os itens adicionados e indica se existe alguma marca concorrente mais barata ou um supermercado onde a cesta final saia mais em conta.",
     },
   ];
 
@@ -131,10 +131,10 @@ export const LocalSeoFooter: React.FC<LocalSeoFooterProps> = ({
               SEO Local • Localizador Inteligente
             </div>
             <h2 className="text-2xl sm:text-3xl font-black leading-tight tracking-tight">
-              Procurando um <span className="text-amber-300">Mercado Perto de Mim</span>?
+              O Melhor Preço <span className="text-amber-300">Você Encontra Aqui!</span>
             </h2>
             <p className="text-xs sm:text-sm text-slate-100 font-medium leading-relaxed">
-              Encontre a loja do Super Yama mais próxima, verifique o horário de funcionamento ao vivo, consulte os preços de prateleira em tempo real e aproveite as ofertas exclusivas do Clube Yama.
+              Compare preços entre todos os supermercados da Zona Sul de São Paulo, encontre as melhores ofertas e economize em suas compras online.
             </p>
           </div>
 
@@ -145,7 +145,7 @@ export const LocalSeoFooter: React.FC<LocalSeoFooterProps> = ({
               className="w-full sm:w-auto bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs px-6 py-4 rounded-2xl flex items-center justify-center gap-2.5 transition shadow-lg shadow-amber-900/30 whitespace-nowrap active:scale-95 disabled:opacity-60"
             >
               <LocateFixed className="w-5 h-5 text-slate-950 animate-pulse" />
-              {geoLoading ? "Localizando via GPS..." : "Usar Meu GPS (Mercado Perto de Mim)"}
+              {geoLoading ? "Localizando via GPS..." : "Usar Meu GPS (Supermercados Próximos)"}
             </button>
           </div>
         </div>
@@ -162,14 +162,14 @@ export const LocalSeoFooter: React.FC<LocalSeoFooterProps> = ({
             <div>
               <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
                 <Navigation className="w-5 h-5 text-red-600" />
-                Unidades Super Yama em São Paulo - SP
+                Supermercados na Zona Sul de SP
               </h3>
               <p className="text-xs text-slate-500 font-medium">
                 Endereço, telefone e status em tempo real das nossas lojas físicas
               </p>
             </div>
             <span className="text-xs font-bold text-slate-500 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
-              3 Unidades Ativas
+                Supermercados Parceiros
             </span>
           </div>
 
@@ -288,7 +288,7 @@ export const LocalSeoFooter: React.FC<LocalSeoFooterProps> = ({
               Buscas Frequentes & Categorias Especiais: "Perto de Mim"
             </h3>
             <p className="text-xs text-slate-500 mt-1 font-medium">
-              Encontre o que você precisa a poucos passos no Super Yama com entrega rápida 24h em e-bikes para Jardim Aracati, Vila de São Paulo, Pava e Taquandava.
+              Descubra os melhores preços da sua região no Yammá. Compare e compre em e-commerces de supermercados com entrega rápida para Jardim Aracati, Vila de São Paulo, Pava e Taquandava.
             </p>
           </div>
 
@@ -365,14 +365,19 @@ export const LocalSeoFooter: React.FC<LocalSeoFooterProps> = ({
             </h4>
             <div className="flex flex-wrap gap-2 text-xs">
               {[
-                "Yama Supermercado",
-                "Super Yama Supermercado",
-                "Supermercado Yama",
-                "Yama",
-                "Delivery 24 horas SP",
-                "Mercado Yama Ipava",
-                "Mercado",
-                "Supermercado Yama Cidade Ipava",
+                "Yammá",
+                "Cotação de preços",
+                "Consulta de preço",
+                "Comparar preço",
+                "Cotar preço",
+                "Qual o preço",
+                "Ver preço",
+                "Comparar preços de supermercado",
+                "Supermercados Zona Sul SP",
+                "O melhor preço você encontra aqui",
+                "Yammá Cotações",
+                "E-commerce de Supermercado",
+                "Supermercados Parceiros Zona Sul",
                 "Mercado Perto de Mim",
                 "Mercado Próximo a Mim",
                 "Mercado Aberto Agora",
@@ -413,7 +418,7 @@ export const LocalSeoFooter: React.FC<LocalSeoFooterProps> = ({
           <div className="border-b border-slate-200 pb-3">
             <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
               <HelpCircle className="w-5 h-5 text-red-600" />
-              Perguntas Frequentes - Mercado Perto de Mim & Dúvidas
+              Perguntas Frequentes - Yammá Cotação de Preços
             </h3>
           </div>
 
@@ -447,7 +452,7 @@ export const LocalSeoFooter: React.FC<LocalSeoFooterProps> = ({
         {/* Copyright Footer Line */}
         <div className="pt-8 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-medium">
           <div>
-            © 2026 <strong>Super Yama Supermercados Ltda.</strong> • Todos os direitos reservados.
+            © {new Date().getFullYear()} <strong>Yammá.</strong> • O melhor preço você encontra aqui! • Todos os direitos reservados.
           </div>
           <div className="flex items-center gap-4">
             <span>Privacidade</span>

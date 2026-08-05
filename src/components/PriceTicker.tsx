@@ -29,7 +29,7 @@ export const PriceTicker: React.FC<PriceTickerProps> = ({
         <div className="bg-red-600 text-white font-black text-[11px] uppercase tracking-wider px-3.5 py-2.5 flex items-center gap-2 shrink-0 z-20 shadow-md border-r border-red-700">
           <span className="w-2 h-2 rounded-full bg-white animate-ping shrink-0" />
           <span className="w-2 h-2 rounded-full bg-white shrink-0 -ml-4" />
-          <span className="hidden sm:inline font-mono">COTAÇÕES YAMA</span>
+          <span className="hidden sm:inline font-mono">COTAÇÕES YAMMÁ</span>
           <span className="sm:hidden font-mono">OFERTAS</span>
           <Sparkles className="w-3.5 h-3.5 text-amber-300" />
         </div>
@@ -90,7 +90,7 @@ export const PriceTicker: React.FC<PriceTickerProps> = ({
           >
             {tickerProducts.map((p, index) => {
               const discountPercent = Math.round(
-                ((p.price - p.clubeYamaPrice) / p.price) * 100
+                ((p.price - p.yammaPrice) / p.price) * 100
               );
 
               return (
@@ -135,7 +135,7 @@ export const PriceTicker: React.FC<PriceTickerProps> = ({
                       </span>
 
                       <span className="font-black text-amber-300 text-xs font-mono">
-                        R$ {p.clubeYamaPrice.toFixed(2).replace(".", ",")}
+                        R$ {p.yammaPrice.toFixed(2).replace(".", ",")}
                       </span>
 
                       {discountPercent > 0 && (

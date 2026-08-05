@@ -7,7 +7,7 @@ export const GeminiProductAssistant: React.FC = () => {
   >([
     {
       role: "assistant",
-      text: "Olá! Sou o assistente de inteligência artificial do **Super Yama Supermercados**. 🛒\n\nVocê pode me mandar foto de uma etiqueta de preço, rótulo de produto ou nota fiscal para eu conferir se o valor está vantajoso, ou pedir sugestões de receitas com nossas ofertas de hoje!",
+      text: "Olá! Sou o assistente de inteligência artificial do **Yammá Cotações**. 🛒\n\nVocê pode me mandar foto de uma etiqueta de preço, rótulo de produto ou nota fiscal para eu conferir se o valor está vantajoso, ou pedir sugestões de receitas com nossas ofertas de hoje!",
     },
   ]);
 
@@ -94,7 +94,7 @@ export const GeminiProductAssistant: React.FC = () => {
           </div>
           <div>
             <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-              Assistente IA Super Yama Gemini
+              Assistente IA Yammá Gemini
             </h2>
             <p className="text-xs text-slate-500 font-medium">
               Leitor inteligente de etiquetas, comparador de preços e consultor de receitas
@@ -149,7 +149,7 @@ export const GeminiProductAssistant: React.FC = () => {
           {loading && (
             <div className="flex items-center gap-2 text-xs text-purple-700 font-bold bg-purple-50 p-3 rounded-2xl border border-purple-100 w-fit">
               <Loader2 className="w-4 h-4 animate-spin text-purple-600" />
-              <span>Analisando solicitação no Super Yama AI...</span>
+              <span>Analisando solicitação no Yammá AI...</span>
             </div>
           )}
         </div>

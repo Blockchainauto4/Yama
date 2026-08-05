@@ -17,7 +17,7 @@ export interface Product {
   brand: string;
   category: CategoryType;
   price: number;
-  clubeYamaPrice: number;
+  yammaPrice: number;
   unitMeasure: string;
   unitPriceRatio: string; // e.g. "R$ 14,90/kg"
   aisle: string; // e.g. "Corredor 4 - Laticínios"

@@ -212,7 +212,7 @@ export const BarcodeScannerModal: React.FC<BarcodeScannerModalProps> = ({
                     EAN: {p.barcode}
                   </div>
                   <div className="text-xs font-bold text-emerald-400">
-                    R$ {p.clubeYamaPrice.toFixed(2).replace(".", ",")}
+                    R$ {p.yammaPrice.toFixed(2).replace(".", ",")}
                   </div>
                 </div>
               </button>

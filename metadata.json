@@ -1,6 +1,6 @@
 {
-  "name": "Yama Eco-Express & Supermercados | Entregas 24h em Bikes, Rastreio GPS & Consulta de Preços",
-  "description": "Plataforma de entregas rápidas 24 horas em bicicletas elétricas e mecânicas, cadastro de entregadores, rastreio GPS ao vivo de mercadorias no mercado e consulta de preços em tempo real.",
+  "name": "Yammá | Sistema de Cotação de Preços",
+  "description": "Yammá é um sistema de cotação dos melhores preços entre todos os supermercados da zona sul de São Paulo. O melhor preço você encontra aqui!",
   "requestFramePermissions": ["camera", "geolocation"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

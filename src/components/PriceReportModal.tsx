@@ -64,7 +64,7 @@ export const PriceReportModal: React.FC<PriceReportModalProps> = ({
             <div className="font-bold text-slate-900">{product.name}</div>
             <div className="text-slate-500 font-medium">
               Preço no Sistema: R${" "}
-              {product.clubeYamaPrice.toFixed(2).replace(".", ",")}
+              {product.yammaPrice.toFixed(2).replace(".", ",")}
             </div>
           </div>
         </div>

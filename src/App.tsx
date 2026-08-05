@@ -41,7 +41,7 @@ export default function App() {
   // Auth User State
   const [currentUser, setCurrentUser] = useState<UserProfile | null>(() => {
     try {
-      const saved = localStorage.getItem("superyama_user");
+      const saved = localStorage.getItem("yamma_user");
       return saved ? JSON.parse(saved) : null;
     } catch {
       return null;
@@ -62,7 +62,7 @@ export default function App() {
   const handleUserLogin = (user: UserProfile) => {
     setCurrentUser(user);
     try {
-      localStorage.setItem("superyama_user", JSON.stringify(user));
+      localStorage.setItem("yamma_user", JSON.stringify(user));
     } catch {
       // ignore
     }
@@ -72,7 +72,7 @@ export default function App() {
   const handleUserLogout = () => {
     setCurrentUser(null);
     try {
-      localStorage.removeItem("superyama_user");
+      localStorage.removeItem("yamma_user");
     } catch {
       // ignore
     }
@@ -89,19 +89,19 @@ export default function App() {
 
     const assignedDeliv = deliverers[Math.floor(Math.random() * deliverers.length)];
     const totalVal = cart.reduce(
-      (sum, item) => sum + item.product.clubeYamaPrice * item.quantity,
+      (sum, item) => sum + item.product.yammaPrice * item.quantity,
       0
     );
 
     const newOrder: ActiveDeliveryOrder = {
       id: "ord-" + Math.floor(1000 + Math.random() * 9000),
-      orderNumber: "#YAMA-" + Math.floor(1000 + Math.random() * 9000),
+      orderNumber: "#YAMMA-" + Math.floor(1000 + Math.random() * 9000),
       storeName: selectedStore.name,
       storeAddress: selectedStore.address,
       customerAddress: currentUser
         ? `Rua das Flores, 88 - ${selectedStore.neighborhood}`
         : `Endereço do Cliente - ${selectedStore.neighborhood}`,
-      customerName: currentUser?.name || "Cliente Yama",
+      customerName: currentUser?.name || "Cliente Yammá",
       neighborhood: selectedStore.neighborhood.split("/")[0],
       deliverer: assignedDeliv,
       itemsCount: cart.reduce((sum, i) => sum + i.quantity, 0),
@@ -192,9 +192,9 @@ export default function App() {
             (p) =>
               p.category === item.product.category &&
               p.id !== item.product.id &&
-              p.clubeYamaPrice < item.product.clubeYamaPrice
+              p.yammaPrice < item.product.yammaPrice
           )
-          .sort((a, b) => a.clubeYamaPrice - b.clubeYamaPrice)[0];
+          .sort((a, b) => a.yammaPrice - b.yammaPrice)[0];
 
         if (cheaper) {
           swappedCount++;
@@ -227,7 +227,7 @@ export default function App() {
       productName: target.name,
       oldPrice: target.price,
       newPrice,
-      oldClubePrice: target.clubeYamaPrice,
+      oldClubePrice: target.yammaPrice,
       newClubePrice,
       timestamp: new Date().toLocaleTimeString("pt-BR"),
     };
@@ -240,7 +240,7 @@ export default function App() {
           return {
             ...p,
             price: newPrice,
-            clubeYamaPrice: newClubePrice,
+            yammaPrice: newClubePrice,
             inPromotion,
             promotionBadge: badge || p.promotionBadge,
           };
@@ -415,7 +415,7 @@ export default function App() {
             <span className="text-slate-300">Unidade: {selectedStore.name} ({selectedStore.address})</span>
           </div>
           <div className="flex items-center gap-4 uppercase tracking-widest text-[10px]">
-            <span>SUPER YAMA V. 2.4.0</span>
+            <span>YAMMÁ V. 2.4.0</span>
             <span className="h-3 w-[1px] bg-slate-600"></span>
             <span>Suporte: Ramal 204</span>
           </div>

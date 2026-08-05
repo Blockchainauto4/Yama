@@ -70,7 +70,7 @@ export const TotemTerminalView: React.FC<TotemTerminalViewProps> = ({
           </div>
           <div>
             <h2 className="text-lg font-bold uppercase tracking-wider text-slate-900">
-              Super Yama • Totem Consulta Rápida
+              Yammá • Totem Consulta Rápida
             </h2>
             <p className="text-xs text-slate-500 font-medium flex items-center gap-1">
               <MapPin className="w-3.5 h-3.5 text-red-600" />
@@ -174,14 +174,14 @@ export const TotemTerminalView: React.FC<TotemTerminalViewProps> = ({
               <div className="text-center sm:text-right bg-red-50 px-6 py-4 rounded-2xl border border-red-100">
                 <span className="text-xs text-red-600 font-extrabold uppercase tracking-wider flex items-center justify-center sm:justify-end gap-1 mb-1">
                   <BadgeCheck className="w-4 h-4 text-red-600" />
-                  Preço Clube Yama
+                  Preço Yammá
                 </span>
                 <div className="text-5xl sm:text-6xl font-black text-slate-900 tracking-tighter">
-                  R$ {scannedProduct.clubeYamaPrice.toFixed(2).replace(".", ",")}
+                  R$ {scannedProduct.yammaPrice.toFixed(2).replace(".", ",")}
                 </div>
                 <span className="text-xs text-emerald-700 font-bold block mt-1">
                   Economia de R${" "}
-                  {(scannedProduct.price - scannedProduct.clubeYamaPrice)
+                  {(scannedProduct.price - scannedProduct.yammaPrice)
                     .toFixed(2)
                     .replace(".", ",")}{" "}
                   por unidade

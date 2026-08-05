@@ -24,7 +24,7 @@ export const PriceManagerModal: React.FC<PriceManagerModalProps> = ({
 
   const [editPrice, setEditPrice] = useState<string>(selectedProd?.price.toString() || "");
   const [editClubePrice, setEditClubePrice] = useState<string>(
-    selectedProd?.clubeYamaPrice.toString() || ""
+    selectedProd?.yammaPrice.toString() || ""
   );
   const [isPromo, setIsPromo] = useState<boolean>(selectedProd?.inPromotion || false);
   const [promoBadge, setPromoBadge] = useState<string>(selectedProd?.promotionBadge || "");
@@ -35,7 +35,7 @@ export const PriceManagerModal: React.FC<PriceManagerModalProps> = ({
     const prod = products.find((p) => p.id === id);
     if (prod) {
       setEditPrice(prod.price.toString());
-      setEditClubePrice(prod.clubeYamaPrice.toString());
+      setEditClubePrice(prod.yammaPrice.toString());
       setIsPromo(prod.inPromotion);
       setPromoBadge(prod.promotionBadge || "");
     }
@@ -65,7 +65,7 @@ export const PriceManagerModal: React.FC<PriceManagerModalProps> = ({
               Painel Gestor - Atualização de Preços em Tempo Real
             </h2>
             <p className="text-xs text-slate-500 font-medium">
-              Altere o valor de qualquer produto para refletir instantaneamente em todos os totens e telas do sistema Super Yama
+              Altere o valor de qualquer produto para refletir instantaneamente em todos os totens e telas do sistema Yammá
             </p>
           </div>
         </div>
@@ -95,7 +95,7 @@ export const PriceManagerModal: React.FC<PriceManagerModalProps> = ({
                   </div>
                 </div>
                 <div className={`text-xs font-bold whitespace-nowrap ${p.id === selectedProdId ? "text-white" : "text-slate-900"}`}>
-                  R$ {p.clubeYamaPrice.toFixed(2).replace(".", ",")}
+                  R$ {p.yammaPrice.toFixed(2).replace(".", ",")}
                 </div>
               </button>
             ))}
@@ -137,7 +137,7 @@ export const PriceManagerModal: React.FC<PriceManagerModalProps> = ({
 
                 <div>
                   <label className="block text-xs font-bold text-red-600 mb-1">
-                    Preço Exclusivo Clube Yama (R$)
+                    Preço Exclusivo Yammá (R$)
                   </label>
                   <input
                     type="text"

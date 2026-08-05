@@ -39,7 +39,7 @@ export const ProductDetailCard: React.FC<ProductDetailCardProps> = ({
   const [addedNotice, setAddedNotice] = React.useState(false);
 
   const discountPercent = Math.round(
-    ((product.price - product.clubeYamaPrice) / product.price) * 100
+    ((product.price - product.yammaPrice) / product.price) * 100
   );
 
   const handleAdd = () => {
@@ -107,10 +107,10 @@ export const ProductDetailCard: React.FC<ProductDetailCardProps> = ({
             <div className="flex items-end gap-3 flex-wrap">
               <span className="text-2xl font-bold text-slate-400 pb-2">R$</span>
               <span className="text-6xl sm:text-7xl font-black text-slate-900 tracking-tighter">
-                {product.clubeYamaPrice.toFixed(2).replace(".", ",")}
+                {product.yammaPrice.toFixed(2).replace(".", ",")}
               </span>
               <div className="mb-2 bg-red-50 p-2.5 rounded-xl border border-red-100">
-                <p className="text-red-600 text-xs font-bold uppercase">Oferta Yama</p>
+                <p className="text-red-600 text-xs font-bold uppercase">Oferta Yammá</p>
                 <p className="text-slate-500 text-xs line-through decoration-slate-400 font-semibold">
                   R$ {product.price.toFixed(2).replace(".", ",")}
                 </p>
@@ -121,7 +121,7 @@ export const ProductDetailCard: React.FC<ProductDetailCardProps> = ({
               <div className="p-3.5 bg-emerald-50 rounded-2xl border border-emerald-100">
                 <p className="text-emerald-700 text-xs font-bold uppercase mb-0.5">Economia no Clube</p>
                 <p className="text-base font-bold text-emerald-900">
-                  R$ {(product.price - product.clubeYamaPrice).toFixed(2).replace(".", ",")}
+                  R$ {(product.price - product.yammaPrice).toFixed(2).replace(".", ",")}
                 </p>
               </div>
               <div className="p-3.5 bg-amber-50 rounded-2xl border border-amber-100">
@@ -148,7 +148,7 @@ export const ProductDetailCard: React.FC<ProductDetailCardProps> = ({
               className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs rounded-2xl transition shadow-lg shadow-red-200 flex items-center justify-center gap-2 mx-auto"
             >
               <Sparkles className="w-4 h-4 text-amber-300" />
-              <span>Criar Conta / Entrar para Ver Preço & Ganhar 5% OFF</span>
+              <span>Ouvir no Spotify & Liberar Preços</span>
             </button>
           </div>
         )}

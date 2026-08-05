@@ -43,7 +43,7 @@ export const DeliveryTrackerView: React.FC<DeliveryTrackerViewProps> = ({
   // Quick errand form
   const [showErrandForm, setShowErrandForm] = useState(false);
   const [errandNeighborhood, setErrandNeighborhood] = useState("Jardim Aracati");
-  const [errandStore, setErrandStore] = useState("Super Yama - Unidade Taquandava");
+  const [errandStore, setErrandStore] = useState("Yammá - Unidade Taquandava");
   const [errandItems, setErrandItems] = useState("1x Leite Integral, 1x Açúcar 1kg, 1x Ovos 30u");
   const [errandAddress, setErrandAddress] = useState("Rua das Rosas, 77");
 
@@ -247,9 +247,9 @@ export const DeliveryTrackerView: React.FC<DeliveryTrackerViewProps> = ({
                 onChange={(e) => setErrandStore(e.target.value)}
                 className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs font-bold text-slate-800"
               >
-                <option value="Super Yama - Unidade Taquandava">Super Yama - Unidade Taquandava</option>
-                <option value="Super Yama - Unidade Funcionários Públicos">Super Yama - Unidade Funcionários Públicos</option>
-                <option value="Super Yama - Unidade Anatoli Liadov">Super Yama - Unidade Anatoli Liadov</option>
+                <option value="Yammá - Unidade Taquandava">Yammá - Unidade Taquandava</option>
+                <option value="Yammá - Unidade Funcionários Públicos">Yammá - Unidade Funcionários Públicos</option>
+                <option value="Yammá - Unidade Anatoli Liadov">Yammá - Unidade Anatoli Liadov</option>
                 <option value="Farmácia de Bairro Parceira">Farmácia de Bairro Parceira 24h</option>
                 <option value="Hortifruti & Feira Local">Hortifruti & Feira Local</option>
               </select>
@@ -451,7 +451,7 @@ export const DeliveryTrackerView: React.FC<DeliveryTrackerViewProps> = ({
                     <ShoppingBag className="w-5 h-5" />
                   </div>
                   <span className="text-[10px] font-black bg-slate-950 px-2 py-0.5 rounded text-slate-300 mt-1 border border-slate-800">
-                    Mercado Yama
+                    Supermercados Parceiros
                   </span>
                 </div>
 

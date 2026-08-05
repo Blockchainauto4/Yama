@@ -70,7 +70,7 @@ export const WhatsAppCheckoutModal: React.FC<WhatsAppCheckoutModalProps> = ({
     0
   );
   const clubeTotal = cart.reduce(
-    (acc, item) => acc + item.product.clubeYamaPrice * item.quantity,
+    (acc, item) => acc + item.product.yammaPrice * item.quantity,
     0
   );
   const totalSavings = regularTotal - clubeTotal;
@@ -87,7 +87,7 @@ export const WhatsAppCheckoutModal: React.FC<WhatsAppCheckoutModalProps> = ({
 
   // Format WhatsApp Payload
   const generateWhatsAppMessage = () => {
-    let msg = `🛒 *NOVO PEDIDO - SUPER YAMA SUPERMERCADOS*\n`;
+    let msg = `🛒 *NOVO PEDIDO - YAMMÁ COTAÇÕES*\n`;
     msg += `----------------------------------------\n`;
     msg += `🏪 *Loja Origem:* ${selectedStore.name}\n`;
     msg += `📍 *Endereço da Loja:* ${selectedStore.address}\n\n`;
@@ -104,10 +104,10 @@ export const WhatsAppCheckoutModal: React.FC<WhatsAppCheckoutModalProps> = ({
 
     msg += `📦 *ITENS COMPRADOS (${itemsCount} itens):*\n`;
     cart.forEach((item, index) => {
-      const itemSubtotal = item.product.clubeYamaPrice * item.quantity;
+      const itemSubtotal = item.product.yammaPrice * item.quantity;
       msg += `${index + 1}. ${item.quantity}x ${item.product.name} (${item.product.brand}) - R$ ${itemSubtotal
         .toFixed(2)
-        .replace(".", ",")} (R$ ${item.product.clubeYamaPrice
+        .replace(".", ",")} (R$ ${item.product.yammaPrice
         .toFixed(2)
         .replace(".", ",")} un)\n`;
     });
@@ -115,7 +115,7 @@ export const WhatsAppCheckoutModal: React.FC<WhatsAppCheckoutModalProps> = ({
     msg += `\n----------------------------------------\n`;
     msg += `💰 *RESUMO FINANCEIRO:*\n`;
     msg += `• Subtotal (Tabela Normal): R$ ${regularTotal.toFixed(2).replace(".", ",")}\n`;
-    msg += `• Economia Clube Yama: -R$ ${totalSavings.toFixed(2).replace(".", ",")}\n`;
+    msg += `• Economia Yammá: -R$ ${totalSavings.toFixed(2).replace(".", ",")}\n`;
     if (welcomeDiscount > 0) {
       msg += `• Bônus de Cadastro (5% OFF): -R$ ${welcomeDiscount.toFixed(2).replace(".", ",")}\n`;
     }
@@ -130,7 +130,7 @@ export const WhatsAppCheckoutModal: React.FC<WhatsAppCheckoutModalProps> = ({
       msg += `📝 *Observações:* ${notes}\n`;
     }
     msg += `----------------------------------------\n`;
-    msg += `⚡ *Pedido gerado pelo aplicativo Super Yama 24h*`;
+    msg += `⚡ *Pedido gerado pelo aplicativo Yammá 24h*`;
 
     return msg;
   };
@@ -143,7 +143,7 @@ export const WhatsAppCheckoutModal: React.FC<WhatsAppCheckoutModalProps> = ({
 
     // Confirm order state
     onConfirmOrder({
-      customerName: customerName || "Cliente Yama",
+      customerName: customerName || "Cliente Yammá",
       customerPhone: customerPhone || "(11) 99999-9999",
       customerAddress: fullAddressStr,
       paymentMethod,
@@ -179,7 +179,7 @@ export const WhatsAppCheckoutModal: React.FC<WhatsAppCheckoutModalProps> = ({
               WhatsApp Direct 24h
             </span>
             <span className="text-xs text-emerald-100 font-bold">
-              Central Super Yama
+              Central Yammá
             </span>
           </div>
 
