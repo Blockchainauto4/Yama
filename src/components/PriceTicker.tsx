@@ -19,8 +19,9 @@ export const PriceTicker: React.FC<PriceTickerProps> = ({
 
   const tickerProducts = products.length > 0 ? [...products, ...products] : [];
 
-  // Speed duration: "slow" = 85s (fácil de manobrar), "normal" = 45s
-  const animationDuration = tickerSpeed === "slow" ? "85s" : "45s";
+  // Velocidade desacelerada para facilitar a leitura e manuseio dos itens
+  // "slow" = 220s (movimento calmo e suave), "normal" = 130s
+  const animationDuration = tickerSpeed === "slow" ? "220s" : "130s";
 
   return (
     <div className="bg-slate-900 border-y border-slate-800 text-white overflow-hidden shadow-inner relative z-10 select-none">
