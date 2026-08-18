@@ -419,12 +419,12 @@ export const CartManager: React.FC<CartManagerProps> = ({
                     <span>- R$ {totalSavings.toFixed(2).replace(".", ",")}</span>
                   </div>
 
-                  {/* 5% Welcome Discount Badge or Login Prompt */}
+                  {/* Welcome Discount Badge or Login Prompt */}
                   {currentUser ? (
                     <div className="flex justify-between text-amber-300 font-black bg-amber-950/80 p-2.5 rounded-xl border border-amber-600/50 text-xs">
                       <span className="flex items-center gap-1.5">
                         <Gift className="w-4 h-4 text-amber-400" />
-                        Desconto Especial (Ouvinte Fluxo):
+                        Desconto Especial (Bônus Kwai):
                       </span>
                       <span>- R$ {welcomeDiscountAmount.toFixed(2).replace(".", ",")}</span>
                     </div>
@@ -432,17 +432,17 @@ export const CartManager: React.FC<CartManagerProps> = ({
                     <div className="bg-amber-400/20 border border-amber-400/40 p-3 rounded-2xl text-xs text-amber-200 space-y-2">
                       <div className="flex items-center gap-1.5 font-bold text-amber-300">
                         <Gift className="w-4 h-4" />
-                        <span>Ganhe 50% OFF na 1ª compra ao fazer Pre-save!</span>
+                        <span>Ganhe 50% OFF na 1ª compra com Bônus Kwai!</span>
                       </div>
                       <p className="text-[11px] leading-tight text-amber-100">
-                        Faça o Pre-save grátis agora para ganhar <strong>R$ {((clubeTotal * 50) / 100).toFixed(2).replace(".", ",")} de desconto extra</strong> no total desta compra.
+                        Acesse o link do Kwai agora para ganhar <strong>R$ {((clubeTotal * 50) / 100).toFixed(2).replace(".", ",")} de desconto extra</strong> no total desta compra.
                       </p>
                       <button
                         onClick={onOpenAuth}
-                        className="w-full py-2 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs transition flex items-center justify-center gap-1.5"
+                        className="w-full py-2 bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-slate-950 font-black rounded-xl text-xs transition flex items-center justify-center gap-1.5 cursor-pointer"
                       >
                         <UserCheck className="w-3.5 h-3.5" />
-                        Fazer Pre-save & Liberar 50% OFF
+                        Bônus Kwai & Liberar 50% OFF
                       </button>
                     </div>
                   )}

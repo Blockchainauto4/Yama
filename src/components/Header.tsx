@@ -134,10 +134,10 @@ export const Header: React.FC<HeaderProps> = ({
           ) : (
             <button
               onClick={onOpenAuth}
-              className="flex items-center gap-1.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-[11px] px-3 py-1 rounded-lg transition shadow-xs"
+              className="flex items-center gap-1.5 bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-slate-950 font-black text-[11px] px-3 py-1.5 rounded-lg transition shadow-xs cursor-pointer"
             >
-              <Headphones className="w-3.5 h-3.5" />
-              <span>Ouvir Fluxo & Liberar</span>
+              <Gift className="w-3.5 h-3.5" />
+              <span>Bônus Kwai R$0.5 & 50% OFF</span>
             </button>
           )}
 
@@ -190,6 +190,21 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
           </div>
         </div>
+
+                {/* Spotify Embedded Player (Visible on Desktop when Logged In) */}
+        {currentUser && (
+          <div className="hidden lg:block h-[60px] w-[300px] overflow-hidden rounded-xl border border-slate-200">
+            <iframe 
+              src="https://open.spotify.com/embed/playlist/37i9dQZF1DX9kKAG1x43nS?utm_source=generator&theme=0&autoplay=1" 
+              width="100%" 
+              height="80" 
+              frameBorder="0" 
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+              loading="lazy"
+              style={{ marginTop: '-10px' }}
+            ></iframe>
+          </div>
+        )}
 
         {/* Mode Navigation Tabs */}
         <nav className="flex items-center gap-1.5 bg-white p-1.5 rounded-2xl border border-slate-200 shadow-sm w-full md:w-auto overflow-x-auto scrollbar-none">

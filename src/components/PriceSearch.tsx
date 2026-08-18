@@ -79,6 +79,39 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
 
   return (
     <div className="space-y-8">
+      {/* Kwai Promotional Campaign Banner */}
+      <div 
+        onClick={onOpenAuth}
+        className="bg-gradient-to-r from-purple-700 via-indigo-600 to-amber-500 rounded-3xl p-4 sm:p-5 text-white shadow-lg shadow-purple-500/15 cursor-pointer hover:scale-[1.01] transition-transform duration-200 border border-purple-300/40 relative overflow-hidden"
+      >
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 relative z-10">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-amber-400 text-slate-950 flex items-center justify-center font-black text-lg shrink-0 shadow-md">
+              🎁
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="bg-amber-400 text-slate-950 text-[10px] font-black uppercase px-2 py-0.5 rounded-full tracking-wider">
+                  Bônus Kwai
+                </span>
+                <span className="text-xs text-amber-200 font-bold hidden md:inline">
+                  Ganhe até R$100 convidando amigos!
+                </span>
+              </div>
+              <p className="text-xs sm:text-sm font-bold text-white mt-0.5">
+                Clica no link e se você for um novo ou inativo usuário do Kwai, já ganha R$0.5! Não vai te custar nada～
+              </p>
+            </div>
+          </div>
+          <div className="shrink-0">
+            <span className="inline-flex items-center gap-1.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs px-4 py-2 rounded-xl shadow transition">
+              <span>Resgatar R$0.5 & 50% OFF</span>
+              <ChevronRight className="w-4 h-4" />
+            </span>
+          </div>
+        </div>
+      </div>
+
       {/* Search Header Banner */}
       <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-sm relative overflow-hidden flex flex-col items-center justify-center text-center">
         <div className="max-w-2xl relative z-10 w-full mx-auto">
@@ -240,15 +273,15 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
             {currentUser ? (
               <span className="text-emerald-700 font-bold flex items-center gap-1 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100">
                 <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                Preços liberados + Desconto Pre-save
+                Preços liberados + Bônus Kwai 50% OFF
               </span>
             ) : (
               <button
                 onClick={onOpenAuth}
-                className="text-amber-800 font-extrabold flex items-center gap-1 bg-amber-100 hover:bg-amber-200 px-3 py-1 rounded-full border border-amber-300 transition text-xs"
+                className="text-amber-800 font-extrabold flex items-center gap-1 bg-amber-100 hover:bg-amber-200 px-3 py-1 rounded-full border border-amber-300 transition text-xs cursor-pointer"
               >
                 <Lock className="w-3.5 h-3.5 text-amber-700" />
-                Pre-save p/ ver preços e ganhar 50% OFF
+                Bônus Kwai p/ ver preços e ganhar 50% OFF
               </button>
             )}
           </div>

@@ -66,7 +66,7 @@ export default function App() {
     } catch {
       // ignore
     }
-    showToast(`🎉 Olá, ${user.name}! Desconto de 50% (Pre-save) ativado e preços liberados!`);
+    showToast(`🎉 Olá, ${user.name}! Bônus Kwai e desconto de 50% ativados com preços liberados!`);
   };
 
   const handleUserLogout = () => {

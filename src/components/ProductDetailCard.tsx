@@ -140,15 +140,15 @@ export const ProductDetailCard: React.FC<ProductDetailCardProps> = ({
                 Preço Exclusivo para Cadastrados
               </h4>
               <p className="text-xs text-amber-800 font-medium max-w-sm mx-auto mt-1">
-                Faça login ou cadastre-se grátis em menos de 10 segundos para visualizar o preço e garantir <strong>50% de desconto no pre-save</strong> em sua compra.
+                Acesse o bônus Kwai em menos de 10 segundos para visualizar o preço e garantir <strong>50% de desconto</strong> em sua compra.
               </p>
             </div>
             <button
               onClick={onOpenAuth}
-              className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs rounded-2xl transition shadow-lg shadow-red-200 flex items-center justify-center gap-2 mx-auto"
+              className="px-6 py-3 bg-gradient-to-r from-purple-700 via-indigo-600 to-amber-500 hover:from-purple-800 hover:to-amber-600 text-white font-extrabold text-xs rounded-2xl transition shadow-lg shadow-purple-200 flex items-center justify-center gap-2 mx-auto cursor-pointer"
             >
               <Sparkles className="w-4 h-4 text-amber-300" />
-              <span>Ouvir no Spotify & Liberar Preços</span>
+              <span>Resgatar Bônus Kwai & Liberar Preços</span>
             </button>
           </div>
         )}
