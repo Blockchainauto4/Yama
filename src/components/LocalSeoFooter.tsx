@@ -95,28 +95,28 @@ export const LocalSeoFooter: React.FC<LocalSeoFooterProps> = ({
 
   const faqs = [
     {
-      q: "O que é o Yammá?",
-      a: "O Yammá é um sistema inteligente de cotação e comparação de preços que reúne os valores praticados por todos os supermercados da Zona Sul de São Paulo, ajudando você a encontrar o melhor preço para as suas compras.",
+      q: "O que é o Yammá / Super Yama Supermercados?",
+      a: "O Yammá (frequentemente buscado como Super Yama Supermercado ou Mercado Yama) é a principal rede e sistema inteligente de cotações em tempo real da Zona Sul de São Paulo, conectando unidades em Cidade Ipava, Chácara Santa Maria, Taquandava e regiões vizinhas com os menores preços garantidos.",
     },
     {
-      q: "O Yammá faz entrega de supermercado?",
-      a: "O Yammá não vende produtos diretamente, mas facilita o seu processo de compra. Você encontra o melhor preço no nosso site e pode ser redirecionado para comprar nos e-commerces dos supermercados parceiros que fazem delivery para a sua região.",
+      q: "O Yama Supermercado faz entrega perto de mim (Mercado Delivery)?",
+      a: "Sim! Através da nossa frota própria de E-Bikes ecológicas e integração direta com WhatsApp, realizamos entregas rápidas para Cidade Ipava, Chácara Santa Maria, Taquandava, Jardim Aracati, Vila de São Paulo, Jardim São Luís e M'Boi Mirim.",
     },
     {
-      q: "Consigo comparar preços de hortifruti fresco e açougue?",
-      a: "Com certeza! Nosso sistema monitora preços de frutas, legumes, verduras e cortes de carne em diversos supermercados próximos a você, permitindo que você encontre qualidade e economia.",
+      q: "Como comparar os preços do Yama com Supermercado Gideão, Super City e Polvo?",
+      a: "No Yammá você pode pesquisar qualquer produto ou escanear o código de barras (EAN). Nosso algoritmo compara instantaneamente os valores praticados por outros estabelecimentos da região (como Supermercado Gideão na Chácara Santa Maria, Super City em Cotia / SP II, Supermercado Polvo, Supermercado Avenida e Super Be), garantindo economia real no seu bolso.",
     },
     {
-      q: "Como consultar preços de produtos essenciais como Leite, Açúcar, Ovos e Frutas?",
-      a: "Você pode buscar qualquer item na nossa barra de busca inteligente. O Yammá compara instantaneamente o preço do produto em diferentes redes de supermercados para garantir a melhor oferta.",
+      q: "Existe opção de Adega e Mercado 24h perto de mim?",
+      a: "Sim, nossa seção de adega e conveniência disponibiliza cervejas trincando de geladas, vinhos, destilados, carvão para churrasco e petiscos com atendimento ágil para a sua comodidade.",
     },
     {
-      q: "Quais supermercados da Zona Sul estão no Yammá?",
-      a: "O Yammá monitora as principais redes e supermercados de bairro da Zona Sul de São Paulo, incluindo regiões como Jardim Aracati, Vila de São Paulo, Jardim São Luís, Taquandava, e Chácara Santana.",
+      q: "Como funciona o desconto e bônus de 50% de desconto na primeira compra?",
+      a: "Basta clicar na campanha do Kwai disponível no topo do site para resgatar seu saldo bônus e desbloquear automaticamente 50% de desconto adicional na sua cesta de compras.",
     },
     {
-      q: "Como funciona o comparativo de preços e trocas econômicas?",
-      a: "No seu carrinho de cotação, o comparador inteligente analisa os itens adicionados e indica se existe alguma marca concorrente mais barata ou um supermercado onde a cesta final saia mais em conta.",
+      q: "Consigo comparar preços de hortifruti fresco, açougue e padaria?",
+      a: "Com certeza! Monitoramos diariamente cortes de carne bovina no açougue, pão francês quentinho assado na hora na padaria e hortifruti fresco selecionado para você.",
     },
   ];
 
@@ -280,19 +280,39 @@ export const LocalSeoFooter: React.FC<LocalSeoFooterProps> = ({
           </div>
         </div>
 
-        {/* Local SEO Categories Keyword Badges & Special Sections */}
-        <div className="bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-6">
-          <div className="border-b border-slate-200 pb-4">
-            <h3 className="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
-              <BadgePercent className="w-5 h-5 text-red-600" />
-              Buscas Frequentes & Categorias Especiais: "Perto de Mim"
-            </h3>
-            <p className="text-xs text-slate-500 mt-1 font-medium">
-              Descubra os melhores preços da sua região no Yammá. Compare e compre em e-commerces de supermercados com entrega rápida para Jardim Aracati, Vila de São Paulo, Pava e Taquandava.
-            </p>
+        {/* Local SEO Categories Keyword Badges & Search Console Hub */}
+        <div className="bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-8">
+          <div className="border-b border-slate-200 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <h3 className="font-extrabold text-base sm:text-lg text-slate-900 flex items-center gap-2">
+                <BadgePercent className="w-5 h-5 text-red-600" />
+                Buscas Frequentes & SEO Local: "Mercado Perto de Mim"
+              </h3>
+              <p className="text-xs text-slate-500 mt-1 font-medium max-w-3xl">
+                Cotações em tempo real no <strong>Yammá (Super Yama Supermercado)</strong>. Compare ofertas com mercados da região e peça delivery rápido para <strong>Cidade Ipava, Chácara Santa Maria, Taquandava, Jardim Aracati, Cotia e toda Zona Sul SP</strong>.
+              </p>
+            </div>
+            <div className="inline-flex items-center gap-1.5 bg-emerald-100 text-emerald-800 text-[11px] font-extrabold px-3 py-1.5 rounded-xl shrink-0 self-start md:self-auto border border-emerald-300">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              Preços Monitorados Hoje
+            </div>
           </div>
 
+          {/* Special Categories Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 text-xs">
+            {/* Mercado que faz entrega perto de mim */}
+            <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-2">
+              <div className="font-extrabold text-slate-900 text-sm flex items-center gap-1.5 text-emerald-700">
+                🛵 Mercado Delivery Perto de Mim
+              </div>
+              <p className="text-[11px] text-slate-600 font-medium leading-relaxed">
+                Mercado que faz entrega rápida no seu endereço via WhatsApp e frota E-Bike sustentável com taxa reduzida.
+              </p>
+              <div className="text-[10px] text-emerald-800 font-extrabold bg-emerald-50 px-2 py-1 rounded-lg">
+                📍 Cidade Ipava • Chácara Sta Maria • Taquandava
+              </div>
+            </div>
+
             {/* Adega 24 Horas & Disque Bebida Perto de Mim */}
             <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-2">
               <div className="font-extrabold text-slate-900 text-sm flex items-center gap-1.5 text-purple-700">
@@ -319,88 +339,92 @@ export const LocalSeoFooter: React.FC<LocalSeoFooterProps> = ({
               </div>
             </div>
 
+            {/* Açougue e Churrasco */}
+            <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-2">
+              <div className="font-extrabold text-slate-900 text-sm flex items-center gap-1.5 text-red-700">
+                🥩 Açougue & Churrasco
+              </div>
+              <p className="text-[11px] text-slate-600 font-medium leading-relaxed">
+                Picanha bovina resfriada, alcatra, fraldinha, linguiça toscana, espetinhos e carvão vegetal 3kg sem fumaça.
+              </p>
+              <div className="text-[10px] text-red-800 font-extrabold bg-red-50 px-2 py-1 rounded-lg">
+                📍 Cortes Nobres • Sexta do Churrasco
+              </div>
+            </div>
+
             {/* Loja de Produtos de Limpeza Perto de Mim */}
             <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-2">
               <div className="font-extrabold text-slate-900 text-sm flex items-center gap-1.5 text-blue-700">
-                🧹 Produtos de Limpeza Perto de Mim
+                🧹 Produtos de Limpeza
               </div>
               <p className="text-[11px] text-slate-600 font-medium leading-relaxed">
-                Sabão em pó Omo e Brilhante, amaciantes concentrados Downy e Ypê, água sanitária, desinfetantes Pinho Sol e papel higiênico.
+                Sabão em pó Omo e Brilhante, amaciantes concentrados Downy e Ypê, desinfetantes e papel higiênico no menor preço.
               </p>
               <div className="text-[10px] text-blue-800 font-extrabold bg-blue-50 px-2 py-1 rounded-lg">
                 📍 Corredor 6 • Ofertas do Clube
               </div>
             </div>
+          </div>
 
-            {/* Loja de Utensílios Domésticos Perto de Mim */}
-            <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-2">
-              <div className="font-extrabold text-slate-900 text-sm flex items-center gap-1.5 text-indigo-700">
-                🍳 Utensílios Domésticos Perto de Mim
-              </div>
-              <p className="text-[11px] text-slate-600 font-medium leading-relaxed">
-                Potes herméticos Sanremo BPA Free, assadeiras de alumínio, javras de vidro, copos, talheres, vassouras, rodos e baldes reforçados.
-              </p>
-              <div className="text-[10px] text-indigo-800 font-extrabold bg-indigo-50 px-2 py-1 rounded-lg">
-                📍 Utilidades para Casa & Cozinha
-              </div>
-            </div>
-
-            {/* Loja de Produtos para Churrasco Perto de Mim */}
-            <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-2">
-              <div className="font-extrabold text-slate-900 text-sm flex items-center gap-1.5 text-red-700">
-                🥩 Produtos para Churrasco Perto de Mim
-              </div>
-              <p className="text-[11px] text-slate-600 font-medium leading-relaxed">
-                Carvão vegetal 3kg sem fumaça, sal grosso Cisne, picanha nobre Friboi, linguiça toscana Perdigão, espetinhos e acendedores.
-              </p>
-              <div className="text-[10px] text-red-800 font-extrabold bg-red-50 px-2 py-1 rounded-lg">
-                📍 Sexta do Churrasco • Açougue Nobre
-              </div>
+          {/* Comparativo Regional de Mercados */}
+          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-3">
+            <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-amber-500" />
+              Mercados e Redes Monitorados na Região da Zona Sul & Cotia:
+            </h4>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 text-xs">
+              {[
+                { name: "Yammá / Super Yama", loc: "Cidade Ipava & Taquandava", tag: "Cotações Ao Vivo" },
+                { name: "Supermercado Gideão", loc: "Chácara Santa Maria", tag: "Comparado" },
+                { name: "Super City SP II / Cotia", loc: "Cotia & Zona Sul", tag: "Comparado" },
+                { name: "Supermercado Polvo", loc: "Zona Sul SP", tag: "Comparado" },
+                { name: "Supermercado Avenida", loc: "Vila de São Paulo", tag: "Comparado" },
+                { name: "Super Be Supermercado", loc: "Jardim São Luís", tag: "Comparado" },
+              ].map((m, idx) => (
+                <div key={idx} className="bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-center flex flex-col justify-between">
+                  <div className="font-bold text-slate-900 text-[11px]">{m.name}</div>
+                  <div className="text-[10px] text-slate-500 mt-0.5">{m.loc}</div>
+                  <span className="mt-1.5 text-[9px] font-extrabold text-blue-700 bg-blue-50 rounded px-1.5 py-0.5 self-center">
+                    {m.tag}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
 
+          {/* Keywords Cloud (Direct Search Console Matching) */}
           <div className="pt-2">
             <h4 className="text-xs font-bold text-slate-700 mb-3 uppercase tracking-wider">
-              Termos de Busca Regionais em Destaque:
+              Principais Termos Pesquisados no Google:
             </h4>
             <div className="flex flex-wrap gap-2 text-xs">
               {[
-                "Yammá",
-                "Cotação de preços",
-                "Consulta de preço",
-                "Comparar preço",
-                "Cotar preço",
-                "Qual o preço",
-                "Ver preço",
-                "Comparar preços de supermercado",
-                "Supermercados Zona Sul SP",
-                "O melhor preço você encontra aqui",
-                "Yammá Cotações",
-                "E-commerce de Supermercado",
-                "Supermercados Parceiros Zona Sul",
-                "Mercado Perto de Mim",
-                "Mercado Próximo a Mim",
-                "Mercado Aberto Agora",
-                "Adega Perto de Mim",
-                "Adega Aberta 24 Horas Perto de Mim",
-                "Disque Bebida / Disk Bebida Perto de Mim",
-                "Disque Cerveja Gelada Perto de Mim",
-                "Disque Vinho Perto de Mim",
-                "Supermercado Delivery na Vila de São Paulo",
-                "Padaria Perto de Mim - Pão Francês Quentinho",
-                "Hortifruti Perto de Mim - Frutas Frescas",
-                "Açougue Perto de Mim - Carnes para Churrasco",
-                "Loja de Produtos de Limpeza Perto de Mim",
-                "Loja de Utensílios Domésticos Perto de Mim",
-                "Produtos para Churrasco Perto de Mim",
-                "Mercado Perto de Mim - Jardim Aracati",
-                "Mercado na Pava e Taquandava",
-                "Supermercado Perto de Mim - M'Boi Mirim",
-                "Onde comprar cerveja barata",
-                "Ofertas de Supermercado Hoje",
-                "Carvão Vegetal 3kg para Churrasco",
-                "Sabão em Pó OMO e Amaciante",
-                "Consulta de Preço por Código de Barras EAN",
+                "yama supermercado",
+                "super yama supermercado",
+                "super yama",
+                "supermercado yama cidade ipava",
+                "supermercado yama",
+                "mercado yama ipava",
+                "supermercado gideão chácara santa maria",
+                "mercado gideão chacara santa maria",
+                "gideao supermercado",
+                "mercado super city cotia",
+                "supermercado super city sp ii",
+                "supermercado polvo",
+                "supermercado avenida",
+                "super be",
+                "mercado que faz entrega perto de mim",
+                "mercado delivery",
+                "mercado 24h perto de mim",
+                "mercado perto de mim",
+                "supermercado perto de mim",
+                "yammá supermercado",
+                "cotação de preços supermercado",
+                "consulta de preço código de barras",
+                "adega perto de mim 24 horas",
+                "padaria perto de mim pão quente",
+                "açougue carne churrasco zona sul",
+                "mercado delivery whatsapp",
               ].map((term, idx) => (
                 <span
                   key={idx}
