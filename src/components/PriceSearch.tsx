@@ -79,33 +79,34 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
 
   return (
     <div className="space-y-8">
-      {/* Kwai Promotional Campaign Banner */}
+      {/* CLT Job Vacancies WhatsApp Group Promotional Banner */}
       <div 
         onClick={onOpenAuth}
-        className="bg-gradient-to-r from-purple-700 via-indigo-600 to-amber-500 rounded-3xl p-4 sm:p-5 text-white shadow-lg shadow-purple-500/15 cursor-pointer hover:scale-[1.01] transition-transform duration-200 border border-purple-300/40 relative overflow-hidden"
+        className="bg-gradient-to-r from-emerald-800 via-teal-700 to-slate-900 rounded-3xl p-4 sm:p-5 text-white shadow-lg shadow-emerald-950/20 cursor-pointer hover:scale-[1.01] transition-transform duration-200 border border-emerald-500/40 relative overflow-hidden"
       >
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 relative z-10">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-amber-400 text-slate-950 flex items-center justify-center font-black text-lg shrink-0 shadow-md">
-              🎁
+        <div className="absolute -right-8 -bottom-8 w-32 h-32 bg-emerald-400/10 rounded-full blur-xl pointer-events-none" />
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10">
+          <div className="flex items-center gap-3.5">
+            <div className="w-11 h-11 rounded-2xl bg-emerald-400 text-slate-950 flex items-center justify-center font-black text-xl shrink-0 shadow-md">
+              💼
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <span className="bg-amber-400 text-slate-950 text-[10px] font-black uppercase px-2 py-0.5 rounded-full tracking-wider">
-                  Bônus Kwai
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="bg-emerald-400 text-slate-950 text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full tracking-wider shadow-xs">
+                  Vagas CLT • Carteira Assinada
                 </span>
-                <span className="text-xs text-amber-200 font-bold hidden md:inline">
-                  Ganhe até R$100 convidando amigos!
+                <span className="bg-emerald-950/80 text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-600/50">
+                  📱 Grupo Oficial WhatsApp
                 </span>
               </div>
-              <p className="text-xs sm:text-sm font-bold text-white mt-0.5">
-                Clica no link e se você for um novo ou inativo usuário do Kwai, já ganha R$0.5! Não vai te custar nada～
+              <p className="text-xs sm:text-sm font-bold text-white mt-1">
+                Acesse o grupo de <strong className="text-emerald-300">Vagas de Emprego CLT</strong> no WhatsApp: Repositor, Caixa, Açougue, Padaria e Entregadores com carteira assinada!
               </p>
             </div>
           </div>
-          <div className="shrink-0">
-            <span className="inline-flex items-center gap-1.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs px-4 py-2 rounded-xl shadow transition">
-              <span>Resgatar R$0.5 & 50% OFF</span>
+          <div className="shrink-0 w-full sm:w-auto">
+            <span className="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-xs px-4 py-2.5 rounded-xl shadow-md transition">
+              <span>Entrar no Grupo WhatsApp</span>
               <ChevronRight className="w-4 h-4" />
             </span>
           </div>
@@ -273,15 +274,15 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
             {currentUser ? (
               <span className="text-emerald-700 font-bold flex items-center gap-1 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100">
                 <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                Preços liberados + Bônus Kwai 50% OFF
+                Preços liberados + Membro Vagas CLT 50% OFF
               </span>
             ) : (
               <button
                 onClick={onOpenAuth}
-                className="text-amber-800 font-extrabold flex items-center gap-1 bg-amber-100 hover:bg-amber-200 px-3 py-1 rounded-full border border-amber-300 transition text-xs cursor-pointer"
+                className="text-emerald-900 font-extrabold flex items-center gap-1.5 bg-emerald-100 hover:bg-emerald-200 px-3 py-1 rounded-full border border-emerald-300 transition text-xs cursor-pointer"
               >
-                <Lock className="w-3.5 h-3.5 text-amber-700" />
-                Bônus Kwai p/ ver preços e ganhar 50% OFF
+                <Lock className="w-3.5 h-3.5 text-emerald-700" />
+                Grupo Vagas CLT p/ ver preços e 50% OFF
               </button>
             )}
           </div>

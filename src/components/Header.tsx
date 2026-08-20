@@ -20,6 +20,8 @@ import {
   Bike,
   Truck,
   Zap,
+  Briefcase,
+  MessageCircle,
 } from "lucide-react";
 import { AppMode, StoreUnit, UserProfile } from "../types";
 
@@ -134,10 +136,10 @@ export const Header: React.FC<HeaderProps> = ({
           ) : (
             <button
               onClick={onOpenAuth}
-              className="flex items-center gap-1.5 bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-slate-950 font-black text-[11px] px-3 py-1.5 rounded-lg transition shadow-xs cursor-pointer"
+              className="flex items-center gap-1.5 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-white font-black text-[11px] px-3 py-1.5 rounded-lg transition shadow-xs cursor-pointer"
             >
-              <Gift className="w-3.5 h-3.5" />
-              <span>Bônus Kwai R$0.5 & 50% OFF</span>
+              <MessageCircle className="w-3.5 h-3.5 fill-current" />
+              <span>💼 Vagas CLT • Grupo WhatsApp</span>
             </button>
           )}
 

@@ -131,24 +131,24 @@ export const ProductDetailCard: React.FC<ProductDetailCardProps> = ({
             </div>
           </div>
         ) : (
-          <div className="bg-amber-50 border-2 border-dashed border-amber-300 rounded-3xl p-6 text-center space-y-3">
-            <div className="w-12 h-12 bg-amber-400 text-slate-950 rounded-2xl flex items-center justify-center mx-auto shadow-md">
+          <div className="bg-emerald-50 border-2 border-dashed border-emerald-300 rounded-3xl p-6 text-center space-y-3">
+            <div className="w-12 h-12 bg-emerald-500 text-white rounded-2xl flex items-center justify-center mx-auto shadow-md">
               <Lock className="w-6 h-6" />
             </div>
             <div>
-              <h4 className="text-lg font-extrabold text-amber-950">
-                Preço Exclusivo para Cadastrados
+              <h4 className="text-lg font-extrabold text-emerald-950">
+                Preço Exclusivo para Membros
               </h4>
-              <p className="text-xs text-amber-800 font-medium max-w-sm mx-auto mt-1">
-                Acesse o bônus Kwai em menos de 10 segundos para visualizar o preço e garantir <strong>50% de desconto</strong> em sua compra.
+              <p className="text-xs text-emerald-800 font-medium max-w-sm mx-auto mt-1">
+                Entre no nosso grupo de <strong>Vagas CLT no WhatsApp</strong> para visualizar os preços e garantir <strong>50% de desconto</strong> na sua compra.
               </p>
             </div>
             <button
               onClick={onOpenAuth}
-              className="px-6 py-3 bg-gradient-to-r from-purple-700 via-indigo-600 to-amber-500 hover:from-purple-800 hover:to-amber-600 text-white font-extrabold text-xs rounded-2xl transition shadow-lg shadow-purple-200 flex items-center justify-center gap-2 mx-auto cursor-pointer"
+              className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white font-extrabold text-xs rounded-2xl transition shadow-lg shadow-emerald-200 flex items-center justify-center gap-2 mx-auto cursor-pointer"
             >
-              <Sparkles className="w-4 h-4 text-amber-300" />
-              <span>Resgatar Bônus Kwai & Liberar Preços</span>
+              <Sparkles className="w-4 h-4 text-emerald-200" />
+              <span>💼 Grupo Vagas CLT & Liberar Preços</span>
             </button>
           </div>
         )}

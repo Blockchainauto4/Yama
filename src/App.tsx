@@ -66,7 +66,7 @@ export default function App() {
     } catch {
       // ignore
     }
-    showToast(`🎉 Olá, ${user.name}! Bônus Kwai e desconto de 50% ativados com preços liberados!`);
+    showToast(`🎉 Bem-vindo(a)! Você entrou no Grupo de Vagas CLT e liberou os preços com 50% de desconto!`);
   };
 
   const handleUserLogout = () => {

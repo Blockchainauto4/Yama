@@ -111,8 +111,8 @@ export const LocalSeoFooter: React.FC<LocalSeoFooterProps> = ({
       a: "Sim, nossa seção de adega e conveniência disponibiliza cervejas trincando de geladas, vinhos, destilados, carvão para churrasco e petiscos com atendimento ágil para a sua comodidade.",
     },
     {
-      q: "Como funciona o desconto e bônus de 50% de desconto na primeira compra?",
-      a: "Basta clicar na campanha do Kwai disponível no topo do site para resgatar seu saldo bônus e desbloquear automaticamente 50% de desconto adicional na sua cesta de compras.",
+      q: "Como funciona o desconto de 50% de desconto na primeira compra?",
+      a: "Basta clicar no banner de Vagas CLT no topo do site e acessar nosso grupo oficial no WhatsApp para desbloquear automaticamente 50% de desconto adicional na sua cesta de compras e visualizar todos os preços.",
     },
     {
       q: "Consigo comparar preços de hortifruti fresco, açougue e padaria?",

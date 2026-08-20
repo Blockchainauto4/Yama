@@ -421,28 +421,28 @@ export const CartManager: React.FC<CartManagerProps> = ({
 
                   {/* Welcome Discount Badge or Login Prompt */}
                   {currentUser ? (
-                    <div className="flex justify-between text-amber-300 font-black bg-amber-950/80 p-2.5 rounded-xl border border-amber-600/50 text-xs">
+                    <div className="flex justify-between text-emerald-300 font-black bg-emerald-950/80 p-2.5 rounded-xl border border-emerald-600/50 text-xs">
                       <span className="flex items-center gap-1.5">
-                        <Gift className="w-4 h-4 text-amber-400" />
-                        Desconto Especial (Bônus Kwai):
+                        <Gift className="w-4 h-4 text-emerald-400" />
+                        Desconto Membro (Grupo Vagas CLT):
                       </span>
                       <span>- R$ {welcomeDiscountAmount.toFixed(2).replace(".", ",")}</span>
                     </div>
                   ) : (
-                    <div className="bg-amber-400/20 border border-amber-400/40 p-3 rounded-2xl text-xs text-amber-200 space-y-2">
-                      <div className="flex items-center gap-1.5 font-bold text-amber-300">
+                    <div className="bg-emerald-500/20 border border-emerald-400/40 p-3 rounded-2xl text-xs text-emerald-200 space-y-2">
+                      <div className="flex items-center gap-1.5 font-bold text-emerald-300">
                         <Gift className="w-4 h-4" />
-                        <span>Ganhe 50% OFF na 1ª compra com Bônus Kwai!</span>
+                        <span>Ganhe 50% OFF na 1ª compra ao entrar no Grupo Vagas CLT!</span>
                       </div>
-                      <p className="text-[11px] leading-tight text-amber-100">
-                        Acesse o link do Kwai agora para ganhar <strong>R$ {((clubeTotal * 50) / 100).toFixed(2).replace(".", ",")} de desconto extra</strong> no total desta compra.
+                      <p className="text-[11px] leading-tight text-emerald-100">
+                        Entre no nosso grupo do WhatsApp de vagas CLT para ganhar <strong>R$ {((clubeTotal * 50) / 100).toFixed(2).replace(".", ",")} de desconto extra</strong> no total desta compra.
                       </p>
                       <button
                         onClick={onOpenAuth}
-                        className="w-full py-2 bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-slate-950 font-black rounded-xl text-xs transition flex items-center justify-center gap-1.5 cursor-pointer"
+                        className="w-full py-2 bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-400 hover:to-green-400 text-slate-950 font-black rounded-xl text-xs transition flex items-center justify-center gap-1.5 cursor-pointer"
                       >
                         <UserCheck className="w-3.5 h-3.5" />
-                        Bônus Kwai & Liberar 50% OFF
+                        Entrar no Grupo WhatsApp & 50% OFF
                       </button>
                     </div>
                   )}
