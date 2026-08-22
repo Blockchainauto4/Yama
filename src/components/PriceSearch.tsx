@@ -4,6 +4,7 @@ import {
   CategoryType,
   StoreUnit,
   UserProfile,
+  JobVacancy,
 } from "../types";
 import {
   Search,
@@ -20,6 +21,7 @@ import {
   UserCheck,
 } from "lucide-react";
 import { ProductDetailCard } from "./ProductDetailCard";
+import { JobSlotsSlider } from "./JobSlotsSlider";
 
 interface PriceSearchProps {
   products: Product[];
@@ -31,6 +33,8 @@ interface PriceSearchProps {
   onOpenScanner: () => void;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
+  onOpenRadar?: () => void;
+  vacancies?: JobVacancy[];
 }
 
 export const PriceSearch: React.FC<PriceSearchProps> = ({
@@ -43,6 +47,8 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
   onOpenScanner,
   searchQuery,
   setSearchQuery,
+  onOpenRadar,
+  vacancies = [],
 }) => {
 
   const [selectedCategory, setSelectedCategory] = useState<CategoryType | "tudo">("tudo");
@@ -78,40 +84,15 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
   }, [products, searchQuery, selectedCategory]);
 
   return (
-    <div className="space-y-8">
-      {/* CLT Job Vacancies WhatsApp Group Promotional Banner */}
-      <div 
-        onClick={onOpenAuth}
-        className="bg-gradient-to-r from-emerald-800 via-teal-700 to-slate-900 rounded-3xl p-4 sm:p-5 text-white shadow-lg shadow-emerald-950/20 cursor-pointer hover:scale-[1.01] transition-transform duration-200 border border-emerald-500/40 relative overflow-hidden"
-      >
-        <div className="absolute -right-8 -bottom-8 w-32 h-32 bg-emerald-400/10 rounded-full blur-xl pointer-events-none" />
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10">
-          <div className="flex items-center gap-3.5">
-            <div className="w-11 h-11 rounded-2xl bg-emerald-400 text-slate-950 flex items-center justify-center font-black text-xl shrink-0 shadow-md">
-              💼
-            </div>
-            <div>
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="bg-emerald-400 text-slate-950 text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full tracking-wider shadow-xs">
-                  Vagas CLT • Carteira Assinada
-                </span>
-                <span className="bg-emerald-950/80 text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-600/50">
-                  📱 Grupo Oficial WhatsApp
-                </span>
-              </div>
-              <p className="text-xs sm:text-sm font-bold text-white mt-1">
-                Acesse o grupo de <strong className="text-emerald-300">Vagas de Emprego CLT</strong> no WhatsApp: Repositor, Caixa, Açougue, Padaria e Entregadores com carteira assinada!
-              </p>
-            </div>
-          </div>
-          <div className="shrink-0 w-full sm:w-auto">
-            <span className="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-xs px-4 py-2.5 rounded-xl shadow-md transition">
-              <span>Entrar no Grupo WhatsApp</span>
-              <ChevronRight className="w-4 h-4" />
-            </span>
-          </div>
-        </div>
-      </div>
+    <div className="space-y-6">
+      {/* Slides with Available Slots (JobSlotsSlider) */}
+      {vacancies && vacancies.length > 0 && (
+        <JobSlotsSlider
+          vacancies={vacancies}
+          onOpenRadar={onOpenRadar}
+          onOpenGroup={onOpenAuth}
+        />
+      )}
 
       {/* Search Header Banner */}
       <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-sm relative overflow-hidden flex flex-col items-center justify-center text-center">

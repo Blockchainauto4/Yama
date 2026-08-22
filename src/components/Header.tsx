@@ -134,13 +134,22 @@ export const Header: React.FC<HeaderProps> = ({
               </button>
             </div>
           ) : (
-            <button
-              onClick={onOpenAuth}
-              className="flex items-center gap-1.5 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-white font-black text-[11px] px-3 py-1.5 rounded-lg transition shadow-xs cursor-pointer"
-            >
-              <MessageCircle className="w-3.5 h-3.5 fill-current" />
-              <span>💼 Vagas CLT • Grupo WhatsApp</span>
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setMode("radar_vagas")}
+                className="flex items-center gap-1.5 bg-red-600 hover:bg-red-500 text-white font-black text-[11px] px-2.5 py-1.5 rounded-lg transition shadow-xs cursor-pointer animate-pulse"
+              >
+                <span className="w-2 h-2 rounded-full bg-white inline-block animate-ping" />
+                <span>🚨 Radar de Vagas</span>
+              </button>
+              <button
+                onClick={onOpenAuth}
+                className="flex items-center gap-1.5 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-white font-black text-[11px] px-3 py-1.5 rounded-lg transition shadow-xs cursor-pointer"
+              >
+                <MessageCircle className="w-3.5 h-3.5 fill-current" />
+                <span className="hidden sm:inline">💼 Grupo WhatsApp</span>
+              </button>
+            </div>
           )}
 
           <span className="hidden sm:inline text-slate-300">|</span>
@@ -221,6 +230,20 @@ export const Header: React.FC<HeaderProps> = ({
             <Search className="w-4 h-4" />
             Busca de Preços
           </button>
+          
+          <button
+            onClick={() => setMode("radar_vagas")}
+            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+              currentMode === "radar_vagas"
+                ? "bg-gradient-to-r from-red-600 to-rose-600 text-white shadow-md"
+                : "text-red-700 bg-red-50 hover:bg-red-100 hover:text-red-800 border border-red-200"
+            }`}
+          >
+            <Briefcase className="w-3.5 h-3.5" />
+            <span>Radar de Vagas</span>
+            <span className="w-2 h-2 rounded-full bg-red-500 animate-ping inline-block ml-0.5" />
+          </button>
+
           <button
             onClick={() => setMode("carrinho")}
             className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all relative ${

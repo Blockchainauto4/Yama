@@ -8,8 +8,10 @@ import {
   UserProfile,
   DelivererProfile,
   ActiveDeliveryOrder,
+  JobVacancy,
 } from "./types";
 import { INITIAL_PRODUCTS, STORES_DATA, MOCK_DELIVERERS, MOCK_ACTIVE_ORDERS } from "./data/mockData";
+import { INITIAL_JOB_VACANCIES } from "./data/mockJobs";
 import { Header } from "./components/Header";
 import { PriceSearch } from "./components/PriceSearch";
 import { BarcodeScannerModal } from "./components/BarcodeScannerModal";
@@ -24,6 +26,7 @@ import { LocalSeoFooter } from "./components/LocalSeoFooter";
 import { AuthModal } from "./components/AuthModal";
 import { DeliveryTrackerView } from "./components/DeliveryTrackerView";
 import { DelivererRegisterView } from "./components/DelivererRegisterView";
+import { LiveJobRadarView } from "./components/LiveJobRadarView";
 import { Bell, Flame, RefreshCw, Sparkles, CheckCircle2 } from "lucide-react";
 
 export default function App() {
@@ -37,6 +40,9 @@ export default function App() {
   // Fleet Deliverers & Active GPS Delivery Orders
   const [deliverers, setDeliverers] = useState<DelivererProfile[]>(MOCK_DELIVERERS);
   const [activeOrders, setActiveOrders] = useState<ActiveDeliveryOrder[]>(MOCK_ACTIVE_ORDERS);
+
+  // Live Job Vacancies & Diárias Radar
+  const [vacancies, setVacancies] = useState<JobVacancy[]>(INITIAL_JOB_VACANCIES);
 
   // Auth User State
   const [currentUser, setCurrentUser] = useState<UserProfile | null>(() => {
@@ -66,7 +72,7 @@ export default function App() {
     } catch {
       // ignore
     }
-    showToast(`🎉 Bem-vindo(a)! Você entrou no Grupo de Vagas CLT e liberou os preços com 50% de desconto!`);
+    showToast(`💼 Bem-vindo(a)! Você acessou o Grupo Oficial de Vagas CLT no WhatsApp.`);
   };
 
   const handleUserLogout = () => {
@@ -82,6 +88,11 @@ export default function App() {
   const handleRegisterDeliverer = (newDeliv: DelivererProfile) => {
     setDeliverers((prev) => [newDeliv, ...prev]);
     showToast(`🚲 Cadastro efetuado! ${newDeliv.name} foi ativado(a) no radar da frota 24h.`);
+  };
+
+  const handleAddNewVacancy = (newVac: JobVacancy) => {
+    setVacancies((prev) => [newVac, ...prev]);
+    showToast(`🚨 Vaga publicada! "${newVac.title}" agora está visível no Radar ao Vivo.`);
   };
 
   const handleCheckoutDelivery = () => {
@@ -314,6 +325,16 @@ export default function App() {
             onOpenScanner={() => setIsScannerOpen(true)}
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
+            onOpenRadar={() => setMode("radar_vagas")}
+            vacancies={vacancies}
+          />
+        )}
+
+        {currentMode === "radar_vagas" && (
+          <LiveJobRadarView
+            vacancies={vacancies}
+            onAddVacancy={handleAddNewVacancy}
+            onOpenGroup={() => setIsAuthModalOpen(true)}
           />
         )}
 
@@ -386,6 +407,7 @@ export default function App() {
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
         onLogin={handleUserLogin}
+        onOpenRadar={() => setMode("radar_vagas")}
       />
 
       <BarcodeScannerModal

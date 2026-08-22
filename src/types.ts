@@ -131,10 +131,33 @@ export interface ActiveDeliveryOrder {
 
 export type AppMode =
   | "consulta"
-  | "totem" | "encarte"
+  | "radar_vagas"
+  | "totem"
+  | "encarte"
   | "carrinho"
   | "gestor"
   | "ia_assistente"
   | "rastreio"
   | "cadastro_entregador";
+
+export interface JobVacancy {
+  id: string;
+  title: string;
+  category: "urgente_agora" | "diaria" | "clt" | "eventos_restaurante" | "logistica_supermercado";
+  urgencyLevel: string;
+  quantity: string;
+  pay: string;
+  address: string;
+  landmark: string;
+  region: string;
+  workingHours: string;
+  requirements: string[];
+  contactName: string;
+  contactRole: string;
+  contactPhone: string;
+  notes?: string;
+  postedAt: string;
+  isVerified: boolean;
+  rawWhatsAppText?: string;
+}
 
