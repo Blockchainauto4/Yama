@@ -56,16 +56,18 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
 
   const categories: { id: CategoryType | "tudo"; label: string; icon: string }[] = [
     { id: "tudo", label: "Todos os Itens", icon: "🛒" },
-    { id: "padaria", label: "Padaria", icon: "🥖" },
-    { id: "limpeza", label: "Produtos de Limpeza", icon: "🧼" },
-    { id: "churrasco", label: "Produtos p/ Churrasco", icon: "🔥" },
-    { id: "hortifruti", label: "Hortifruti", icon: "🍎" },
-    { id: "utensílios domésticos", label: "Utensílios Domésticos", icon: "🍳" },
-    { id: "açougue", label: "Açougue & Carnes", icon: "🥩" },
     { id: "mercearia", label: "Mercearia", icon: "🌾" },
+    { id: "açougue", label: "Açougue & Carnes", icon: "🥩" },
+    { id: "hortifruti", label: "Hortifruti", icon: "🍎" },
     { id: "laticínios", label: "Laticínios & Frios", icon: "🧀" },
-    { id: "bebidas", label: "Adega & Disque Bebida / Cerveja / Vinho", icon: "🍷" },
-    { id: "higiene", label: "Higiene Pessoal", icon: "🧴" },
+    { id: "padaria", label: "Padaria & Frios", icon: "🥖" },
+    { id: "bebidas", label: "Bebidas & Adega", icon: "🍷" },
+    { id: "congelados", label: "Congelados", icon: "🧊" },
+    { id: "limpeza", label: "Produtos de Limpeza", icon: "🧼" },
+    { id: "higiene", label: "Higiene & Perfumaria", icon: "🧴" },
+    { id: "bazar", label: "Bazar & Utilidades", icon: "🏠" },
+    { id: "churrasco", label: "Produtos p/ Churrasco", icon: "🔥" },
+    { id: "utensílios domésticos", label: "Utensílios Domésticos", icon: "🍳" },
   ];
 
   const filteredProducts = useMemo(() => {

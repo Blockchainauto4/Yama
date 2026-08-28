@@ -7,6 +7,8 @@ export type CategoryType =
   | "mercearia"
   | "limpeza"
   | "higiene"
+  | "congelados"
+  | "bazar"
   | "utensílios domésticos"
   | "churrasco";
 

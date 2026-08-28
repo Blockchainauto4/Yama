@@ -1,6 +1,6 @@
 {
-  "name": "Yammá | Sistema de Cotação de Preços",
-  "description": "Yammá é um sistema de cotação dos melhores preços entre todos os supermercados da zona sul de São Paulo. O melhor preço você encontra aqui!",
+  "name": "Super Yama Supermercado | Encarte de Ofertas e Delivery 24h SP",
+  "description": "Confira o encarte de ofertas do Super Yama Supermercado! Loja 24h na Cidade Ipava e unidades no Jd. Vera Cruz. Delivery rápido, açougue, hortifruti e os melhores preços da Zona Sul SP.",
   "requestFramePermissions": ["camera", "geolocation"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
