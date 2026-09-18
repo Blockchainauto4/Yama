@@ -1,4 +1,5 @@
 export type CategoryType =
+  | "café da manhã"
   | "hortifruti"
   | "açougue"
   | "padaria"

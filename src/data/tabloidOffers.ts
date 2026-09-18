@@ -10,6 +10,7 @@ export interface TabloidSection {
 }
 
 export const TABLOID_SECTIONS: TabloidSection[] = [
+  { id: "cafe_manha", title: "Café da Manhã", category: "café da manhã", icon: "☕", badgeColor: "bg-amber-600" },
   { id: "mercearia", title: "Mercearia", category: "mercearia", icon: "🌾", badgeColor: "bg-red-600" },
   { id: "hortifruti", title: "Hortifruti", category: "hortifruti", icon: "🍎", validity: "28/08 até 30/08/2026", badgeColor: "bg-emerald-600" },
   { id: "açougue", title: "Açougue & Carnes", category: "açougue", icon: "🥩", badgeColor: "bg-rose-700" },

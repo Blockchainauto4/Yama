@@ -54,8 +54,9 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<CategoryType | "tudo">("tudo");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
-  const categories: { id: CategoryType | "tudo"; label: string; icon: string }[] = [
+  const categories: { id: CategoryType | "tudo"; label: string; icon: string; badge?: string }[] = [
     { id: "tudo", label: "Todos os Itens", icon: "🛒" },
+    { id: "café da manhã", label: "Café da Manhã", icon: "☕", badge: "NOVO" },
     { id: "mercearia", label: "Mercearia", icon: "🌾" },
     { id: "açougue", label: "Açougue & Carnes", icon: "🥩" },
     { id: "hortifruti", label: "Hortifruti", icon: "🍎" },
@@ -70,6 +71,23 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
     { id: "utensílios domésticos", label: "Utensílios Domésticos", icon: "🍳" },
   ];
 
+  const isBreakfastItem = (p: Product) =>
+    p.category === "café da manhã" ||
+    p.aisle.toLowerCase().includes("matinais") ||
+    p.aisle.toLowerCase().includes("café") ||
+    p.name.toLowerCase().includes("café") ||
+    p.name.toLowerCase().includes("pão") ||
+    p.name.toLowerCase().includes("toddy") ||
+    p.name.toLowerCase().includes("leite") ||
+    p.name.toLowerCase().includes("iogurte") ||
+    p.name.toLowerCase().includes("margarina") ||
+    p.name.toLowerCase().includes("manteiga") ||
+    p.name.toLowerCase().includes("requeijão") ||
+    p.name.toLowerCase().includes("torrada") ||
+    p.name.toLowerCase().includes("bisnaga") ||
+    p.name.toLowerCase().includes("sucrilhos") ||
+    p.name.toLowerCase().includes("geleia");
+
   const filteredProducts = useMemo(() => {
     return products.filter((p) => {
       const matchesSearch =
@@ -79,7 +97,11 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
         p.category.toLowerCase().includes(searchQuery.toLowerCase());
 
       const matchesCategory =
-        selectedCategory === "tudo" || p.category === selectedCategory;
+        selectedCategory === "tudo"
+          ? true
+          : selectedCategory === "café da manhã"
+          ? isBreakfastItem(p)
+          : p.category === selectedCategory;
 
       return matchesSearch && matchesCategory;
     });
@@ -149,13 +171,12 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
           <div className="mt-6 flex flex-wrap items-center justify-center gap-2 text-xs text-slate-600">
             <span className="text-slate-400 font-bold flex items-center gap-1 text-[10px] uppercase tracking-wider mr-2">
               <Tag className="w-3 h-3" /> Testar:
-
             </span>
             {[
+              { label: "☕ Café Pilão 500g", code: "7896006710116" },
+              { label: "🥖 Pão Francês kg", code: "7896006750099" },
+              { label: "🥛 Leite Itambé 1L", code: "7891025100010" },
               { label: "Arroz Camil 5kg", code: "7891000100103" },
-              { label: "Feijão Kicaldo 1kg", code: "7896006700018" },
-              { label: "Leite Itambé 1L", code: "7891025100010" },
-              { label: "Contra Filé kg", code: "7891000300015" },
             ].map((chip) => (
               <button
                 key={chip.code}
@@ -195,6 +216,8 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
             const itemCount =
               cat.id === "tudo"
                 ? products.length
+                : cat.id === "café da manhã"
+                ? products.filter(isBreakfastItem).length
                 : products.filter((p) => p.category === cat.id).length;
 
             return (
@@ -209,6 +232,17 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
               >
                 <span>{cat.icon}</span>
                 <span>{cat.label}</span>
+                {cat.badge && (
+                  <span
+                    className={`text-[9px] font-black uppercase px-1.5 py-0.5 rounded-md ${
+                      selectedCategory === cat.id
+                        ? "bg-amber-400 text-slate-950"
+                        : "bg-amber-100 text-amber-800 border border-amber-300"
+                    }`}
+                  >
+                    {cat.badge}
+                  </span>
+                )}
                 <span
                   className={`text-[10px] px-1.5 py-0.5 rounded-full font-mono ${
                     selectedCategory === cat.id
@@ -222,6 +256,33 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
             );
           })}
         </div>
+
+        {/* Café da Manhã Dedicated Spotlight Header */}
+        {selectedCategory === "café da manhã" && (
+          <div className="bg-gradient-to-r from-amber-600 via-orange-500 to-amber-700 rounded-3xl p-5 sm:p-6 text-white shadow-lg relative overflow-hidden flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-scaleUp">
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-3xl shadow-inner shrink-0">
+                ☕
+              </div>
+              <div>
+                <div className="inline-flex items-center gap-1.5 bg-amber-400 text-slate-950 text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-1">
+                  <span>PRIMEIRA REFEIÇÃO DO DIA</span>
+                </div>
+                <h3 className="text-lg sm:text-xl font-black tracking-tight leading-tight">
+                  Especial Café da Manhã & Matinais
+                </h3>
+                <p className="text-xs sm:text-sm text-amber-100 font-medium mt-0.5">
+                  Pães quentinhos saindo do forno, cafés selecionados, frios, laticínios, margarinas e achocolatados com preço especial.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 shrink-0">
+              <span className="text-xs font-black bg-white/20 px-3.5 py-2 rounded-xl backdrop-blur-xs border border-white/20">
+                {products.filter(isBreakfastItem).length} ofertas matinais
+              </span>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Selected Product Detail Card or List View */}

@@ -144,10 +144,10 @@ export const Header: React.FC<HeaderProps> = ({
               </button>
               <button
                 onClick={onOpenAuth}
-                className="flex items-center gap-1.5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-black text-[11px] px-3 py-1.5 rounded-lg transition shadow-xs cursor-pointer border border-orange-300 animate-pulse"
+                className="flex items-center gap-1.5 bg-gradient-to-r from-rose-600 via-pink-600 to-rose-700 hover:from-rose-500 hover:to-pink-500 text-white font-black text-[11px] px-3 py-1.5 rounded-lg transition shadow-xs cursor-pointer border border-rose-300 animate-pulse"
               >
                 <Gift className="w-3.5 h-3.5" />
-                <span>🎁 Ganhe R$ 0.5 no Kwai</span>
+                <span>🎁 Bônus TikTok Lite #DLN481109361511</span>
               </button>
             </div>
           )}
