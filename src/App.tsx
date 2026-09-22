@@ -72,7 +72,7 @@ export default function App() {
     } catch {
       // ignore
     }
-    showToast(`💼 Bem-vindo(a)! Você acessou o Grupo Oficial de Vagas CLT no WhatsApp.`);
+    showToast(`⭐ Membro cadastrado com sucesso! 50% de desconto e frete de bike liberados.`);
   };
 
   const handleUserLogout = () => {
@@ -326,6 +326,7 @@ export default function App() {
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
             onOpenRadar={() => setMode("radar_vagas")}
+            onOpenDeliveryTracker={() => setMode("rastreio")}
             vacancies={vacancies}
           />
         )}

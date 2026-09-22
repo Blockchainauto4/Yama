@@ -23,6 +23,7 @@ import {
   Bike,
   MessageSquare,
 } from "lucide-react";
+import { safeCopyText } from "../utils/clipboard";
 
 interface CartManagerProps {
   cart: CartItem[];
@@ -117,7 +118,7 @@ export const CartManager: React.FC<CartManagerProps> = ({
     (comp) => comp.bestAlternative !== null
   ).length;
 
-  const handleShareList = () => {
+  const handleShareList = async () => {
     let text = `🛒 *Minha Lista de Compras - Yammá (${selectedStore.name})*\n\n`;
     cart.forEach((item, index) => {
       text += `${index + 1}. *${item.product.name}* (${item.quantity}x)\n`;
@@ -140,7 +141,7 @@ export const CartManager: React.FC<CartManagerProps> = ({
         .replace(".", ",")}\n`;
     }
 
-    navigator.clipboard.writeText(text);
+    await safeCopyText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };

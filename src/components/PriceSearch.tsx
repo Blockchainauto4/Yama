@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { ProductDetailCard } from "./ProductDetailCard";
 import { JobSlotsSlider } from "./JobSlotsSlider";
+import { PromoAnnualShoppingBanner } from "./PromoAnnualShoppingBanner";
 
 interface PriceSearchProps {
   products: Product[];
@@ -109,6 +110,9 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
 
   return (
     <div className="space-y-6">
+      {/* Mega Promo: R$ 50.000 em compras durante 1 ano */}
+      <PromoAnnualShoppingBanner onOpenAuth={onOpenAuth} />
+
       {/* Slides with Available Slots (JobSlotsSlider) */}
       {vacancies && vacancies.length > 0 && (
         <JobSlotsSlider

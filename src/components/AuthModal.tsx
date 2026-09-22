@@ -12,6 +12,7 @@ import {
   Gift,
   Copy,
 } from "lucide-react";
+import { safeCopyText } from "../utils/clipboard";
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -21,7 +22,7 @@ interface AuthModalProps {
   vacancies?: JobVacancy[];
 }
 
-const TIKTOK_PROMO_URL = "https://www.tiktok.com/d/4/ZS9A8hP4xH5YK-hTu53/";
+const TIKTOK_PROMO_URL = "https://www.tiktok.com/d/4/ZS9AyD1Ka3qSj-Iu84v/";
 const TIKTOK_REFERRAL_CODE = "#DLN481109361511";
 
 export const AuthModal: React.FC<AuthModalProps> = ({
@@ -34,19 +35,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const [isHovered, setIsHovered] = useState(false);
   const [copiedCode, setCopiedCode] = useState(false);
 
-  const handleCopyCode = () => {
-    navigator.clipboard.writeText(TIKTOK_REFERRAL_CODE);
+  const handleCopyCode = async () => {
+    await safeCopyText(TIKTOK_REFERRAL_CODE);
     setCopiedCode(true);
     setTimeout(() => setCopiedCode(false), 2500);
   };
 
   const handleOpenTikTok = () => {
-    // Also copy code to clipboard automatically on open for ease of use
-    try {
-      navigator.clipboard.writeText(TIKTOK_REFERRAL_CODE);
-    } catch {
-      // ignore
-    }
     window.open(TIKTOK_PROMO_URL, "_blank");
     const newUser: UserProfile = {
       id: "usr-" + Date.now(),
@@ -131,11 +126,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
           {/* Punchy Title */}
           <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight leading-tight">
-            Ganhe Recompensas no TikTok Lite!
+            Concorra a R$ 50.000 em Compras!
           </h2>
 
           <p className="text-xs sm:text-sm text-rose-200 font-bold mt-1.5 leading-snug">
-            Use meu código <span className="text-yellow-300 font-extrabold">{TIKTOK_REFERRAL_CODE}</span> para participar do TikTok Lite e ganhar recompensas.
+            Nenhum amigo por perto? Compartilhe a foto ou o link e use o código <span className="text-yellow-300 font-extrabold">{TIKTOK_REFERRAL_CODE}</span> para concorrer a 1 ano de compras grátis.
           </p>
         </div>
 
@@ -251,7 +246,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
             <div className="flex items-center gap-1 truncate max-w-[240px]">
               <ShieldCheck className="w-3.5 h-3.5 text-rose-600 shrink-0" />
-              <span className="truncate">Link: tiktok.com/d/4/ZS9A8hP4xH5YK-hTu53/</span>
+              <span className="truncate">Link: tiktok.com/d/4/ZS9AyD1Ka3qSj-Iu84v/</span>
             </div>
             <button
               onClick={onClose}

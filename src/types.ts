@@ -79,9 +79,13 @@ export interface UserProfile {
   id: string;
   name: string;
   email: string;
+  phone?: string;
+  neighborhood?: string;
   cpf?: string;
-  welcomeDiscountActive: boolean; // 5% off on total purchase
-  discountPercent: number; // 5
+  welcomeDiscountActive: boolean; // 50% off on total purchase
+  discountPercent: number; // 50
+  freeBikeDelivery?: boolean;
+  membershipTier?: "Membro VIP" | "Clube Yammá";
 }
 
 export type BikeType = "ebike" | "mechanical_bike";

@@ -147,7 +147,7 @@ export const Header: React.FC<HeaderProps> = ({
                 className="flex items-center gap-1.5 bg-gradient-to-r from-rose-600 via-pink-600 to-rose-700 hover:from-rose-500 hover:to-pink-500 text-white font-black text-[11px] px-3 py-1.5 rounded-lg transition shadow-xs cursor-pointer border border-rose-300 animate-pulse"
               >
                 <Gift className="w-3.5 h-3.5" />
-                <span>🎁 Bônus TikTok Lite #DLN481109361511</span>
+                <span>🎉 R$ 50.000 em Compras (1 Ano)</span>
               </button>
             </div>
           )}

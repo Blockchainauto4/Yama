@@ -137,10 +137,10 @@ export const ProductDetailCard: React.FC<ProductDetailCardProps> = ({
             </div>
             <div>
               <h4 className="text-lg font-extrabold text-emerald-950">
-                Preço Exclusivo para Membros
+                Preço Exclusivo para Membros do Clube
               </h4>
               <p className="text-xs text-emerald-800 font-medium max-w-sm mx-auto mt-1">
-                Entre no nosso grupo de <strong>Vagas CLT no WhatsApp</strong> para visualizar os preços e garantir <strong>50% de desconto</strong> na sua compra.
+                Faça seu <strong>Cadastro de Membro</strong> em segundos para visualizar todos os preços, garantir <strong>50% de desconto</strong> e frete grátis no delivery de bike.
               </p>
             </div>
             <button
@@ -148,7 +148,7 @@ export const ProductDetailCard: React.FC<ProductDetailCardProps> = ({
               className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white font-extrabold text-xs rounded-2xl transition shadow-lg shadow-emerald-200 flex items-center justify-center gap-2 mx-auto cursor-pointer"
             >
               <Sparkles className="w-4 h-4 text-emerald-200" />
-              <span>💼 Grupo Vagas CLT & Liberar Preços</span>
+              <span>⭐ Fazer Cadastro de Membro & Liberar Preços</span>
             </button>
           </div>
         )}

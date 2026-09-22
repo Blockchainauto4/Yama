@@ -14,6 +14,7 @@ import {
   Sparkles,
   ShieldCheck,
 } from "lucide-react";
+import { safeCopyText } from "../utils/clipboard";
 
 interface JobSlotsSliderProps {
   vacancies: JobVacancy[];
@@ -47,13 +48,13 @@ export const JobSlotsSlider: React.FC<JobSlotsSliderProps> = ({
     });
   };
 
-  const handleCopyJob = (job: JobVacancy, e: React.MouseEvent) => {
+  const handleCopyJob = async (job: JobVacancy, e: React.MouseEvent) => {
     e.stopPropagation();
     const textToCopy =
       job.rawWhatsAppText ||
       `🚨 *${job.title}*\n${job.urgencyLevel}\n\n📍 ${job.address}\n*${job.landmark}*\n\n💵 ${job.pay}\n⏰ ${job.workingHours}\n\n👤 Contato: ${job.contactName} (${job.contactRole})\n📱 WhatsApp: ${job.contactPhone}`;
 
-    navigator.clipboard.writeText(textToCopy);
+    await safeCopyText(textToCopy);
     setCopiedId(job.id);
     setTimeout(() => setCopiedId(null), 2200);
   };

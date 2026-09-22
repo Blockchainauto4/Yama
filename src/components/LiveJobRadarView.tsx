@@ -25,6 +25,7 @@ import {
   Navigation,
 } from "lucide-react";
 import { JobSlotsSlider } from "./JobSlotsSlider";
+import { safeCopyText } from "../utils/clipboard";
 
 interface LiveJobRadarViewProps {
   vacancies: JobVacancy[];
@@ -98,14 +99,14 @@ export const LiveJobRadarView: React.FC<LiveJobRadarViewProps> = ({
     return matchesCategory && matchesRegion && matchesQuery;
   });
 
-  const handleCopyJobData = (job: JobVacancy) => {
+  const handleCopyJobData = async (job: JobVacancy) => {
     const textToCopy =
       job.rawWhatsAppText ||
       `🚨 *${job.title}*\n${job.urgencyLevel}\n\n📍 ${job.address}\n*${job.landmark}*\n\n💵 ${job.pay}\n⏰ ${job.workingHours}\n\n${
         job.notes ? `*${job.notes}*\n\n` : ""
       }👤 Contato: ${job.contactName} (${job.contactRole})\n📱 WhatsApp: ${job.contactPhone}`;
 
-    navigator.clipboard.writeText(textToCopy);
+    await safeCopyText(textToCopy);
     setCopiedJobId(job.id);
     setTimeout(() => setCopiedJobId(null), 2500);
   };

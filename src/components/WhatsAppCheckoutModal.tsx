@@ -18,6 +18,7 @@ import {
   Receipt,
   FileText,
 } from "lucide-react";
+import { safeCopyText } from "../utils/clipboard";
 
 interface WhatsAppCheckoutModalProps {
   isOpen: boolean;
@@ -154,9 +155,9 @@ export const WhatsAppCheckoutModal: React.FC<WhatsAppCheckoutModalProps> = ({
     window.open(whatsappUrl, "_blank");
   };
 
-  const handleCopyMessage = () => {
+  const handleCopyMessage = async () => {
     const text = generateWhatsAppMessage();
-    navigator.clipboard.writeText(text);
+    await safeCopyText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };
