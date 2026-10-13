@@ -440,11 +440,11 @@ export default function App() {
         </button>
       )}
 
-      {/* Video Popup: apenas o vídeo, play/pause e áudio desde o início */}
+      {/* Video Popup: apenas o vídeo, play/pause, áudio e botão após 15 segundos */}
       <VideoPopupModal
         isOpen={isVideoPopupOpen}
         onClose={() => setIsVideoPopupOpen(false)}
-        delayMinutes={15}
+        delaySeconds={15}
         programUrl="https://ai.hub.xyz/r/8G5GNCTF"
       />
 

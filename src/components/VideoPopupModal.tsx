@@ -5,7 +5,7 @@ interface VideoPopupModalProps {
   isOpen: boolean;
   onClose: () => void;
   programUrl?: string;
-  delayMinutes?: number;
+  delaySeconds?: number;
 }
 
 const DEFAULT_PROGRAM_URL = "https://ai.hub.xyz/r/8G5GNCTF";
@@ -15,18 +15,22 @@ export const VideoPopupModal: React.FC<VideoPopupModalProps> = ({
   isOpen,
   onClose,
   programUrl = DEFAULT_PROGRAM_URL,
-  delayMinutes = 15,
+  delaySeconds = 15,
 }) => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [isUnlocked, setIsUnlocked] = useState<boolean>(false);
-  const totalSeconds = delayMinutes * 60; // 15 minutos = 900s
-  const [secondsRemaining, setSecondsRemaining] = useState<number>(totalSeconds);
+  const [secondsRemaining, setSecondsRemaining] = useState<number>(delaySeconds);
   const secretClickCount = useRef<number>(0);
 
-  // Countdown timer for 15 minutes: after 15 minutes, the button appears
+  // Exibe o botão após 15 segundos de vídeo
   useEffect(() => {
-    if (!isOpen || isUnlocked) return;
+    if (!isOpen) return;
+
+    // Reseta caso o pop-up seja reaberto e ainda não esteja desbloqueado
+    if (isUnlocked) return;
+
+    setSecondsRemaining(delaySeconds);
 
     const interval = setInterval(() => {
       setSecondsRemaining((prev) => {
@@ -40,7 +44,7 @@ export const VideoPopupModal: React.FC<VideoPopupModalProps> = ({
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [isOpen, isUnlocked]);
+  }, [isOpen, isUnlocked, delaySeconds]);
 
   // Send commands to YouTube iframe (Play, Pause, unMute with full audio)
   const sendIframeCommand = (func: string, args: unknown[] = []) => {
@@ -132,15 +136,15 @@ export const VideoPopupModal: React.FC<VideoPopupModalProps> = ({
           </button>
         </div>
 
-        {/* Aparece só o botão após 15 minutos (ou após 3 cliques no controle para teste) */}
+        {/* Aparece só o botão após 15 segundos com o link de renda extra */}
         {isUnlocked && (
           <a
             href={programUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full text-center py-3.5 px-6 rounded-2xl font-black text-white bg-emerald-600 hover:bg-emerald-500 shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer animate-fadeIn text-sm sm:text-base"
+            className="w-full text-center py-3.5 px-6 rounded-2xl font-black text-white bg-emerald-600 hover:bg-emerald-500 shadow-2xl transition-all flex items-center justify-center gap-2 cursor-pointer animate-fadeIn text-sm sm:text-base tracking-wide"
           >
-            <span>👉 ENTRAR NO PROGRAMA</span>
+            <span>👉 CLIQUE AQUI: RENDA EXTRA</span>
           </a>
         )}
       </div>
