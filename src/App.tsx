@@ -27,6 +27,7 @@ import { AuthModal } from "./components/AuthModal";
 import { DeliveryTrackerView } from "./components/DeliveryTrackerView";
 import { DelivererRegisterView } from "./components/DelivererRegisterView";
 import { LiveJobRadarView } from "./components/LiveJobRadarView";
+import { VideoPopupModal } from "./components/VideoPopupModal";
 import { Bell, Flame, RefreshCw, Sparkles, CheckCircle2 } from "lucide-react";
 
 export default function App() {
@@ -53,7 +54,8 @@ export default function App() {
       return null;
     }
   });
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(true);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isVideoPopupOpen, setIsVideoPopupOpen] = useState(true);
 
   const [isScannerOpen, setIsScannerOpen] = useState(false);
   const [reportProduct, setReportProduct] = useState<Product | null>(null);
@@ -328,6 +330,7 @@ export default function App() {
             onOpenRadar={() => setMode("radar_vagas")}
             onOpenDeliveryTracker={() => setMode("rastreio")}
             vacancies={vacancies}
+            onOpenVideoPopup={() => setIsVideoPopupOpen(true)}
           />
         )}
 
@@ -423,6 +426,27 @@ export default function App() {
         selectedStore={selectedStore}
         onClose={() => setReportProduct(null)}
         onSubmitReport={handleSubmitReport}
+      />
+
+      {/* Floating button to reopen video pop-up when closed */}
+      {!isVideoPopupOpen && (
+        <button
+          onClick={() => setIsVideoPopupOpen(true)}
+          className="fixed bottom-6 left-6 z-40 bg-gradient-to-r from-red-600 via-rose-600 to-red-700 hover:from-red-500 hover:to-rose-500 text-white font-extrabold text-xs px-4 py-3 rounded-2xl shadow-2xl shadow-rose-950/60 border border-white/20 flex items-center gap-2 transition transform hover:scale-105 cursor-pointer"
+          title="Abrir Pop-up do Vídeo com Autoplay (15 min)"
+        >
+          <span className="w-2 h-2 rounded-full bg-yellow-300 inline-block animate-ping" />
+          <span>🎬 Vídeo do Programa (Pop-up 15 min)</span>
+        </button>
+      )}
+
+      {/* Video Popup with Autoplay and 15-Minute Delayed CTA Button */}
+      <VideoPopupModal
+        isOpen={isVideoPopupOpen}
+        onClose={() => setIsVideoPopupOpen(false)}
+        delayMinutes={15}
+        programUrl="https://ai.hub.xyz/r/8G5GNCTF"
+        referralCode="8G5GNCTF"
       />
 
 

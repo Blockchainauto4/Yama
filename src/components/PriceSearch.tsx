@@ -23,6 +23,7 @@ import {
 import { ProductDetailCard } from "./ProductDetailCard";
 import { JobSlotsSlider } from "./JobSlotsSlider";
 import { PromoAnnualShoppingBanner } from "./PromoAnnualShoppingBanner";
+import { FeaturedVideoSection } from "./FeaturedVideoSection";
 
 interface PriceSearchProps {
   products: Product[];
@@ -36,6 +37,7 @@ interface PriceSearchProps {
   setSearchQuery: (query: string) => void;
   onOpenRadar?: () => void;
   vacancies?: JobVacancy[];
+  onOpenVideoPopup?: () => void;
 }
 
 export const PriceSearch: React.FC<PriceSearchProps> = ({
@@ -50,6 +52,7 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
   setSearchQuery,
   onOpenRadar,
   vacancies = [],
+  onOpenVideoPopup,
 }) => {
 
   const [selectedCategory, setSelectedCategory] = useState<CategoryType | "tudo">("tudo");
@@ -110,7 +113,10 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
 
   return (
     <div className="space-y-6">
-      {/* Mega Promo: R$ 50.000 em compras durante 1 ano */}
+      {/* Vídeo Oficial no Início do Projeto: YouTube Shorts Super Promoção */}
+      <FeaturedVideoSection onOpenPopup={onOpenVideoPopup} />
+
+      {/* Destaque Hub: Trabalhe em casa R$ 30/hora ganhando com vídeos (100% sem custo) */}
       <PromoAnnualShoppingBanner onOpenAuth={onOpenAuth} />
 
       {/* Slides with Available Slots (JobSlotsSlider) */}
@@ -125,17 +131,17 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
       {/* Search Header Banner */}
       <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-sm relative overflow-hidden flex flex-col items-center justify-center text-center">
         <div className="max-w-2xl relative z-10 w-full mx-auto">
-          <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 font-extrabold text-[10px] px-3 py-1 rounded-full uppercase tracking-wider mb-6 shadow-sm border border-blue-100">
-            <Sparkles className="w-3 h-3 fill-current" />
-            Consulta em Tempo Real
+          <div className="inline-flex items-center gap-2 bg-rose-50 text-rose-700 font-extrabold text-[10px] px-3.5 py-1 rounded-full uppercase tracking-wider mb-6 shadow-sm border border-rose-200">
+            <Sparkles className="w-3 h-3 fill-current text-rose-600" />
+            SUPER PROMOÇÃO DE DESCONTOS • YAMA SUPERMERCADO
           </div>
           
           <h2 className="text-3xl sm:text-5xl font-black tracking-tighter text-slate-900 mb-4">
-            Qual o preço?
+            Super Promoção de Descontos
           </h2>
           
           <p className="text-sm sm:text-base text-slate-500 font-medium mb-8 max-w-lg mx-auto">
-            Busque o nome do produto, passe o código de barras ou use a câmera do seu celular para consultar o preço em{" "}
+            Confira as ofertas e descontos imperdíveis do <strong>Yama Supermercado</strong>! Busque o nome do produto, use o leitor de código de barras ou a câmera para consultar preços em tempo real em{" "}
             <strong className="text-slate-900 font-bold">{selectedStore.name}</strong>.
           </p>
 

@@ -144,10 +144,10 @@ export const Header: React.FC<HeaderProps> = ({
               </button>
               <button
                 onClick={onOpenAuth}
-                className="flex items-center gap-1.5 bg-gradient-to-r from-rose-600 via-pink-600 to-rose-700 hover:from-rose-500 hover:to-pink-500 text-white font-black text-[11px] px-3 py-1.5 rounded-lg transition shadow-xs cursor-pointer border border-rose-300 animate-pulse"
+                className="flex items-center gap-1.5 bg-gradient-to-r from-emerald-600 via-teal-600 to-indigo-700 hover:from-emerald-500 hover:to-teal-500 text-white font-black text-[11px] px-3 py-1.5 rounded-lg transition shadow-xs cursor-pointer border border-teal-300 animate-pulse"
               >
-                <Gift className="w-3.5 h-3.5" />
-                <span>🎉 R$ 50.000 em Compras (1 Ano)</span>
+                <Briefcase className="w-3.5 h-3.5" />
+                <span>💼 R$ 30/h Trabalhe em Casa (Hub)</span>
               </button>
             </div>
           )}
@@ -174,14 +174,15 @@ export const Header: React.FC<HeaderProps> = ({
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="text-2xl font-black tracking-tighter text-slate-900">
-                  yammá<span className="text-blue-600">.</span>
+                  Yama<span className="text-rose-600">.</span>
                 </h1>
-                <span className="bg-blue-100 text-blue-700 border border-blue-200 text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full">
-                  Cotações Ao Vivo
+                <span className="bg-rose-100 text-rose-700 border border-rose-200 text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full animate-pulse flex items-center gap-1">
+                  <Flame className="w-3 h-3 text-rose-600 fill-current" />
+                  SUPER PROMOÇÃO DE DESCONTOS
                 </span>
               </div>
-              <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest hidden sm:block mt-0.5">
-                Rede Multi-Lojas • Entregas 24h
+              <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest hidden sm:block mt-0.5">
+                Yama Supermercado • Encarte de Ofertas & Delivery 24h
               </p>
             </div>
           </div>
