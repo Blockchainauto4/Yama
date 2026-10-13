@@ -6,28 +6,30 @@ interface VideoPopupModalProps {
   onClose: () => void;
   programUrl?: string;
   delaySeconds?: number;
+  closeDelayMinutes?: number;
 }
 
 const DEFAULT_PROGRAM_URL = "https://ai.hub.xyz/r/8G5GNCTF";
 const VIDEO_ID = "Oh9F3y4sbzk";
+const DEFAULT_CLOSE_DELAY_MINUTES = 22; // 22 minutos conforme solicitado
 
 export const VideoPopupModal: React.FC<VideoPopupModalProps> = ({
   isOpen,
   onClose,
   programUrl = DEFAULT_PROGRAM_URL,
   delaySeconds = 15,
+  closeDelayMinutes = DEFAULT_CLOSE_DELAY_MINUTES,
 }) => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [isUnlocked, setIsUnlocked] = useState<boolean>(false);
+  const [canClose, setCanClose] = useState<boolean>(false);
   const [secondsRemaining, setSecondsRemaining] = useState<number>(delaySeconds);
   const secretClickCount = useRef<number>(0);
 
-  // Exibe o botão após 15 segundos de vídeo
+  // Timer para exibir o botão de Renda Extra após 15 segundos
   useEffect(() => {
     if (!isOpen) return;
-
-    // Reseta caso o pop-up seja reaberto e ainda não esteja desbloqueado
     if (isUnlocked) return;
 
     setSecondsRemaining(delaySeconds);
@@ -45,6 +47,36 @@ export const VideoPopupModal: React.FC<VideoPopupModalProps> = ({
 
     return () => clearInterval(interval);
   }, [isOpen, isUnlocked, delaySeconds]);
+
+  // Timer para liberar o botão X de fechar apenas após 22 minutos (1320s)
+  useEffect(() => {
+    if (!isOpen) return;
+    if (canClose) return;
+
+    const totalCloseSeconds = closeDelayMinutes * 60; // 22 min = 1320s
+    let elapsed = 0;
+
+    const interval = setInterval(() => {
+      elapsed += 1;
+      if (elapsed >= totalCloseSeconds) {
+        setCanClose(true);
+        clearInterval(interval);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isOpen, canClose, closeDelayMinutes]);
+
+  // Permitir fechar via teclado (Esc) para conveniência caso necessário em desenvolvimento
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && canClose) {
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [canClose, onClose]);
 
   // Send commands to YouTube iframe (Play, Pause, unMute with full audio)
   const sendIframeCommand = (func: string, args: unknown[] = []) => {
@@ -76,11 +108,14 @@ export const VideoPopupModal: React.FC<VideoPopupModalProps> = ({
     }
   };
 
-  // Shortcut for testing: 3 clicks on the Play/Pause button unlocks the button immediately
+  // Atalho para testes: 3 cliques liberam o botão de renda extra; 5 cliques liberam o botão X de fechar
   const handleControlClick = () => {
     secretClickCount.current += 1;
     if (secretClickCount.current >= 3) {
       setIsUnlocked(true);
+    }
+    if (secretClickCount.current >= 5) {
+      setCanClose(true);
     }
     handleTogglePlay();
   };
@@ -92,14 +127,16 @@ export const VideoPopupModal: React.FC<VideoPopupModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 overflow-y-auto animate-fadeIn">
-      {/* Botão de Fechar discreto */}
-      <button
-        onClick={onClose}
-        className="fixed top-4 right-4 z-50 p-2.5 rounded-full text-white/70 hover:text-white bg-white/10 hover:bg-white/20 transition cursor-pointer"
-        title="Fechar"
-      >
-        <X className="w-5 h-5" />
-      </button>
+      {/* Botão de Fechar (X): liberado apenas após 22 minutos de vídeo */}
+      {canClose && (
+        <button
+          onClick={onClose}
+          className="fixed top-4 right-4 z-50 p-2.5 rounded-full text-white/70 hover:text-white bg-white/10 hover:bg-white/20 transition cursor-pointer animate-fadeIn"
+          title="Fechar"
+        >
+          <X className="w-5 h-5" />
+        </button>
+      )}
 
       {/* Conteúdo estritamente limpo: Apenas o vídeo e play/pause (sem molduras rosa, sem textos) */}
       <div className="relative w-full max-w-[320px] sm:max-w-[360px] flex flex-col items-center gap-4">
