@@ -46,7 +46,6 @@ export const FeaturedVideoSection: React.FC<FeaturedVideoSectionProps> = ({
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
     } catch {
-      // Fallback
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
     }
@@ -59,14 +58,14 @@ export const FeaturedVideoSection: React.FC<FeaturedVideoSectionProps> = ({
 
   if (isMinimized) {
     return (
-      <div className="bg-gradient-to-r from-slate-900 via-rose-950 to-slate-900 text-white rounded-2xl p-3 sm:p-4 border border-rose-500/30 shadow-lg flex items-center justify-between gap-3 transition-all">
+      <div className="bg-slate-900 text-white rounded-2xl p-3 sm:p-4 border border-slate-800 shadow-lg flex items-center justify-between gap-3 transition-all">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-rose-600 flex items-center justify-center text-white shrink-0 shadow-md">
+          <div className="w-9 h-9 rounded-xl bg-red-600 flex items-center justify-center text-white shrink-0 shadow-md">
             <Film className="w-5 h-5" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-[10px] uppercase font-black bg-rose-500/20 text-rose-300 px-2 py-0.5 rounded-full border border-rose-400/30">
+              <span className="text-[10px] uppercase font-black bg-red-500/20 text-red-300 px-2 py-0.5 rounded-full border border-red-500/30">
                 Vídeo Oficial
               </span>
               <span className="text-xs font-bold text-white">
@@ -82,7 +81,7 @@ export const FeaturedVideoSection: React.FC<FeaturedVideoSectionProps> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={() => setIsMinimized(false)}
-            className="flex items-center gap-1 bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition shadow-md"
+            className="flex items-center gap-1 bg-red-600 hover:bg-red-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition shadow-md cursor-pointer"
           >
             <Play className="w-3.5 h-3.5 fill-current" />
             <span>Assistir</span>
@@ -94,21 +93,17 @@ export const FeaturedVideoSection: React.FC<FeaturedVideoSectionProps> = ({
   }
 
   return (
-    <div className="bg-gradient-to-br from-slate-900 via-slate-900 to-rose-950 text-white rounded-3xl p-5 sm:p-8 border border-rose-500/30 shadow-2xl relative overflow-hidden transition-all">
-      {/* Decorative Glow Orbs */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-rose-600/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-10 left-10 w-80 h-80 bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
-
+    <div className="bg-slate-900 text-white rounded-3xl p-5 sm:p-8 border border-slate-800 shadow-2xl relative overflow-hidden transition-all">
       {/* Header bar of the section */}
       <div className="flex items-center justify-between gap-3 mb-5 pb-4 border-b border-white/10 relative z-10">
         <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-rose-600 to-red-500 flex items-center justify-center text-white shadow-lg shadow-rose-600/40">
+          <div className="w-9 h-9 rounded-2xl bg-red-600 flex items-center justify-center text-white shadow-lg">
             <Film className="w-4 h-4" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1 bg-rose-500/20 border border-rose-400/40 text-rose-300 text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full">
-                <Flame className="w-3 h-3 text-rose-400 fill-current animate-pulse" />
+              <span className="inline-flex items-center gap-1 bg-red-500/20 border border-red-500/30 text-red-300 text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full">
+                <Flame className="w-3 h-3 text-red-400 fill-current animate-pulse" />
                 Vídeo Oficial no Início
               </span>
               <span className="text-[10px] text-slate-400 hidden sm:inline">
@@ -125,7 +120,7 @@ export const FeaturedVideoSection: React.FC<FeaturedVideoSectionProps> = ({
         <button
           onClick={() => setIsMinimized(true)}
           title="Minimizar vídeo"
-          className="text-slate-400 hover:text-white p-2 rounded-xl hover:bg-white/10 transition text-xs flex items-center gap-1"
+          className="text-slate-400 hover:text-white p-2 rounded-xl hover:bg-white/10 transition text-xs flex items-center gap-1 cursor-pointer"
         >
           <span className="hidden sm:inline text-[11px] font-semibold">Recolher</span>
           <ChevronUp className="w-4 h-4" />
@@ -136,18 +131,12 @@ export const FeaturedVideoSection: React.FC<FeaturedVideoSectionProps> = ({
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center relative z-10">
         {/* Left Side: Vertical YouTube Shorts Frame */}
         <div className="md:col-span-5 flex justify-center">
-          <div className="relative w-full max-w-[280px] sm:max-w-[310px] aspect-[9/16] rounded-3xl overflow-hidden bg-black border-2 border-rose-500/40 shadow-2xl shadow-rose-950/60 group">
-            {/* Top Phone-like bezel / Notch decor */}
-            <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 pointer-events-none flex items-center gap-1 bg-black/60 backdrop-blur-sm px-3 py-0.5 rounded-full border border-white/10 text-[9px] text-rose-300 font-bold">
-              <Sparkles className="w-2.5 h-2.5" />
-              Yama Promo Reels
-            </div>
-
+          <div className="relative w-full max-w-[280px] sm:max-w-[310px] aspect-[9/16] rounded-2xl overflow-hidden bg-black border border-white/10 shadow-2xl group">
             {/* Embedded IFrame */}
             <iframe
               src={YOUTUBE_EMBED_URL}
               title="SUPER PROMOÇÃO DE DESCONTOS Yama Supermercado"
-              className="w-full h-full border-0 rounded-3xl"
+              className="w-full h-full border-0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             />
@@ -172,7 +161,7 @@ export const FeaturedVideoSection: React.FC<FeaturedVideoSectionProps> = ({
           {/* Value Badges */}
           <div className="grid grid-cols-2 gap-2.5 pt-1">
             <div className="bg-white/5 border border-white/10 rounded-2xl p-3 flex items-start gap-2.5">
-              <div className="w-7 h-7 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center shrink-0">
+              <div className="w-7 h-7 rounded-lg bg-red-500/20 text-red-400 flex items-center justify-center shrink-0">
                 <Flame className="w-4 h-4" />
               </div>
               <div>
@@ -187,7 +176,7 @@ export const FeaturedVideoSection: React.FC<FeaturedVideoSectionProps> = ({
               </div>
               <div>
                 <h4 className="text-xs font-extrabold text-white">Vídeo Completo</h4>
-                <p className="text-[11px] text-slate-400">Ative o som no player</p>
+                <p className="text-[11px] text-slate-400">Com áudio no player</p>
               </div>
             </div>
           </div>
@@ -198,10 +187,10 @@ export const FeaturedVideoSection: React.FC<FeaturedVideoSectionProps> = ({
             {onOpenPopup && (
               <button
                 onClick={onOpenPopup}
-                className="flex items-center gap-2 bg-gradient-to-r from-amber-500 via-rose-600 to-red-600 hover:from-amber-400 hover:to-rose-500 text-white font-black text-xs sm:text-sm px-5 py-3 rounded-2xl shadow-xl shadow-rose-900/40 transition transform hover:-translate-y-0.5 cursor-pointer animate-pulse"
+                className="flex items-center gap-2 bg-red-600 hover:bg-red-500 text-white font-black text-xs sm:text-sm px-5 py-3 rounded-2xl shadow-lg transition transform hover:-translate-y-0.5 cursor-pointer"
               >
-                <Sparkles className="w-4 h-4 fill-current text-yellow-200" />
-                <span>Abrir Pop-up (Autoplay + 15 min)</span>
+                <Play className="w-4 h-4 fill-current text-white" />
+                <span>Abrir no Pop-up</span>
               </button>
             )}
 
@@ -220,7 +209,7 @@ export const FeaturedVideoSection: React.FC<FeaturedVideoSectionProps> = ({
             {/* WhatsApp Share */}
             <button
               onClick={shareViaWhatsApp}
-              className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm px-4 py-3 rounded-2xl shadow-md transition"
+              className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm px-4 py-3 rounded-2xl shadow-md transition cursor-pointer"
             >
               <Share2 className="w-4 h-4" />
               <span>Compartilhar</span>
@@ -229,7 +218,7 @@ export const FeaturedVideoSection: React.FC<FeaturedVideoSectionProps> = ({
             {/* Copy Link */}
             <button
               onClick={copyVideoLink}
-              className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm px-4 py-3 rounded-2xl border border-white/20 transition"
+              className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm px-4 py-3 rounded-2xl border border-white/20 transition cursor-pointer"
             >
               {copied ? (
                 <>
@@ -248,7 +237,7 @@ export const FeaturedVideoSection: React.FC<FeaturedVideoSectionProps> = ({
           {/* Link pill display */}
           <div className="pt-1 flex items-center gap-2 text-[11px] text-slate-400 font-mono truncate">
             <span className="text-slate-500 font-sans">Link direto:</span>
-            <span className="truncate text-rose-300/90 underline">
+            <span className="truncate text-slate-300 underline">
               youtube.com/shorts/Oh9F3y4sbzk
             </span>
           </div>

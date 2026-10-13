@@ -28,7 +28,7 @@ import { DeliveryTrackerView } from "./components/DeliveryTrackerView";
 import { DelivererRegisterView } from "./components/DelivererRegisterView";
 import { LiveJobRadarView } from "./components/LiveJobRadarView";
 import { VideoPopupModal } from "./components/VideoPopupModal";
-import { Bell, Flame, RefreshCw, Sparkles, CheckCircle2 } from "lucide-react";
+import { Bell, Flame, RefreshCw, Sparkles, CheckCircle2, Play } from "lucide-react";
 
 export default function App() {
   const [currentMode, setMode] = useState<AppMode>("consulta");
@@ -432,21 +432,20 @@ export default function App() {
       {!isVideoPopupOpen && (
         <button
           onClick={() => setIsVideoPopupOpen(true)}
-          className="fixed bottom-6 left-6 z-40 bg-gradient-to-r from-red-600 via-rose-600 to-red-700 hover:from-red-500 hover:to-rose-500 text-white font-extrabold text-xs px-4 py-3 rounded-2xl shadow-2xl shadow-rose-950/60 border border-white/20 flex items-center gap-2 transition transform hover:scale-105 cursor-pointer"
-          title="Abrir Pop-up do Vídeo com Autoplay (15 min)"
+          className="fixed bottom-6 left-6 z-40 bg-red-600 hover:bg-red-500 text-white font-extrabold text-xs px-4 py-3 rounded-2xl shadow-xl shadow-black/40 border border-white/20 flex items-center gap-2 transition transform hover:scale-105 cursor-pointer"
+          title="Abrir Pop-up do Vídeo"
         >
-          <span className="w-2 h-2 rounded-full bg-yellow-300 inline-block animate-ping" />
-          <span>🎬 Vídeo do Programa (Pop-up 15 min)</span>
+          <Play className="w-3.5 h-3.5 fill-current" />
+          <span>🎬 Assistir Vídeo</span>
         </button>
       )}
 
-      {/* Video Popup with Autoplay and 15-Minute Delayed CTA Button */}
+      {/* Video Popup: apenas o vídeo, play/pause e áudio desde o início */}
       <VideoPopupModal
         isOpen={isVideoPopupOpen}
         onClose={() => setIsVideoPopupOpen(false)}
         delayMinutes={15}
         programUrl="https://ai.hub.xyz/r/8G5GNCTF"
-        referralCode="8G5GNCTF"
       />
 
 
