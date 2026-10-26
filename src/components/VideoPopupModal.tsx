@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { X, Play, Pause } from "lucide-react";
+import { X, Play, Pause, ChevronLeft, ChevronRight, CheckCircle2, Download, Smartphone, ArrowRight } from "lucide-react";
+import { PROOF_SLIDES, HUB_PROGRAM_URL } from "../data/proofSlides";
 
 interface VideoPopupModalProps {
   isOpen: boolean;
@@ -9,8 +10,7 @@ interface VideoPopupModalProps {
   closeDelayMinutes?: number;
 }
 
-const DEFAULT_PROGRAM_URL = "https://ai.hub.xyz/r/8G5GNCTF";
-const VIDEO_ID = "Oh9F3y4sbzk";
+const DEFAULT_PROGRAM_URL = HUB_PROGRAM_URL;
 const DEFAULT_CLOSE_DELAY_MINUTES = 22; // 22 minutos conforme solicitado
 
 export const VideoPopupModal: React.FC<VideoPopupModalProps> = ({
@@ -20,12 +20,17 @@ export const VideoPopupModal: React.FC<VideoPopupModalProps> = ({
   delaySeconds = 15,
   closeDelayMinutes = DEFAULT_CLOSE_DELAY_MINUTES,
 }) => {
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [isUnlocked, setIsUnlocked] = useState<boolean>(false);
   const [canClose, setCanClose] = useState<boolean>(false);
   const [secondsRemaining, setSecondsRemaining] = useState<number>(delaySeconds);
   const secretClickCount = useRef<number>(0);
+  const progressRef = useRef<number>(0);
+  const [progressPercent, setProgressPercent] = useState<number>(0);
+
+  const SLIDE_INTERVAL_MS = 4000;
+  const currentSlide = PROOF_SLIDES[currentIndex];
 
   // Timer para exibir o botão de Renda Extra após 15 segundos
   useEffect(() => {
@@ -67,7 +72,26 @@ export const VideoPopupModal: React.FC<VideoPopupModalProps> = ({
     return () => clearInterval(interval);
   }, [isOpen, canClose, closeDelayMinutes]);
 
-  // Permitir fechar via teclado (Esc) para conveniência caso necessário em desenvolvimento
+  // Auto-slide effect when isPlaying is true
+  useEffect(() => {
+    if (!isOpen || !isPlaying) return;
+
+    const stepMs = 50;
+    const stepPercent = (stepMs / SLIDE_INTERVAL_MS) * 100;
+
+    const interval = setInterval(() => {
+      progressRef.current += stepPercent;
+      if (progressRef.current >= 100) {
+        progressRef.current = 0;
+        setCurrentIndex((prev) => (prev + 1) % PROOF_SLIDES.length);
+      }
+      setProgressPercent(progressRef.current);
+    }, stepMs);
+
+    return () => clearInterval(interval);
+  }, [isOpen, isPlaying]);
+
+  // Permitir fechar via teclado (Esc) para conveniência caso necessário quando liberado
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && canClose) {
@@ -78,34 +102,20 @@ export const VideoPopupModal: React.FC<VideoPopupModalProps> = ({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [canClose, onClose]);
 
-  // Send commands to YouTube iframe (Play, Pause, unMute with full audio)
-  const sendIframeCommand = (func: string, args: unknown[] = []) => {
-    if (iframeRef.current?.contentWindow) {
-      iframeRef.current.contentWindow.postMessage(
-        JSON.stringify({ event: "command", func, args }),
-        "*"
-      );
-    }
+  const handleNextSlide = () => {
+    progressRef.current = 0;
+    setProgressPercent(0);
+    setCurrentIndex((prev) => (prev + 1) % PROOF_SLIDES.length);
   };
 
-  // Start with audio on load
-  const handleIframeLoad = () => {
-    sendIframeCommand("unMute");
-    sendIframeCommand("setVolume", [100]);
-    sendIframeCommand("playVideo");
-    setIsPlaying(true);
+  const handlePrevSlide = () => {
+    progressRef.current = 0;
+    setProgressPercent(0);
+    setCurrentIndex((prev) => (prev - 1 + PROOF_SLIDES.length) % PROOF_SLIDES.length);
   };
 
   const handleTogglePlay = () => {
-    if (isPlaying) {
-      sendIframeCommand("pauseVideo");
-      setIsPlaying(false);
-    } else {
-      sendIframeCommand("unMute");
-      sendIframeCommand("setVolume", [100]);
-      sendIframeCommand("playVideo");
-      setIsPlaying(true);
-    }
+    setIsPlaying((prev) => !prev);
   };
 
   // Atalho para testes: 3 cliques liberam o botão de renda extra; 5 cliques liberam o botão X de fechar
@@ -122,12 +132,9 @@ export const VideoPopupModal: React.FC<VideoPopupModalProps> = ({
 
   if (!isOpen) return null;
 
-  // YouTube embed URL starting with autoplay and audio (mute=0)
-  const embedUrl = `https://www.youtube-nocookie.com/embed/${VIDEO_ID}?autoplay=1&mute=0&controls=1&enablejsapi=1&playsinline=1&rel=0&loop=1&playlist=${VIDEO_ID}`;
-
   return (
     <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 overflow-y-auto animate-fadeIn">
-      {/* Botão de Fechar (X): liberado apenas após 22 minutos de vídeo */}
+      {/* Botão de Fechar (X): liberado apenas após 22 minutos de vídeo/slide */}
       {canClose && (
         <button
           onClick={onClose}
@@ -138,19 +145,80 @@ export const VideoPopupModal: React.FC<VideoPopupModalProps> = ({
         </button>
       )}
 
-      {/* Conteúdo estritamente limpo: Apenas o vídeo e play/pause (sem molduras rosa, sem textos) */}
+      {/* Conteúdo estritamente limpo: Apenas o slide vertical com imagens e play/pause (sem molduras rosa) */}
       <div className="relative w-full max-w-[320px] sm:max-w-[360px] flex flex-col items-center gap-4">
-        {/* Vídeo vertical Shorts (sem bordas rosa) */}
-        <div className="relative w-full aspect-[9/16] bg-black rounded-2xl overflow-hidden shadow-2xl">
-          <iframe
-            ref={iframeRef}
-            src={embedUrl}
-            onLoad={handleIframeLoad}
-            title="Vídeo Oficial"
-            className="w-full h-full border-0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
+        {/* Slide Vertical (9:16) com Imagem */}
+        <div className="relative w-full aspect-[9/16] bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+          <img
+            src={currentSlide.src}
+            alt={currentSlide.title}
+            className="w-full h-full object-cover select-none"
           />
+
+          {/* Top Badge: Prova & Contador */}
+          <div className="absolute top-3 inset-x-3 flex items-center justify-between pointer-events-none z-20">
+            <span className="bg-black/75 backdrop-blur-md text-emerald-300 border border-emerald-500/40 text-[10px] font-extrabold px-2.5 py-1 rounded-full shadow-md flex items-center gap-1">
+              <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+              {currentSlide.tag}
+            </span>
+            <span className="bg-black/75 backdrop-blur-md text-white border border-white/20 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full shadow-md">
+              {currentIndex + 1}/{PROOF_SLIDES.length}
+            </span>
+          </div>
+
+          {/* Bottom Caption */}
+          <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black via-black/80 to-transparent p-4 pt-6 text-left z-20">
+            <p className="text-emerald-400 font-black text-sm drop-shadow-md">
+              {currentSlide.value}
+            </p>
+            <p className="text-white text-xs font-semibold drop-shadow-md truncate">
+              {currentSlide.title}
+            </p>
+          </div>
+
+          {/* Navegação Prev / Next */}
+          <button
+            onClick={handlePrevSlide}
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-black/60 hover:bg-black/90 text-white/90 hover:text-white border border-white/20 shadow-lg cursor-pointer transition transform active:scale-90"
+            title="Slide anterior"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+
+          <button
+            onClick={handleNextSlide}
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-black/60 hover:bg-black/90 text-white/90 hover:text-white border border-white/20 shadow-lg cursor-pointer transition transform active:scale-90"
+            title="Próximo slide"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+
+          {/* Barra de Progresso do Slide */}
+          <div className="absolute top-0 inset-x-0 h-1 bg-white/20 z-40">
+            <div
+              className="h-full bg-emerald-400 transition-all duration-75"
+              style={{ width: `${progressPercent}%` }}
+            />
+          </div>
+        </div>
+
+        {/* Indicadores de bolinhas */}
+        <div className="flex items-center gap-1.5">
+          {PROOF_SLIDES.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => {
+                progressRef.current = 0;
+                setProgressPercent(0);
+                setCurrentIndex(idx);
+              }}
+              className={`h-1.5 rounded-full transition-all cursor-pointer ${
+                idx === currentIndex
+                  ? "w-6 bg-emerald-400"
+                  : "w-1.5 bg-white/30 hover:bg-white/60"
+              }`}
+            />
+          ))}
         </div>
 
         {/* Botão Play / Pause limpo e direto */}
@@ -166,23 +234,43 @@ export const VideoPopupModal: React.FC<VideoPopupModalProps> = ({
               </>
             ) : (
               <>
-                <Play className="w-4 h-4 fill-current" />
+                <Play className="w-4 h-4 fill-current text-emerald-400" />
                 <span>Play</span>
               </>
             )}
           </button>
         </div>
 
-        {/* Aparece só o botão após 15 segundos com o link de renda extra */}
+        {/* Aparece o botão após 15 segundos: Baixar Aplicativo & Renda Extra */}
         {isUnlocked && (
-          <a
-            href={programUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full text-center py-3.5 px-6 rounded-2xl font-black text-white bg-emerald-600 hover:bg-emerald-500 shadow-2xl transition-all flex items-center justify-center gap-2 cursor-pointer animate-fadeIn text-sm sm:text-base tracking-wide"
-          >
-            <span>👉 CLIQUE AQUI: RENDA EXTRA</span>
-          </a>
+          <div className="w-full flex flex-col gap-2.5 animate-fadeIn">
+            {/* Botão Baixar Aplicativo Principal */}
+            <a
+              href={programUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full text-center py-3.5 px-5 rounded-2xl font-black text-slate-950 bg-emerald-500 hover:bg-emerald-400 shadow-2xl transition-all flex items-center justify-center gap-2.5 cursor-pointer text-sm sm:text-base tracking-wide border-2 border-emerald-300/40 transform active:scale-95 group"
+            >
+              <Download className="w-5 h-5 text-slate-950 stroke-[2.5] group-hover:translate-y-0.5 transition-transform" />
+              <span>BAIXAR APLICATIVO</span>
+            </a>
+
+            {/* Botão Secundário Renda Extra */}
+            <a
+              href={programUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full text-center py-2.5 px-4 rounded-xl font-bold text-white/90 hover:text-white bg-white/10 hover:bg-white/20 transition-all flex items-center justify-center gap-2 cursor-pointer text-xs border border-white/15"
+            >
+              <span>👉 CLIQUE AQUI: RENDA EXTRA</span>
+              <ArrowRight className="w-4 h-4 text-emerald-400" />
+            </a>
+
+            <div className="flex items-center justify-center gap-1.5 text-[10px] text-slate-400 font-medium">
+              <Smartphone className="w-3 h-3 text-emerald-400" />
+              <span>Disponível para Android, iOS e Web • Gratuito</span>
+            </div>
+          </div>
         )}
       </div>
     </div>

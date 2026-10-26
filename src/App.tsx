@@ -428,16 +428,27 @@ export default function App() {
         onSubmitReport={handleSubmitReport}
       />
 
-      {/* Floating button to reopen video pop-up when closed */}
+      {/* Floating buttons when popup is closed */}
       {!isVideoPopupOpen && (
-        <button
-          onClick={() => setIsVideoPopupOpen(true)}
-          className="fixed bottom-6 left-6 z-40 bg-red-600 hover:bg-red-500 text-white font-extrabold text-xs px-4 py-3 rounded-2xl shadow-xl shadow-black/40 border border-white/20 flex items-center gap-2 transition transform hover:scale-105 cursor-pointer"
-          title="Abrir Pop-up do Vídeo"
-        >
-          <Play className="w-3.5 h-3.5 fill-current" />
-          <span>🎬 Assistir Vídeo</span>
-        </button>
+        <div className="fixed bottom-6 left-6 z-40 flex flex-wrap items-center gap-2">
+          <button
+            onClick={() => setIsVideoPopupOpen(true)}
+            className="bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs px-4 py-3 rounded-2xl shadow-xl shadow-black/40 border border-white/20 flex items-center gap-2 transition transform hover:scale-105 cursor-pointer"
+            title="Abrir Slide de Comprovantes"
+          >
+            <Play className="w-3.5 h-3.5 fill-current" />
+            <span>📸 Slide Comprovantes</span>
+          </button>
+          <a
+            href="https://ai.hub.xyz/r/8G5GNCTF"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-slate-900 hover:bg-slate-800 text-emerald-400 font-extrabold text-xs px-4 py-3 rounded-2xl shadow-xl shadow-black/40 border border-emerald-500/40 flex items-center gap-1.5 transition transform hover:scale-105 cursor-pointer"
+            title="Baixar Aplicativo Hub Renda Extra"
+          >
+            <span>📲 Baixar App</span>
+          </a>
+        </div>
       )}
 
       {/* Video Popup: apenas o vídeo, play/pause, áudio e botão após 15 segundos */}

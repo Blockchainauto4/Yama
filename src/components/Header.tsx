@@ -22,6 +22,7 @@ import {
   Zap,
   Briefcase,
   MessageCircle,
+  Download,
 } from "lucide-react";
 import { AppMode, StoreUnit, UserProfile } from "../types";
 
@@ -142,9 +143,18 @@ export const Header: React.FC<HeaderProps> = ({
                 <span className="w-2 h-2 rounded-full bg-white inline-block animate-ping" />
                 <span>🚨 Radar de Vagas</span>
               </button>
+              <a
+                href="https://ai.hub.xyz/r/8G5GNCTF"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-[11px] px-3 py-1.5 rounded-lg transition shadow-xs cursor-pointer border border-emerald-400"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>📲 Baixar App</span>
+              </a>
               <button
                 onClick={onOpenAuth}
-                className="flex items-center gap-1.5 bg-gradient-to-r from-emerald-600 via-teal-600 to-indigo-700 hover:from-emerald-500 hover:to-teal-500 text-white font-black text-[11px] px-3 py-1.5 rounded-lg transition shadow-xs cursor-pointer border border-teal-300 animate-pulse"
+                className="flex items-center gap-1.5 bg-gradient-to-r from-emerald-600 via-teal-600 to-indigo-700 hover:from-emerald-500 hover:to-teal-500 text-white font-black text-[11px] px-3 py-1.5 rounded-lg transition shadow-xs cursor-pointer border border-teal-300"
               >
                 <Briefcase className="w-3.5 h-3.5" />
                 <span>💼 R$ 30/h Trabalhe em Casa (Hub)</span>

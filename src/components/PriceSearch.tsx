@@ -23,7 +23,7 @@ import {
 import { ProductDetailCard } from "./ProductDetailCard";
 import { JobSlotsSlider } from "./JobSlotsSlider";
 import { PromoAnnualShoppingBanner } from "./PromoAnnualShoppingBanner";
-import { FeaturedVideoSection } from "./FeaturedVideoSection";
+import { FeaturedProofSlideSection } from "./FeaturedProofSlideSection";
 
 interface PriceSearchProps {
   products: Product[];
@@ -113,8 +113,8 @@ export const PriceSearch: React.FC<PriceSearchProps> = ({
 
   return (
     <div className="space-y-6">
-      {/* Vídeo Oficial no Início do Projeto: YouTube Shorts Super Promoção */}
-      <FeaturedVideoSection onOpenPopup={onOpenVideoPopup} />
+      {/* Slide de Comprovantes no Início do Projeto: Resultados Reais Hub Renda Extra */}
+      <FeaturedProofSlideSection onOpenPopup={onOpenVideoPopup} />
 
       {/* Destaque Hub: Trabalhe em casa R$ 30/hora ganhando com vídeos (100% sem custo) */}
       <PromoAnnualShoppingBanner onOpenAuth={onOpenAuth} />
