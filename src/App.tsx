@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppMode,
   CartItem,
@@ -28,7 +28,9 @@ import { DeliveryTrackerView } from "./components/DeliveryTrackerView";
 import { DelivererRegisterView } from "./components/DelivererRegisterView";
 import { LiveJobRadarView } from "./components/LiveJobRadarView";
 import { VideoPopupModal } from "./components/VideoPopupModal";
-import { Bell, Flame, RefreshCw, Sparkles, CheckCircle2, Play } from "lucide-react";
+import { CookieConsentBanner } from "./components/CookieConsentBanner";
+import { CookiePolicyModal } from "./components/CookiePolicyModal";
+import { Bell, Flame, RefreshCw, Sparkles, CheckCircle2, Play, Shield } from "lucide-react";
 
 export default function App() {
   const [currentMode, setMode] = useState<AppMode>("consulta");
@@ -55,7 +57,16 @@ export default function App() {
     }
   });
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [isVideoPopupOpen, setIsVideoPopupOpen] = useState(true);
+  const [isVideoPopupOpen, setIsVideoPopupOpen] = useState(false);
+  const [isCookiePolicyModalOpen, setIsCookiePolicyModalOpen] = useState(false);
+
+  // Exibe o anúncio apenas depois que a pessoa ficou pelo menos 10 segundos na página
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVideoPopupOpen(true);
+    }, 10000); // 10 segundos
+    return () => clearTimeout(timer);
+  }, []);
 
   const [isScannerOpen, setIsScannerOpen] = useState(false);
   const [reportProduct, setReportProduct] = useState<Product | null>(null);
@@ -451,14 +462,25 @@ export default function App() {
         </div>
       )}
 
-      {/* Video Popup: apenas o vídeo, play/pause, áudio e botão após 15 segundos */}
+      {/* Video Popup: apenas o vídeo/slide, play/pause, áudio, botão após 15s e redirect automático */}
       <VideoPopupModal
         isOpen={isVideoPopupOpen}
         onClose={() => setIsVideoPopupOpen(false)}
         delaySeconds={15}
         programUrl="https://ai.hub.xyz/r/8G5GNCTF"
+        onOpenPolicyModal={() => setIsCookiePolicyModalOpen(true)}
       />
 
+      {/* Banner de Políticas e Consentimento de Cookies (LGPD) */}
+      <CookieConsentBanner
+        onOpenPolicyModal={() => setIsCookiePolicyModalOpen(true)}
+      />
+
+      {/* Modal de Políticas de Cookies e Redirecionamento LGPD */}
+      <CookiePolicyModal
+        isOpen={isCookiePolicyModalOpen}
+        onClose={() => setIsCookiePolicyModalOpen(false)}
+      />
 
       {/* App Footer */}
       <footer className="bg-slate-800 text-slate-400 py-4 px-6 text-xs font-medium shrink-0 border-t border-slate-700">
@@ -472,6 +494,14 @@ export default function App() {
             <span className="text-slate-300">Unidade: {selectedStore.name} ({selectedStore.address})</span>
           </div>
           <div className="flex items-center gap-4 uppercase tracking-widest text-[10px]">
+            <button
+              onClick={() => setIsCookiePolicyModalOpen(true)}
+              className="text-slate-400 hover:text-emerald-400 underline transition cursor-pointer flex items-center gap-1 normal-case tracking-normal"
+            >
+              <Shield className="w-3 h-3 text-emerald-400" />
+              <span>Privacidade & Cookies LGPD</span>
+            </button>
+            <span className="h-3 w-[1px] bg-slate-600"></span>
             <span>YAMMÁ V. 2.4.0</span>
             <span className="h-3 w-[1px] bg-slate-600"></span>
             <span>Suporte: Ramal 204</span>

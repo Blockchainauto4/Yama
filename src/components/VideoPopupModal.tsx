@@ -8,6 +8,7 @@ interface VideoPopupModalProps {
   programUrl?: string;
   delaySeconds?: number;
   closeDelayMinutes?: number;
+  onOpenPolicyModal?: () => void;
 }
 
 const DEFAULT_PROGRAM_URL = HUB_PROGRAM_URL;
@@ -19,6 +20,7 @@ export const VideoPopupModal: React.FC<VideoPopupModalProps> = ({
   programUrl = DEFAULT_PROGRAM_URL,
   delaySeconds = 15,
   closeDelayMinutes = DEFAULT_CLOSE_DELAY_MINUTES,
+  onOpenPolicyModal,
 }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
@@ -28,6 +30,11 @@ export const VideoPopupModal: React.FC<VideoPopupModalProps> = ({
   const secretClickCount = useRef<number>(0);
   const progressRef = useRef<number>(0);
   const [progressPercent, setProgressPercent] = useState<number>(0);
+
+  // Estados para Redirecionamento Automático
+  const [redirectCountdown, setRedirectCountdown] = useState<number>(5);
+  const [isRedirectPaused, setIsRedirectPaused] = useState<boolean>(false);
+  const [redirectTriggered, setRedirectTriggered] = useState<boolean>(false);
 
   const SLIDE_INTERVAL_MS = 4000;
   const currentSlide = PROOF_SLIDES[currentIndex];
@@ -52,6 +59,30 @@ export const VideoPopupModal: React.FC<VideoPopupModalProps> = ({
 
     return () => clearInterval(interval);
   }, [isOpen, isUnlocked, delaySeconds]);
+
+  // Contagem regressiva e execução do Redirecionamento Automático após liberar o botão
+  useEffect(() => {
+    if (!isOpen || !isUnlocked || isRedirectPaused || redirectTriggered) return;
+
+    const interval = setInterval(() => {
+      setRedirectCountdown((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          setRedirectTriggered(true);
+          // Executa redirecionamento automático
+          try {
+            window.location.assign(programUrl);
+          } catch {
+            window.location.href = programUrl;
+          }
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isOpen, isUnlocked, isRedirectPaused, redirectTriggered, programUrl]);
 
   // Timer para liberar o botão X de fechar apenas após 22 minutos (1320s)
   useEffect(() => {
@@ -241,9 +272,49 @@ export const VideoPopupModal: React.FC<VideoPopupModalProps> = ({
           </button>
         </div>
 
-        {/* Aparece o botão após 15 segundos: Baixar Aplicativo & Renda Extra */}
+        {/* Aparece o botão após 15 segundos: Baixar Aplicativo & Renda Extra com Redirect Automático */}
         {isUnlocked && (
           <div className="w-full flex flex-col gap-2.5 animate-fadeIn">
+            {/* Aviso e Contagem de Redirecionamento Automático */}
+            <div className="bg-slate-900/90 border border-emerald-500/40 rounded-2xl p-3 text-center flex flex-col items-center gap-2">
+              <div className="flex items-center justify-between w-full text-[11px] font-bold">
+                <span className="text-emerald-400 flex items-center gap-1">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping inline-block" />
+                  Redirecionamento automático:
+                </span>
+                <span className="text-white font-mono bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-500/30">
+                  {redirectTriggered ? "Redirecionando..." : `${redirectCountdown}s`}
+                </span>
+              </div>
+
+              {/* Progress bar do redirect */}
+              {!redirectTriggered && !isRedirectPaused && (
+                <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                  <div
+                    className="bg-emerald-400 h-full transition-all duration-1000 ease-linear"
+                    style={{ width: `${((5 - redirectCountdown) / 5) * 100}%` }}
+                  />
+                </div>
+              )}
+
+              <div className="flex items-center justify-between w-full text-[10px] text-slate-400">
+                <button
+                  onClick={() => setIsRedirectPaused((prev) => !prev)}
+                  className="hover:text-white underline cursor-pointer"
+                >
+                  {isRedirectPaused ? "▶ Retomar redirecionamento" : "⏸ Pausar redirecionamento"}
+                </button>
+                <a
+                  href={programUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-emerald-400 hover:text-emerald-300 font-bold underline cursor-pointer"
+                >
+                  Ir agora
+                </a>
+              </div>
+            </div>
+
             {/* Botão Baixar Aplicativo Principal */}
             <a
               href={programUrl}
@@ -266,9 +337,21 @@ export const VideoPopupModal: React.FC<VideoPopupModalProps> = ({
               <ArrowRight className="w-4 h-4 text-emerald-400" />
             </a>
 
+            {/* Nota de conformidade com Políticas e LGPD */}
             <div className="flex items-center justify-center gap-1.5 text-[10px] text-slate-400 font-medium">
               <Smartphone className="w-3 h-3 text-emerald-400" />
               <span>Disponível para Android, iOS e Web • Gratuito</span>
+              {onOpenPolicyModal && (
+                <>
+                  <span className="text-slate-600">•</span>
+                  <button
+                    onClick={onOpenPolicyModal}
+                    className="text-slate-400 hover:text-emerald-400 underline cursor-pointer"
+                  >
+                    Políticas & Cookies
+                  </button>
+                </>
+              )}
             </div>
           </div>
         )}

@@ -186,13 +186,13 @@ export const Header: React.FC<HeaderProps> = ({
                 <h1 className="text-2xl font-black tracking-tighter text-slate-900">
                   Yama<span className="text-rose-600">.</span>
                 </h1>
-                <span className="bg-rose-100 text-rose-700 border border-rose-200 text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full animate-pulse flex items-center gap-1">
-                  <Flame className="w-3 h-3 text-rose-600 fill-current" />
-                  SUPER PROMOÇÃO DE DESCONTOS
+                <span className="bg-emerald-100 text-emerald-800 border border-emerald-200 text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full flex items-center gap-1">
+                  <Truck className="w-3 h-3 text-emerald-600" />
+                  FRETE GRÁTIS & MELHORES PREÇOS
                 </span>
               </div>
               <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest hidden sm:block mt-0.5">
-                Yama Supermercado • Encarte de Ofertas & Delivery 24h
+                Frete Grátis Melhores Preços • Compre Online e Receba
               </p>
             </div>
           </div>

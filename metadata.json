@@ -1,6 +1,6 @@
 {
-  "name": "SUPER PROMOÇÃO DE DESCONTOS Yama Supermercado",
-  "description": "Aproveite a SUPER PROMOÇÃO DE DESCONTOS no Yama Supermercado! Confira encarte com ofertas imperdíveis, descontos em carnes, hortifruti, bebidas e delivery 24h na Zona Sul de SP.",
+  "name": "Frete Grátis Melhores Preços, Compre Online e Receba",
+  "description": "Frete grátis e os melhores preços! Compre online no Yama Supermercado e receba produtos com agilidade, economia e qualidade no conforto da sua casa.",
   "requestFramePermissions": ["camera", "geolocation"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
